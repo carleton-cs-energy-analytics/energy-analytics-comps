@@ -14,6 +14,18 @@ def main():
     transfromCSVFromBadFormatToBetterFormat(dataList, betterFileName)
     df = pd.read_csv(betterFileName, dtype=object)
 
+    # Potential example of finding cycling?
+    previous_entry = None
+    cycle_count = 0
+    for entry in df._series['ACDIN.VAV026:HEAT.COOL']:
+        if entry != previous_entry and previous_entry != None:
+            cycle_count += 1
+        previous_entry = entry
+
+    for index, row in df.iterrows():
+        # print(row)
+        pass
+
 # takes in dataList, which represents the original CSV, and writes a new
 # CSV file that has mapped all the point with their name.
 def transfromCSVFromBadFormatToBetterFormat(dataList, newCSVName):

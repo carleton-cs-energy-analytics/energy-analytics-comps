@@ -3,15 +3,16 @@ import sys
 import pandas as pd
 
 def main():
-    fileName = sys.argv[1]
+    # fileName = sys.argv[1]
     fileName = "TestCSV.csv"
+    betterFileName = "better" + fileName
     with open(fileName, 'r') as f:
         reader = csv.reader(f)
         dataList = list(reader)
 
     # dataList now is a 2x2 matix representing the CSV.
-    transfromCSVFromBadFormatToBetterFormat(dataList, "better" + fileName)
-    df = pd.read_csv("betterTestCSV.csv", dtype=object)
+    transfromCSVFromBadFormatToBetterFormat(dataList, betterFileName)
+    df = pd.read_csv(betterFileName, dtype=object)
 
 # takes in dataList, which represents the original CSV, and writes a new
 # CSV file that has mapped all the point with their name.

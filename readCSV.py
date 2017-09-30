@@ -13,7 +13,17 @@ def main():
        for cell in row:
           line = line + cell + ", "
        print (line)
-        
+
+def transfromCSVFromBadFormatToBetterFormat(dataList, newCSVName):
+    # Find the first empty row and create a dictionary to map the points to their names:
+    split = 0
+    pointToName = {}
+    while (dataList[split][0] != ""):
+        pointToName[dataList[split][0]] = dataList[split][1]
+        split += 1
+    
+    
+    
         
 if __name__ == "__main__":
     main()

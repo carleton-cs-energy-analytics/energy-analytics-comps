@@ -8,6 +8,7 @@ import pandas as pd
 #    CSV into pandas.
 def main():
     if (len(sys.argv) > 1):
+        # CASE: transform the CSV from the bad input to the better one
         if sys.argv[1] = "transform":
             fileName = sys.argv[2]
             with open(fileName, 'r') as f:
@@ -16,21 +17,22 @@ def main():
             
             transfromCSVFromBadFormatToBetterFormat(dataList, betterFileName)
     
+    # CASE: everything else we are trying to do.
     else:
        betterFileName = "betterTestCSV.csv"
        df = pd.read_csv(betterFileName, dtype=object)
 
-    # Potential example of finding cycling?
-    previous_entry = None
-    cycle_count = 0
-    for entry in df._series['ACDIN.VAV026:HEAT.COOL']:
-        if entry != previous_entry and previous_entry != None:
-            cycle_count += 1
-        previous_entry = entry
-
-    for index, row in df.iterrows():
-        # print(row)
-        pass
+	    # Potential example of finding cycling?
+	    previous_entry = None
+	    cycle_count = 0
+	    for entry in df._series['ACDIN.VAV026:HEAT.COOL']:
+	        if entry != previous_entry and previous_entry != None:
+	            cycle_count += 1
+	        previous_entry = entry
+	
+	    for index, row in df.iterrows():
+	        # print(row)
+	        pass
 
 # takes in dataList, which represents the original CSV, and writes a new
 # CSV file that has mapped all the point with their name.

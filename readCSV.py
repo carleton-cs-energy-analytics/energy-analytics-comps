@@ -2,17 +2,23 @@ import csv
 import sys
 import pandas as pd
 
+# Run "python3 readCSV.py transform <nameOfFile>"
+#    to read in the CSV and transform it into a better format
+# If no commandLine arguments are passed into it, then it passed the
+#    CSV into pandas.
 def main():
-    # fileName = sys.argv[1]
-    fileName = "TestCSV.csv"
-    betterFileName = "better" + fileName
-    with open(fileName, 'r') as f:
-        reader = csv.reader(f)
-        dataList = list(reader)
-
-    # dataList now is a 2x2 matix representing the CSV.
-    transfromCSVFromBadFormatToBetterFormat(dataList, betterFileName)
-    df = pd.read_csv(betterFileName, dtype=object)
+    if (len(sys.argv) > 1):
+        if sys.argv[1] = "transform":
+            fileName = sys.argv[2]
+            with open(fileName, 'r') as f:
+                reader = csv.reader(f)
+                dataList = list(reader)
+            
+            transfromCSVFromBadFormatToBetterFormat(dataList, betterFileName)
+    
+    else:
+       betterFileName = "betterTestCSV.csv"
+       df = pd.read_csv(betterFileName, dtype=object)
 
 # takes in dataList, which represents the original CSV, and writes a new
 # CSV file that has mapped all the point with their name.

@@ -35,7 +35,7 @@ class SiemensData:
 					data = self.data.get_value(i, header)
 					equipment_data.append((datetime, data))
 
-				equipment_dictionary[equipment_name] =  equipment_data
+				equipment_dictionary[equipment_name] = equipment_data
 
 		return equipment_dictionary
 

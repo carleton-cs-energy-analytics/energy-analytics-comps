@@ -32,7 +32,7 @@ def transfromCSVFromBadFormatToBetterFormat(dataList, newCSVName):
     # Find the first empty row and create a dictionary to map the points to their names:
     split = 0
     pointToName = {}
-    while (dataList[split][0] != ""):
+    while (split < len(dataList) and dataList[split][0] != ""):
         pointToName[(dataList[split][0])[:-1]] = dataList[split][1]
         split += 1
     

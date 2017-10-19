@@ -8,21 +8,18 @@ from src import readCSV
 
 class TestReadCSV(unittest.TestCase):
 
-    def setUp(self):
-        self.PATH = "/Users/Carolyn/PycharmProjects/energy-analytics-comps/"
-
     def test_transfromCSVFromBadFormatToBetterFormat(self):
         fileName = "TestCSV.csv"
         betterFileName = "better" + fileName
 
-        with open(self.PATH+fileName, 'r') as f:
+        with open(fileName, 'r') as f:
             reader = csv.reader(f)
             dataList = list(reader)
 
         readCSV.transfromCSVFromBadFormatToBetterFormat(
-            dataList=dataList, newCSVName=self.PATH+betterFileName)
+            dataList=dataList, newCSVName=betterFileName)
 
-        new_csv = open(self.PATH+betterFileName, "r")
+        new_csv = open(betterFileName, "r")
 
         readlines = new_csv.readlines()
         self.assertTrue("Point" not in " ".join(readlines))

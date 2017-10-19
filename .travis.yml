@@ -1,14 +1,17 @@
 language: python
-# https://docs.travis-ci.com/user/getting-started/
-# Travis only runs builds on the commits you push after you’ve enabled the repository in Travis CI.
 # https://docs.travis-ci.com/user/customizing-the-build/
+
+# Can add more versions here if we want to test on multiple pythons
+python:
+  - "3.4"
 
 install:
   - travis_retry pip install -r requirements.txt
   - travis_retry pip install coveralls
 
+# all test files must be of form test*.py
 script:
-  - coverage run --source=test -m nose2.__main__ -v
+  - python3 -m unittest discover --start-directory test
 
 after_success:
   - coveralls

@@ -1,22 +1,32 @@
-from nose.tools import assert_equals
+import unittest
 import csv
 
+#TODO anyone know how to do this better than what it is now?
+import sys, os
+sys.path.insert(0, os.path.abspath('..'))
 from src import readCSV
 
-PATH = "/Users/Carolyn/PycharmProjects/energy-analytics-comps/"
-def test_transfromCSVFromBadFormatToBetterFormat():
-    fileName = "TestCSV.csv"
-    betterFileName = "better" + fileName
+class TestReadCSV(unittest.TestCase):
 
-    with open(PATH+fileName, 'r') as f:
-        reader = csv.reader(f)
-        dataList = list(reader)
+    def setUp(self):
+        self.PATH = "/Users/Carolyn/PycharmProjects/energy-analytics-comps/"
 
-    readCSV.transfromCSVFromBadFormatToBetterFormat(
-        dataList=dataList, newCSVName=PATH+betterFileName)
+    def test_transfromCSVFromBadFormatToBetterFormat(self):
+        fileName = "TestCSV.csv"
+        betterFileName = "better" + fileName
 
-    new_csv = open(PATH+betterFileName, "r")
+        with open(self.PATH+fileName, 'r') as f:
+            reader = csv.reader(f)
+            dataList = list(reader)
 
-    readlines = new_csv.readlines()
-    assert_equals("Point" not in " ".join(readlines), True)
+        readCSV.transfromCSVFromBadFormatToBetterFormat(
+            dataList=dataList, newCSVName=self.PATH+betterFileName)
 
+        new_csv = open(self.PATH+betterFileName, "r")
+
+        readlines = new_csv.readlines()
+        self.assertTrue("Point" not in " ".join(readlines))
+        new_csv.close()
+
+if __name__ == "__main__":
+    unittest.main()

@@ -11,12 +11,12 @@
 
 ## Unit Testing
 For every new file and method, add test(s) to the corresponding file or make a new test file in energy-analytics-comps/test
-that must be named test_<FILE_BEING_TESTED>.  Try to keep tests simple/each test only tests one thing.  Try to keep tests
+that must be named ```test*.py```.  Try to keep tests simple/each test only tests one thing.  Try to keep tests
 realistic--have test cases covering what the functionality you have built will be relied upon doing.  The idea is that
 if someone makes a change that would break some process or some core part of what your code was doing, a test should break
 so that the person making the change knows that it is either breaking or changing functionality.
 
 #### To run unit testing
 ```unix
-coverage run --source=test -m nose2
+python3 -m unittest discover --start-directory test
 ```

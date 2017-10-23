@@ -5,6 +5,7 @@ import pandas as pd
 class SiemensData:
     """ Class for reading and manipulating Siemens data from transformed CSVs.
             Contains API for accessing data, as well as function for reading the CSV's.
+            TEST
     """
 
     def __init__(self):

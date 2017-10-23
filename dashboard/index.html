@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Energy Analytics Comps</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Brand</a>
+    </div>
+          <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Analytics <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Comparison</a></li>
+        <li><a href="#">Alerts</a></li>
+      </ul>
+
+   	</div>
+</nav>
+  <div class="container-fluid main-container">
+  	<div class="row">
+  		<div class="col-md-2 left-sidebar-menu">
+  			<ul class="nav nav-stacked">
+  				<li class="active"><a href="#">Leighton</a></li>
+  				<li><a href="#">CMC</a></li>
+  				<li><a href="#">Laird</a></li>
+  			</ul>
+  		</div>
+  		<div class="col-md-10 main-body">
+        <form class="form-inline">
+          <h2> Filter Data</h2>
+          <div class="form-group">
+            Show Data From
+            <label for="roomNumber">Room</label>
+            <select class="form-control" id="roomNumber">
+              <option>All</option>
+              <option>104</option>
+              <option>201</option>
+              <option>-1</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="startDate">From</label>
+            <input type="text" class="form-control" id="startDate">
+            <label for="endDate">To</label>
+            <input type="text" class="form-control" id="endDate">
+          </div>
+          <button type="submit" class="btn btn-default">Filter</button>
+        </form>
+        <canvas id="myChart"></canvas>
+      </div>
+	</div>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js"></script>
+  <script type="text/javascript">
+var ctx = document.getElementById("myChart").getContext('2d');
+new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+    datasets: [{ 
+        data: [2, 4, 5, 6, 7, 10, 11, 12, 14, 16, 18, 20],
+        label: "CMC 104",
+        borderColor: "#3e95cd",
+        fill: false
+      }, { 
+        data: [6, 12, 15, 4, 19, 8, 1, 5, 3, 17, 7, 20],
+        label: "CMC 201",
+        borderColor: "#8e5ea2",
+        fill: false
+      }, { 
+        data: [8, 12, 7, 5, 13, 15, 17, 4, 11, 6, 1, 14],
+        label: "CMC -1",
+        borderColor: "#3cba9f",
+        fill: false
+      }
+    ]
+  },
+  options: {
+    title: {
+      display: true,
+      text: 'Energy Usage in Different Rooms'
+    }
+  }
+});
+</script>
+</body>
+</html>

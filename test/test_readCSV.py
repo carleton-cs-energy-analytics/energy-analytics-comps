@@ -9,14 +9,14 @@ from src import readCSV
 class TestReadCSV(unittest.TestCase):
 
     def test_transfromCSVFromBadFormatToBetterFormat(self):
-        fileName = "TestCSV.csv"
+        fileName = "TestCSV.csv_files"
         betterFileName = "better" + fileName
 
         with open(fileName, 'r') as f:
             reader = csv.reader(f)
             dataList = list(reader)
 
-        readCSV.transfromCSVFromBadFormatToBetterFormat(
+        readCSV.transform_csv_from_bad_format_to_better_format(
             dataList=dataList, newCSVName=betterFileName)
 
         new_csv = open(betterFileName, "r")

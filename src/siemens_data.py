@@ -4,7 +4,7 @@ import pandas as pd
 
 class SiemensData:
     """ Class for reading and manipulating Siemens data from transformed CSVs.
-            Contains API for accessing data, as well as function for reading the CSV's.
+    Contains API for accessing data, as well as function for reading the CSVs.
     """
 
     def __init__(self):
@@ -15,17 +15,19 @@ class SiemensData:
             through timestamps each time. """
         self.datetimes = []
 
-    # Open and store transformed CSV data as class pd object.
     def read_csv(self, filename):
+        """Open and store transformed CSV data as class pd object."""
         self.data = pd.read_csv(filename, dtype=object)
 
     def find_data_for_room(self, room_name):
-        # Key = equipment name, value = sorted list of tuples containing
-        # (timestamp, data)
+        """ Returns dictionary of info about given room.
+        Key = equipment name, value = sorted list of tuples containing (timestamp, data)
+        """
+
         equipment_dictionary = {}
 
         if self.data is None:
-            raise Exception("You haven't read in a csv yet!")
+            raise Exception("You haven't read in a csv_files yet!")
 
         for header in self.data:
             if room_name in header:
@@ -67,7 +69,7 @@ class SiemensData:
 
 
 def main():
-    filename = "betterTestCSV.csv"
+    filename = "betterTestCSV.csv_files"
     data_reader = SiemensData()
     data_reader.read_csv(filename)
     data_reader.create_datetimes_list()

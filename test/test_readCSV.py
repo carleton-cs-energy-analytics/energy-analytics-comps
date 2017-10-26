@@ -1,14 +1,10 @@
 import csv
-import os
-import sys
 import unittest
-
-# TODO anyone know how to do this better than what it is now?
-sys.path.insert(0, os.path.abspath('..'))
-from src import read_csv
+import read_csv
 
 
 class TestReadCSV(unittest.TestCase):
+    """Class for testing functions"""
 
     def test_transform_csv_from_bad_format_to_better_format(self):
 

@@ -1,5 +1,7 @@
+from .context import *
 import unittest
 import csv
+
 from src import read_csv
 
 
@@ -7,7 +9,7 @@ class TestReadCSV(unittest.TestCase):
     """Class for testing read_csv.py"""
 
     def test_transform_csv_from_bad_format_to_better_format(self):
-        csv_path = "../data/csv_files/"
+        csv_path = os.path.dirname(__file__) + "/../data/csv_files/"
         file_name = csv_path + "TestCSV.csv"
         better_file_name = csv_path + "betterTestCSV.csv"
 

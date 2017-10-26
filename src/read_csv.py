@@ -53,7 +53,7 @@ def get_dataframe_from_csv(file_name):
 
 
 def main():
-    """Run "python3 readCSV.py transform <nameOfFile>" to read in the CSV and transform it into a better format
+    """Run "python3 read_csv.py transform <nameOfFile>" to read in the CSV and transform it into a better format
     If no commandLine arguments are passed into it, then it passed the CSV into pandas."""
     if len(sys.argv) > 1:
 

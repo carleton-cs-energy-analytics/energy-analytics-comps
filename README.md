@@ -6,7 +6,7 @@
 - **Guided by:** Jeff Ondich
 - Carleton College, Fall-Winter 2017
 
-![Martha's World](images/marthas_world.png)
+![Martha's World](imgs/marthas_world.png)
 
 
 ## Unit Testing

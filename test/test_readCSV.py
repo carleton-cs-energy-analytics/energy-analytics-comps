@@ -10,7 +10,7 @@ class TestReadCSV(unittest.TestCase):
 
     def test_transform_csv_from_bad_format_to_better_format(self):
         csv_path = sys.path[0] + "/../data/csv_files/"
-        file_name = csv_path + "TestCSV.csv"
+        file_name = csv_path + "HULINGS.AUDIT.TRENDRPT1_171016.csv"
         better_file_name = csv_path + "betterTestCSV.csv"
 
         with open(file_name, 'r') as f:

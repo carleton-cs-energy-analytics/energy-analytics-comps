@@ -25,5 +25,8 @@ class TestReadCSV(unittest.TestCase):
         self.assertTrue("Point" not in " ".join(readlines))
         new_csv.close()
 
+    def test_fail(self):
+        self.assertTrue(False)
+
 if __name__ == "__main__":
     unittest.main()

@@ -7,6 +7,7 @@ import sys
 import pandas as pd
 import os
 
+PATH = sys.path[0]
 
 def transform_csv_from_bad_format_to_better_format(data_list, new_csv_name):
     """
@@ -17,8 +18,6 @@ def transform_csv_from_bad_format_to_better_format(data_list, new_csv_name):
     split = 1
     point_to_name = {}
     while "Point_" in data_list[split][0]:
-        print(split)
-        print("DL:",data_list[split][0][:-1])
         point_to_name[(data_list[split][0])[:-1]] = data_list[split][1]
         split += 1
 
@@ -85,7 +84,7 @@ def transform_all_files():
     Loops over every .csv file and calls transform_file function on it
     :return: None (Output better files in data/better_csv_files)
     '''
-    directory_path = "../data/csv_files/"
+    directory_path = PATH + "/../data/csv_files/"
     for file in os.listdir(directory_path):
         if file.endswith(".csv"):
             transform_file(directory_path, file)
@@ -97,7 +96,7 @@ def transform_file(path, file):
     :param file: file name
     :return: None (Output is better file format in data/better_csv_files)
     '''
-    better_file_name = "../data/better_csv_files/" + file
+    better_file_name = PATH + "/../data/better_csv_files/" + file
     with open(path+file, 'r') as f:
         reader = csv.reader(f)
         data_list = list(reader)

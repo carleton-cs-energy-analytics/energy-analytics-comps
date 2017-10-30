@@ -1,13 +1,15 @@
 # Carleton CS Energy Analytics Comps
 
+<kbd>
+    <img src="imgs/collage.png" alt="Joyous Collage"
+    width="650">
+</kbd>
+
 *Revolutionizing the way Carleton notices that a building is being heated/cooled simultaneously!*
 
 - **Team**: Zephyr Lucas, Jonathan Bisila, Kiya Govek, Carolyn Ryan, Dustin Michels, Jack Lightbody
 - **Guided by:** Jeff Ondich
 - Carleton College, Fall-Winter 2017
-
-![Martha's World](imgs/marthas_world.png)
-
 
 ## Unit Testing
 For every new file and method, add test(s) to the corresponding file or make a new test file in energy-analytics-comps/test
@@ -20,3 +22,4 @@ so that the person making the change knows that it is either breaking or changin
 ```unix
 python3 -m unittest discover --start-directory test
 ```
+

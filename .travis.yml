@@ -15,3 +15,6 @@ script:
 
 after_success:
   - coveralls
+
+notifications:
+    slack: carlcs-analytics:INZrta4dRGcjcdLsM6ba4L7h

@@ -64,7 +64,7 @@ def main():
     if len(sys.argv) > 1:
         # CASE: transform the CSV from the bad input to the better one
         if sys.argv[1] == "transform":
-            directory_path = "../data/csv_files/"
+            directory_path = PATH + "/../data/csv_files/"
             file = sys.argv[2]
             transform_file(directory_path, file)
         else:

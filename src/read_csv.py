@@ -61,10 +61,6 @@ def get_dataframe_from_csv(file_name):
 def main():
     """Run "python3 read_csv.py transform <nameOfFile>" to read in the CSV and transform it into a better format
     If no commandLine arguments are passed into it, then it passed the CSV into pandas."""
-    # Create directory for transforming csvs into better format
-    if not os.path.isdir("../data/better_csv_files"):
-        os.makedirs("../data/better_csv_files")
-
     if len(sys.argv) > 1:
         # CASE: transform the CSV from the bad input to the better one
         if sys.argv[1] == "transform":
@@ -96,6 +92,10 @@ def transform_file(path, file):
     :param file: file name
     :return: None (Output is better file format in data/better_csv_files)
     '''
+    # Create directory for transforming csvs into better format
+    if not os.path.isdir("../data/better_csv_files"):
+        os.makedirs("../data/better_csv_files")
+
     better_file_name = PATH + "/../data/better_csv_files/" + file
     with open(path+file, 'r') as f:
         reader = csv.reader(f)

@@ -94,7 +94,7 @@ def transform_file(path, file):
     '''
     # Create directory for transforming csvs into better format
     if not os.path.isdir(PATH + "/../data/better_csv_files"):
-        os.makedirs("../data/better_csv_files")
+        os.makedirs(PATH + "/../data/better_csv_files")
 
     better_file_name = PATH + "/../data/better_csv_files/" + file
     with open(path+file, 'r') as f:

@@ -93,7 +93,7 @@ def transform_file(path, file):
     :return: None (Output is better file format in data/better_csv_files)
     '''
     # Create directory for transforming csvs into better format
-    if not os.path.isdir("../data/better_csv_files"):
+    if not os.path.isdir(PATH + "/../data/better_csv_files"):
         os.makedirs("../data/better_csv_files")
 
     better_file_name = PATH + "/../data/better_csv_files/" + file

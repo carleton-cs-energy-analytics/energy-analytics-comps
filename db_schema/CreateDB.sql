@@ -2,7 +2,7 @@
 
 -- DROP DATABASE carleton_energy_round1;
 
-CREATE DATABASE carleton_energy_round1
+CREATE DATABASE carleton_energy
     WITH
     OWNER = postgres
     ENCODING = 'UTF8'

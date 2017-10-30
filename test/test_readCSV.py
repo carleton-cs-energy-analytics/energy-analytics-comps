@@ -1,4 +1,4 @@
-from context import *
+from test.context import *
 import unittest
 import csv
 
@@ -9,7 +9,7 @@ class TestReadCSV(unittest.TestCase):
     """Class for testing read_csv.py"""
 
     def test_transform_csv_from_bad_format_to_better_format(self):
-        csv_path = os.path.dirname(__file__) + "/../data/csv_files/"
+        csv_path = sys.path[0] + "/../data/csv_files/"
         file_name = csv_path + "TestCSV.csv"
         better_file_name = csv_path + "betterTestCSV.csv"
 
@@ -27,7 +27,6 @@ class TestReadCSV(unittest.TestCase):
         readlines = new_csv.readlines()
         self.assertTrue("Point" not in " ".join(readlines))
         new_csv.close()
-
 
 if __name__ == "__main__":
     unittest.main()

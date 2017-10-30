@@ -1,32 +1,32 @@
+from test.context import *
 import unittest
 import csv
 
-#TODO anyone know how to do this better than what it is now?
-import sys, os
-sys.path.insert(0, os.path.abspath('..'))
-from src import readCSV
+from src import read_csv
+
 
 class TestReadCSV(unittest.TestCase):
+    """Class for testing read_csv.py"""
 
-    def test_transfromCSVFromBadFormatToBetterFormat(self):
-        fileName = "TestCSV.csv"
-        betterFileName = "better" + fileName
+    def test_transform_csv_from_bad_format_to_better_format(self):
+        csv_path = os.path.dirname(__file__) + "/../data/csv_files/"
+        file_name = csv_path + "TestCSV.csv"
+        better_file_name = csv_path + "betterTestCSV.csv"
 
-        with open(fileName, 'r') as f:
+        with open(file_name, 'r') as f:
             reader = csv.reader(f)
-            dataList = list(reader)
+            data_list = list(reader)
 
-        readCSV.transfromCSVFromBadFormatToBetterFormat(
-            dataList=dataList, newCSVName=betterFileName)
+        read_csv.transform_csv_from_bad_format_to_better_format(
+            data_list=data_list,
+            new_csv_name=better_file_name
+        )
 
-        new_csv = open(betterFileName, "r")
+        new_csv = open(better_file_name, "r")
 
         readlines = new_csv.readlines()
         self.assertTrue("Point" not in " ".join(readlines))
         new_csv.close()
-
-    def test_fail(self):
-        self.assertTrue(False)
 
 if __name__ == "__main__":
     unittest.main()

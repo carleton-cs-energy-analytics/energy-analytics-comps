@@ -1,5 +1,6 @@
 from test.context import *
 import unittest
+import shutil
 
 from src import read_csv
 
@@ -7,9 +8,11 @@ class TestReadCSV(unittest.TestCase):
     """Class for testing read_csv.py"""
     def setUp(self):
         self.PATH = sys.path[0]
+        if os.path.isdir(self.PATH + "/../data/better_csv_files"):
+            shutil.rmtree(self.PATH + "/../data/better_csv_files/")
 
     def tearDown(self):
-        os.rmdir(self.PATH + "/../data/better_csv_files/")
+        shutil.rmtree(self.PATH + "/../data/better_csv_files/")
 
     def test_transform_file(self):
         csv_path = self.PATH + "/../data/csv_files/"

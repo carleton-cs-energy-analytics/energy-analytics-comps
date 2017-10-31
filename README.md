@@ -30,3 +30,4 @@ EXPORT FLASK_APP=routes.py
 flask run
 ```
 You can also optionally enable debug mode with `EXPORT FLASK_DEBUG=1`
+To set up the psycopg2 connection, rename the config.example.py file to config.py and enter the appropriate config values.

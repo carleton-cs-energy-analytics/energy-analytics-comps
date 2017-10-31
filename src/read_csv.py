@@ -75,29 +75,27 @@ def main():
     else:
         transform_all_files()
 
-def transform_all_files():
+def transform_all_files(directory_path = PATH + "/../data/csv_files/"):
     '''
     Loops over every .csv file and calls transform_file function on it
     :return: None (Output better files in data/better_csv_files)
     '''
-    directory_path = PATH + "/../data/csv_files/"
     for file in os.listdir(directory_path):
         if file.endswith(".csv"):
-            transform_file(directory_path, file)
+            transform_file(directory_path + file)
 
-def transform_file(path, file):
+def transform_file(file_path, better_dir_path = PATH + "/../data/better_csv_files"):
     '''
     Transforms an individual file
-    :param path: Path to file
     :param file: file name
     :return: None (Output is better file format in data/better_csv_files)
     '''
     # Create directory for transforming csvs into better format
-    if not os.path.isdir(PATH + "/../data/better_csv_files"):
-        os.makedirs(PATH + "/../data/better_csv_files")
+    if not os.path.isdir(better_dir_path):
+        os.makedirs(better_dir_path)
 
-    better_file_name = PATH + "/../data/better_csv_files/" + file
-    with open(path+file, 'r') as f:
+    better_file_name = better_dir_path + "/" + file_path.split("/")[-1]
+    with open(file_path, 'r') as f:
         reader = csv.reader(f)
         data_list = list(reader)
     transform_csv_from_bad_format_to_better_format(data_list, better_file_name)

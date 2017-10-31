@@ -8,12 +8,15 @@ class TestReadCSV(unittest.TestCase):
     def setUp(self):
         self.PATH = sys.path[0]
 
+    def tearDown(self):
+        os.rmdir(self.PATH + "/../data/better_csv_files/")
+
     def test_transform_file(self):
         csv_path = self.PATH + "/../data/csv_files/"
         file_name = "HULINGS.AUDIT.TRENDRPT1_171016.csv"
         better_file_path = self.PATH + "/../data/better_csv_files/" + file_name
 
-        read_csv.transform_file(csv_path, file_name)
+        read_csv.transform_file(csv_path+file_name)
 
         with open(better_file_path, "r") as new_csv:
             readlines = new_csv.readlines()

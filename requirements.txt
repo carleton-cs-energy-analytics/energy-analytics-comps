@@ -1,2 +1,4 @@
 pandas
 coverage
+flask
+psycopg2

@@ -204,3 +204,4 @@ venv.bak/
 
 # End of https://www.gitignore.io/api/macos,python,pycharm,jupyternotebook
 *__pycache__*
+config.py

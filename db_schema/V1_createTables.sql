@@ -22,7 +22,7 @@ CREATE TABLE InformationSources (
     Name varchar(255) NOT NULL
 );
 
-CREATE TABLE Equipment (
+CREATE TABLE Points (
 	ID SERIAL NOT NULL PRIMARY KEY,
     Name varchar(255) NOT NULL,
     RoomID int NOT NULL,
@@ -34,8 +34,8 @@ CREATE TABLE Equipment (
     FOREIGN KEY (InformationSourceID) REFERENCES InformationSources(ID)
 );
 
-CREATE TABLE DataDriftwood (
-	DriftwoodTimestamp TIMESTAMP NOT NULL,
+CREATE TABLE PointValues (
+	PointTimestamp TIMESTAMP NOT NULL,
     EquipmentID int NOT NULL,
     Value varchar(255) NOT NULL,
     FOREIGN KEY (EquipmentID) REFERENCES Equipment(ID)

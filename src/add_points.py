@@ -48,7 +48,7 @@ def get_known_types():
     known_types = {}
     db.execute("SELECT * FROM EquipmentTypes")
     next_entry = db.fetchone()
-    while next_entry != None:
+    while next_entry is not None:
         return_type = next_entry[2]
         this_type = EquipmentType(next_entry[0], return_type)
         if return_type == "enumerated":
@@ -60,7 +60,7 @@ def get_known_types():
     return known_types
 
 
-def get_equipment_type(equip_name):
+def get_equipment_type(point_name):
     """
     Returns the equipment type for the given name
     If from the known type codes, name will be reasonable
@@ -68,18 +68,18 @@ def get_equipment_type(equip_name):
     """
     type_codes = read_type_codes()
     known_types = get_known_types()
-    if equip_name in type_codes:
-        return known_types[type_codes[equip_name]]
-    equipment_dict = json_dict[equip_name]
-    if "Analog Representation" in equipment_dict:
-        return_type = equipment_dict["Analog Representation"]
-        units = equipment_dict["Engineering Units"]
+    if point_name in type_codes:
+        return known_types[type_codes[point_name]]
+    point_dict = json_dict[point_name]
+    if "Analog Representation" in point_dict:
+        return_type = point_dict["Analog Representation"]
+        units = point_dict["Engineering Units"]
         type_name = return_type + units
         new_type = EquipmentType(type_name, return_type)
         new_type.units = units
     else:
         return_type = "enumerated"
-        enumeration_settings = equipment_dict["Text Table"][1]
+        enumeration_settings = point_dict["Text Table"][1]
         type_name = return_type + ",".join(enumeration_settings)
         new_type = EquipmentType(type_name, return_type)
         new_type.enumeration_settings = enumeration_settings
@@ -88,15 +88,18 @@ def get_equipment_type(equip_name):
     return new_type
 
 
-def push_equipment_to_db(equip_name, room_id, info_source_id):
+def add_point_to_db(point_name, room_id, point_source_id):
     """
     Given some information about an equipment, gets the type and description and pushes that information to the database
     """
-    equip_type = get_equipment_type(equip_name)
-    description = json_dict[equip_name]["Descriptor"]
-    db.execute("""INSERT INTO Equipment (Name, RoomID, EquipmentTypeID, InformationSourceID, Description)
-                VALUES (%s, %s, %s, %s, %s);""", (equip_name, room_id, equip_type.get_id_from_database(),
-                                                  info_source_id, description))
+    db.execute("SELECT * FROM EquipmentTypes WHERE Name = %s AND RoomID = %s;", (point_name, room_id))
+    if db.fetchone() is not None:
+        return # this point is already in database, don't add again
+    equip_type = get_equipment_type(point_name)
+    description = json_dict[point_name]["Descriptor"]
+    db.execute("""INSERT INTO Points (Name, RoomID, EquipmentTypeID, PointSourceID, Description)
+                VALUES (%s, %s, %s, %s, %s);""", (point_name, room_id, equip_type.get_id_from_database(),
+                                                  point_source_id, description))
 
 
 def populate_table_with_known_types(): # RUN ONLY ONCE

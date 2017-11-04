@@ -1,6 +1,6 @@
 DROP TABLE PointValues;
 DROP TABLE Points;
-DROP TABLE EquipmentTypes;
+DROP TABLE PointTypes;
 DROP TABLE PointSources;
 DROP TABLE Rooms;
 DROP TABLE Buildings;
@@ -17,11 +17,12 @@ CREATE TABLE Rooms (
     FOREIGN KEY (BuildingID) REFERENCES Buildings(ID)
 );
 
-CREATE TABLE EquipmentTypes (
+CREATE TABLE PointTypes (
 	ID SERIAL NOT NULL PRIMARY KEY,
     Name varchar(255) NOT NULL,
     Units varchar(255) NOT NULL,
-    ReturnType varchar(255) NOT NULL
+    ReturnType varchar(255) NOT NULL,
+    Factor int
 );
 
 CREATE TABLE PointSources (
@@ -33,7 +34,7 @@ CREATE TABLE Points (
 	ID SERIAL NOT NULL PRIMARY KEY,
     Name varchar(255) NOT NULL,
     RoomID int NOT NULL,
-    EquipmentTypeID int NOT NULL,
+    PointTypeID int NOT NULL,
     PointSourceID int NOT NULL,
     Description text,
     FOREIGN KEY (RoomID) REFERENCES Rooms(ID),
@@ -44,6 +45,6 @@ CREATE TABLE Points (
 CREATE TABLE PointValues (
 	PointTimestamp TIMESTAMP NOT NULL,
     PointID int NOT NULL,
-    PointValue varchar(255) NOT NULL,
+    PointValue int NOT NULL,
     FOREIGN KEY (PointID) REFERENCES Points(ID)
 );

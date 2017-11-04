@@ -10,7 +10,7 @@ CREATE TABLE Rooms (
     FOREIGN KEY (BuildingID) REFERENCES Buildings(ID)
 );
 
-CREATE TABLE EquipmentTypes (
+CREATE TABLE PointTypes (
 	ID SERIAL NOT NULL PRIMARY KEY,
     Name varchar(255) NOT NULL,
     Units varchar(255) NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE Points (
 	ID SERIAL NOT NULL PRIMARY KEY,
     Name varchar(255) NOT NULL,
     RoomID int NOT NULL,
-    EquipmentTypeID int NOT NULL,
+    PointTypeID int NOT NULL,
     PointSourceID int NOT NULL,
     Description text,
     FOREIGN KEY (RoomID) REFERENCES Rooms(ID),

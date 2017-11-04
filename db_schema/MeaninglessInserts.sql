@@ -4,9 +4,9 @@ INSERT INTO Rooms(Name, BuildingID) VALUES ('307', '3'), ('304', '3'), ('', '2')
 
 INSERT INTO PointSources(Name) VALUES ('Siemens'), ('ALC'), ('Lucid'), ('James Solar Panel');
 
-INSERT INTO EquipmentTypes(Name, Units, ReturnType) VALUES ('energy', 'KiloWatts', 'float'), ('HVAC', 'N/A', 'bool');
+INSERT INTO PointTypes(Name, Units, ReturnType) VALUES ('energy', 'KiloWatts', 'float'), ('HVAC', 'N/A', 'bool');
 
-INSERT INTO Points(Name, RoomID, EquipmentTypeID, PointSourceID, Description) VALUES
+INSERT INTO Points(Name, RoomID, PoinTypeID, PointSourceID, Description) VALUES
 	('VAV1', 1, 2, 2, 'The Literal Death Star');
 
 INSERT INTO PointValues (PointTimestamp, PointID, PointValue) VALUES

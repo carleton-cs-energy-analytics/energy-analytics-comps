@@ -1,4 +1,4 @@
-# Gets relevant information from point description jsons to push into database - by Kiya
+# Gets relevant information from point description jsons to push into database
 # none of this actually works yet because IDK how to connect to the database
 
 import json

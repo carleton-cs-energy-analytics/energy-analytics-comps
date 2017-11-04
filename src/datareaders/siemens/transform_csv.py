@@ -6,6 +6,7 @@ import csv
 import sys
 import pandas as pd
 import os
+from src.datareaders import context
 
 PATH = sys.path[0]
 
@@ -26,9 +27,9 @@ def transform_csv_from_bad_format_to_better_format(data_list, new_csv_name):
         writer = csv.writer(f)
         
         # Construct and write the first line
-        first_line = [data_list[split + 1][0], data_list[split + 1][1]]
-        writer.writerow(first_line)
-        writer.writerow("")
+        # first_line = [data_list[split + 1][0], data_list[split + 1][1]]
+        # writer.writerow(first_line)
+        # writer.writerow("")
 
         first_line = ["Date","Time"]
         for key, value in point_to_name.items():
@@ -45,7 +46,7 @@ def main():
     if len(sys.argv) > 1:
         # CASE: transform the CSV from the bad input to the better one
         if sys.argv[1] == "transform":
-            directory_path = PATH + "/../data/csv_files/"
+            directory_path = PATH + "/../../data/csv_files/"
             file = sys.argv[2]
             transform_file(directory_path, file)
 
@@ -53,7 +54,7 @@ def main():
     else:
         transform_all_files()
 
-def transform_all_files(directory_path = PATH + "/../data/csv_files/"):
+def transform_all_files(directory_path = PATH + "/../../data/csv_files/"):
     '''
     Loops over every .csv file and calls transform_file function on it
     :return: None (Output better files in data/better_csv_files)
@@ -62,7 +63,7 @@ def transform_all_files(directory_path = PATH + "/../data/csv_files/"):
         if file.endswith(".csv"):
             transform_file(directory_path + file)
 
-def transform_file(file_path, better_dir_path = PATH + "/../data/better_csv_files"):
+def transform_file(file_path, better_dir_path = PATH + "/../../data/better_csv_files"):
     '''
     Transforms an individual file
     :param file: file name

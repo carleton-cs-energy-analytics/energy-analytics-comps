@@ -1,7 +1,9 @@
 from datetime import datetime
 import pandas as pd
+import sys
+from src.datareaders import context
 
-
+PATH = sys.path[0]
 class SiemensData:
     """ Class for reading and manipulating Siemens data from transformed CSVs.
     Contains API for accessing data, as well as function for reading the CSVs.
@@ -9,7 +11,6 @@ class SiemensData:
 
     def __init__(self):
         self.data = None  # Pandas DataFrame created from transformed CSV.
-
         """ List of datetime objects created from timestamps in CSV, used for
             pairing data in the spreadsheet with timestamps without looking
             through timestamps each time. """
@@ -23,7 +24,6 @@ class SiemensData:
         """ Returns dictionary of info about given room.
         Key = equipment name, value = sorted list of tuples containing (timestamp, data)
         """
-
         equipment_dictionary = {}
 
         if self.data is None:
@@ -57,19 +57,19 @@ class SiemensData:
         for i in range(
                 len(self.data.columns.values)):  # Iterate through all rows
             # Get date and time from particular column
-            date = self.data.get_value(i, "<>Date")
+            date = self.data.get_value(i, "Date")
             time = self.data.get_value(i, "Time")
 
             timestamp = date + " " + time
             # create datetime object from MM/DD/YY xx:xx:xx format
-            datetime_object = datetime.strptime(timestamp, "%m/%d/%y %H:%M:%S")
+            datetime_object = datetime.strptime(timestamp, "%m/%d/%Y %H:%M:%S")
             datetimes.append(datetime_object)
 
         self.datetimes = datetimes
 
 
 def main():
-    filename = "betterTestCSV.csv_files"
+    filename = PATH + "/../../data/better_csv_files/140708-141112_LDC.AUDIT.TRENDRPT1.csv"
     data_reader = SiemensData()
     data_reader.read_csv(filename)
     data_reader.create_datetimes_list()

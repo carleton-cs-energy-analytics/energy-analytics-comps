@@ -1,7 +1,7 @@
-DROP TABLE DataDriftwood;
-DROP TABLE Equipment;
+DROP TABLE PointValues;
+DROP TABLE Points;
 DROP TABLE EquipmentTypes;
-DROP TABLE InformationSources;
+DROP TABLE PointSources;
 DROP TABLE Rooms;
 DROP TABLE Buildings;
 
@@ -24,26 +24,26 @@ CREATE TABLE EquipmentTypes (
     ReturnType varchar(255) NOT NULL
 );
 
-CREATE TABLE InformationSources (
+CREATE TABLE PointSources (
 	ID SERIAL NOT NULL PRIMARY KEY,
     Name varchar(255) NOT NULL
 );
 
-CREATE TABLE Equipment (
+CREATE TABLE Points (
 	ID SERIAL NOT NULL PRIMARY KEY,
     Name varchar(255) NOT NULL,
     RoomID int NOT NULL,
     EquipmentTypeID int NOT NULL,
-    InformationSourceID int NOT NULL,
+    PointSourceID int NOT NULL,
     Description text,
     FOREIGN KEY (RoomID) REFERENCES Rooms(ID),
     FOREIGN KEY (EquipmentTypeID) REFERENCES EquipmentTypes(ID),
-    FOREIGN KEY (InformationSourceID) REFERENCES InformationSources(ID)
+    FOREIGN KEY (PointSourceID) REFERENCES PointSources(ID)
 );
 
-CREATE TABLE DataDriftwood (
-	DriftwoodTimestamp TIMESTAMP NOT NULL,
-    EquipmentID int NOT NULL,
-    Value varchar(255) NOT NULL,
-    FOREIGN KEY (EquipmentID) REFERENCES Equipment(ID)
+CREATE TABLE PointValues (
+	PointTimestamp TIMESTAMP NOT NULL,
+    PointID int NOT NULL,
+    PointValue varchar(255) NOT NULL,
+    FOREIGN KEY (PointID) REFERENCES Points(ID)
 );

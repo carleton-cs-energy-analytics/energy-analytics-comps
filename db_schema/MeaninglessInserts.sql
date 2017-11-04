@@ -2,14 +2,14 @@ INSERT INTO Buildings(Name) VALUES ('Cassat'), ('James'), ('CMC');
 
 INSERT INTO Rooms(Name, BuildingID) VALUES ('307', '3'), ('304', '3'), ('', '2'), ('102', 1);
 
-INSERT INTO InformationSources(Name) VALUES ('Siemens'), ('ALC'), ('Lucid'), ('James Solar Panel');
+INSERT INTO PointSources(Name) VALUES ('Siemens'), ('ALC'), ('Lucid'), ('James Solar Panel');
 
 INSERT INTO EquipmentTypes(Name, Units, ReturnType) VALUES ('energy', 'KiloWatts', 'float'), ('HVAC', 'N/A', 'bool');
 
-INSERT INTO Equipment(Name, RoomID, EquipmentTypeID, InformationSourceID, Description) VALUES
+INSERT INTO Points(Name, RoomID, EquipmentTypeID, PointSourceID, Description) VALUES
 	('VAV1', 1, 2, 2, 'The Literal Death Star');
 
-INSERT INTO DataDriftwood(DriftwoodTimestamp, EquipmentID, Value) VALUES
+INSERT INTO PointValue(PointTimestamp, PointID, PointValue) VALUES
 	('2017-10-10 00:00:00', '1', 'HEAT'),
     ('2017-10-10 00:15:00', '1', 'HEAT'),
     ('2017-10-10 00:30:00', '1', 'HEAT'),

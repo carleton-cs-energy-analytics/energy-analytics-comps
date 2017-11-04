@@ -16,7 +16,7 @@ class TestTransformCSV(unittest.TestCase):
 
     def test_transform_file(self):
         file_name = "HULINGS.AUDIT.TRENDRPT1_171016.csv"
-        better_file_path = get_data_resource("better_csv_files") + file_name
+        better_file_path = get_data_resource("better_csv_files/"+file_name)
 
         transform_csv.transform_file(get_data_resource("csv_files/"+file_name))
 

@@ -1,3 +1,6 @@
+## Our Directories
+data/better_csv_files/
+data/better_csv_files/*
 
 # Created by https://www.gitignore.io/api/macos,python,pycharm,jupyternotebook
 
@@ -73,6 +76,7 @@ cmake-build-debug/
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
+.idea/
 
 # JIRA plugin
 atlassian-ide-plugin.xml

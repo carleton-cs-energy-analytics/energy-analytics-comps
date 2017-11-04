@@ -6,9 +6,7 @@ import csv
 import sys
 import pandas as pd
 import os
-from src.datareaders import context
-
-PATH = sys.path[0]
+from src.datareaders.resources import get_data_resource
 
 def transform_csv_from_bad_format_to_better_format(data_list, new_csv_name):
     """
@@ -46,7 +44,7 @@ def main():
     if len(sys.argv) > 1:
         # CASE: transform the CSV from the bad input to the better one
         if sys.argv[1] == "transform":
-            directory_path = PATH + "/../../data/csv_files/"
+            directory_path = get_data_resource('csv_files')
             file = sys.argv[2]
             transform_file(directory_path, file)
 
@@ -54,21 +52,26 @@ def main():
     else:
         transform_all_files()
 
-def transform_all_files(directory_path = PATH + "/../../data/csv_files/"):
+def transform_all_files(directory_path = None):
     '''
     Loops over every .csv file and calls transform_file function on it
     :return: None (Output better files in data/better_csv_files)
     '''
+    if not directory_path:
+        directory_path = get_data_resource("csv_files")
+
     for file in os.listdir(directory_path):
         if file.endswith(".csv"):
-            transform_file(directory_path + file)
+            transform_file(get_data_resource("csv_files/"+file))
 
-def transform_file(file_path, better_dir_path = PATH + "/../../data/better_csv_files"):
+def transform_file(file_path, better_dir_path = None):
     '''
     Transforms an individual file
     :param file: file name
     :return: None (Output is better file format in data/better_csv_files)
     '''
+    if not better_dir_path:
+        better_dir_path = get_data_resource("better_csv_files")
     # Create directory for transforming csvs into better format
     if not os.path.isdir(better_dir_path):
         os.makedirs(better_dir_path)

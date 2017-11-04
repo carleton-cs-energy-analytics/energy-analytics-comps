@@ -40,7 +40,7 @@ def transform_csv_from_bad_format_to_better_format(data_list, new_csv_name):
             writer.writerow(data_list[i])
 
 def main():
-    """Run "python3 read_csv.py transform <nameOfFile>" to read in the CSV and transform it into a better format
+    """Run "python3 transform_csv.py transform <nameOfFile>" to read in the CSV and transform it into a better format
     If no commandLine arguments are passed into it, then it passed the CSV into pandas."""
     if len(sys.argv) > 1:
         # CASE: transform the CSV from the bad input to the better one

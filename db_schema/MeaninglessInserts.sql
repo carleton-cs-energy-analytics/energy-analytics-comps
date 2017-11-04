@@ -9,7 +9,7 @@ INSERT INTO EquipmentTypes(Name, Units, ReturnType) VALUES ('energy', 'KiloWatts
 INSERT INTO Points(Name, RoomID, EquipmentTypeID, PointSourceID, Description) VALUES
 	('VAV1', 1, 2, 2, 'The Literal Death Star');
 
-INSERT INTO PointValue(PointTimestamp, PointID, PointValue) VALUES
+INSERT INTO PointValues (PointTimestamp, PointID, PointValue) VALUES
 	('2017-10-10 00:00:00', '1', 'HEAT'),
     ('2017-10-10 00:15:00', '1', 'HEAT'),
     ('2017-10-10 00:30:00', '1', 'HEAT'),
@@ -20,7 +20,7 @@ INSERT INTO PointValue(PointTimestamp, PointID, PointValue) VALUES
     ('2017-10-10 01:45:00', '1', 'HEAT');
 
 
-SELECT * FROM DataDriftwood
-JOIN Equipment on DataDriftwood.equipmentID = Equipment.ID
-JOIN Rooms on Equipment.RoomID = Rooms.ID
+SELECT * FROM PointValues
+JOIN Points on PointValues.pointID = Points.ID
+JOIN Rooms on Points.RoomID = Rooms.ID
 JOIN Buildings on Rooms.BuildingID = Buildings.ID

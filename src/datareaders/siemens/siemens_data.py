@@ -1,9 +1,6 @@
 from datetime import datetime
 import pandas as pd
-import sys, os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/../..")
-import src.datareaders.context
-
+from siemens_context import *
 
 PATH = sys.path[0]
 class SiemensData:

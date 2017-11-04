@@ -39,25 +39,6 @@ def transform_csv_from_bad_format_to_better_format(data_list, new_csv_name):
         for i in range(split + 5, len(data_list), 1):
             writer.writerow(data_list[i])
 
-
-def get_dataframe_from_csv(file_name):
-    """Make csv_files into Pandas data frame"""
-    df = pd.read_csv(file_name, dtype=object)
-
-    # Potential example of finding cycling?
-    previous_entry = None
-    cycle_count = 0
-    for entry in df._series['ACDIN.VAV026:HEAT.COOL']:
-        if entry != previous_entry and previous_entry is not None:
-            cycle_count += 1
-        previous_entry = entry
-    print("{} cycles(?) in this example".format(cycle_count))
-
-    for index, row in df.iterrows():
-        # print(row)
-        pass
-
-
 def main():
     """Run "python3 read_csv.py transform <nameOfFile>" to read in the CSV and transform it into a better format
     If no commandLine arguments are passed into it, then it passed the CSV into pandas."""
@@ -67,9 +48,6 @@ def main():
             directory_path = PATH + "/../data/csv_files/"
             file = sys.argv[2]
             transform_file(directory_path, file)
-        else:
-            file_name = sys.argv[1]
-            get_dataframe_from_csv(file_name)
 
     # CASE: transforms every .csv file in csv_files to a better format
     else:

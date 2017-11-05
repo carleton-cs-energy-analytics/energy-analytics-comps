@@ -1,12 +1,7 @@
 from datetime import datetime
 import pandas as pd
-import sys, os
-# import importlib
-# importlib.import_module("datareaders.siemens.siemens_context")
-# import src.datareaders.siemens.siemens_context
 from src.datareaders.resources import get_data_resource
 
-PATH = os.path.dirname(__file__)
 class SiemensData:
     """ Class for reading and manipulating Siemens data from transformed CSVs.
     Contains API for accessing data, as well as function for reading the CSVs.

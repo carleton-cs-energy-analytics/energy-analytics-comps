@@ -20,8 +20,13 @@ class SiemensReader:
 
         for point_name in self.siemens_data.data.columns[2:]:
             room_name = self._parse_room(point_name)
+            point_type = self._get_point_type(point_name)
+            description = self.json_dict[point_name]["Descriptor"]
+
+            point = Point(point_name, room_name, self.building_name, self.source, point_type, description)
+
             self.db_connection.addUniqueRoom(room_name, self.building_name)
-            self._add_point_to_db(point_name, room_name, self.building_name, self.source)
+            self.db_connection.addUniquePoint(point)
 
     def _add_building(self):
         self.db_connection.addUniqueBuilding(self.building_name)
@@ -69,20 +74,6 @@ class SiemensReader:
         self.db_connection.addPointType(new_type)
         known_types[new_type.name] = new_type
         return new_type
-
-    def _add_point_to_db(self, point_name, room_name, building_name, point_source):
-        """
-        Given some information about a point, gets the type and description and pushes that information to the database
-        """
-        this_point = Point(point_name, room_name, building_name, point_source)
-
-        point_type = self._get_point_type(point_name)
-        description = self.json_dict[point_name]["Descriptor"]
-
-        this_point.type = point_type
-        this_point.description = description
-
-        self.db_connection.addUniquePoint(this_point)
 
     def _populate_table_with_known_types(self):  # RUN ONLY ONCE
         """

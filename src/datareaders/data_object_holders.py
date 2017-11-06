@@ -23,15 +23,10 @@ class PointType:
 
 
 class Point:
-    name = ""
-    room = ""
-    building = ""
-    point_type = None # will be a PointType object
-    source = ""
-    description = ""
-
-    def __init__(self, name, room_name, building_name, source_enum_value):
+    def __init__(self, name, room_name, building_name, source_enum_value, point_type, description):
         self.name = name
         self.room = room_name
         self.building = building_name
         self.source = source_enum_value
+        self.point_type = point_type
+        self.description = description

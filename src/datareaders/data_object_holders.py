@@ -31,7 +31,8 @@ class Point:
     source = ""
     description = ""
 
-    def __init__(self, name, room_name, building_name):
+    def __init__(self, name, room_name, building_name, source_name):
         self.name = name
         self.room = room_name
         self.building = building_name
+        self.source = source_name

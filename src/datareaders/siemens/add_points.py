@@ -51,7 +51,7 @@ def add_point_to_db(point_name, room_name, building_name, point_source_name):
     """
     Given some information about a point, gets the type and description and pushes that information to the database
     """
-    this_point = Point(point_name, room_name, building_name)
+    this_point = Point(point_name, room_name, building_name, point_source_name)
     point_id = db_connection.getIDPoint(this_point)
     if point_id is not None:
         return # this point is already in database, don't add again
@@ -61,7 +61,6 @@ def add_point_to_db(point_name, room_name, building_name, point_source_name):
 
     this_point.type = point_type
     this_point.description = description
-    this_point.source = point_source_name
 
     db_connection.addPoint(this_point)
 

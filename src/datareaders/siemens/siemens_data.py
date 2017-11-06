@@ -19,7 +19,8 @@ class SiemensData:
         self.data = pd.read_csv(filename, dtype=object)
 
     def find_data_for_room(self, room_name):
-        """ Returns dictionary of info about given room.
+        """
+        Returns dictionary of info about given room.
         Key = equipment name, value = sorted list of tuples containing (timestamp, data)
         """
         equipment_dictionary = {}

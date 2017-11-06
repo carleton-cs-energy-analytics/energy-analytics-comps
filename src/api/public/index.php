@@ -8,6 +8,8 @@ if (PHP_SAPI == 'cli-server') {
         return false;
     }
 }
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -17,11 +19,17 @@ session_start();
 $settings = require __DIR__ . '/../src/settings.php';
 $app = new \Slim\App($settings);
 
+// DB Settings
+require __DIR__.'/../src/config.php';
+
 // Set up dependencies
 require __DIR__ . '/../src/dependencies.php';
 
-// Register middleware
-require __DIR__ . '/../src/middleware.php';
+// Register the model
+require __DIR__ . '/../src/model.php';
+
+// Register database
+require __DIR__ . '/../src/database.php';
 
 // Register routes
 require __DIR__ . '/../src/routes.php';

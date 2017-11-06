@@ -15,11 +15,6 @@ return [
             'path' => isset($_ENV['docker']) ? 'php://stdout' : __DIR__ . '/../logs/app.log',
             'level' => \Monolog\Logger::DEBUG,
         ],
-        'database' => [
-            'username' => 'energycomps',
-            'password' => 'password',
-            'host' => 'localhost',
-        ],
         'debug' => true
     ],
 ];

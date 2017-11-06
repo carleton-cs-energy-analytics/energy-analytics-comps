@@ -1,6 +1,5 @@
 import psycopg2
 from src.datareaders.data_object_holders import PointType
-from src.datareaders.table_enumerations import Sources
 
 class DatabaseConnection:
     # some connection information
@@ -14,20 +13,27 @@ class DatabaseConnection:
     # add methods add object to database
 
     def addBuilding(self, name):
-        db.execute("INSERT INTO ")
-        pass
+        self.db.execute("INSERT INTO Buildings(Name) VALUES (%s);", (name))
 
     def addRoom(self, name, building_name):
-        pass
+        building_id = self.getIDBuilding(building_name)
+        self.db.execute("INSERT INTO Rooms(Name, BuildingID) VALUES (%s, %i);", (name, building_id))
 
     def addPointType(self, point_type):
-        pass
+        self.db.execute("INSERT INTO PointTypes(Name, Units, ReturnType, Factor) VALUES (%s, %s, %s, %i);",
+                        (point_type.name, point_type.get_units_placeholder(), point_type.return_type,
+                         point_type.factor))
 
     def addPoint(self, point):
-        pass
+        room_id = self.getIDRoom(point.room, point.building)
+        type_id = self.getIDPointType(point.point_type)
+        self.db.execute("INSERT INTO Points(Name, RoomID, PoinTypeID, PointSourceID, Description) VALUES (%s, %i, "
+                        "%i, $i, $s);", (point.name, room_id, type_id, point.source, point.description))
 
-    def addPointValue(self, timestamp, point_id, value):
-        pass
+    def addPointValue(self, timestamp, point, value):
+        point_id = self.getIDPoint(point)
+        self.db.execute("INSERT INTO PointValues (PointTimestamp, PointID, PointValue) VALUES (%s, %i, %i);",
+                        (timestamp, point_id, value))
 
     # getID methods return the ID of an object if it is in the database, or None if not
 

@@ -1,6 +1,7 @@
 ## Our Directories
 data/better_csv_files/
 data/better_csv_files/*
+src/datareaders/data_connection_params.py
 
 # Created by https://www.gitignore.io/api/macos,python,pycharm,jupyternotebook
 

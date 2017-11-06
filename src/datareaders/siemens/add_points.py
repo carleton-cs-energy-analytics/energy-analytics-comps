@@ -47,14 +47,14 @@ def get_point_type(point_name):
     return new_type
 
 
-def add_point_to_db(point_name, room_name, building_name, point_source_name):
+def add_point_to_db(point_name, room_name, building_name, point_source):
     """
     Given some information about a point, gets the type and description and pushes that information to the database
     """
-    this_point = Point(point_name, room_name, building_name, point_source_name)
-    point_id = db_connection.getIDPoint(this_point)
-    if point_id is not None:
-        return # this point is already in database, don't add again
+    db_connection = DatabaseConnection()
+    json_dict = json.load("magic")
+
+    this_point = Point(point_name, room_name, building_name, point_source)
 
     point_type = get_point_type(point_name)
     description = json_dict[point_name]["Descriptor"]
@@ -62,7 +62,7 @@ def add_point_to_db(point_name, room_name, building_name, point_source_name):
     this_point.type = point_type
     this_point.description = description
 
-    db_connection.addPoint(this_point)
+    db_connection.addUniquePoint(this_point)
 
 
 def populate_table_with_known_types(): # RUN ONLY ONCE

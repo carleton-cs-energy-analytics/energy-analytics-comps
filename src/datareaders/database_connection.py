@@ -1,5 +1,6 @@
 import psycopg2
 from src.datareaders.data_object_holders import PointType
+from src.datareaders.table_enumerations import Sources
 
 class DatabaseConnection:
     # some connection information
@@ -13,6 +14,7 @@ class DatabaseConnection:
     # add methods add object to database
 
     def addBuilding(self, name):
+        db.execute("INSERT INTO ")
         pass
 
     def addRoom(self, name, building_name):

@@ -1,7 +1,13 @@
+import psycopg2
+from src.datareaders.data_object_holders import PointType
+
 class DatabaseConnection:
     # some connection information
+    db = None
 
     def __init__(self):
+        db_connection = psycopg2.connect("magic")
+        db = db_connection.cursor()
         pass
 
     # add methods add object to database
@@ -9,33 +15,30 @@ class DatabaseConnection:
     def addBuilding(self, name):
         pass
 
-    def addRoom(self, name, building_id):
+    def addRoom(self, name, building_name):
         pass
 
-    def addPointType(self, name, return_type, units, factor):
+    def addPointType(self, point_type):
         pass
 
-    def addPoint(self, name, room_id, type_id, source_id, description):
+    def addPoint(self, point):
         pass
 
     def addPointValue(self, timestamp, point_id, value):
         pass
 
-    # check methods see if given object is already in database
+    # getID methods return the ID of an object if it is in the database, or None if not
 
-    def checkBuilding(self, name):
+    def getIDBuilding(self, name):
         pass
 
-    def checkRoom(self, name, building_id):
+    def getIDRoom(self, name, building_id):
         pass
 
-    def checkPointType(self, name, return_type, units, factor):
+    def getIDPointType(self, point_type):
         pass
 
-    def checkPoint(self, name, room_id, type_id, source_id, description):
-        pass
-
-    def checkPointValue(self, timestamp, point_id, value):
+    def getIDPoint(self, point): # only need to use name and room/building combo
         pass
 
     # addUnique methods add object to database only if it is not already in the database
@@ -43,15 +46,29 @@ class DatabaseConnection:
     def addUniqueBuilding(self, name):
         pass
 
-    def addUniqueRoom(self, name, building_id):
+    def addUniqueRoom(self, name, building_name):
         pass
 
-    def addUniquePointType(self, name, return_type, units, factor):
+    def addUniquePointType(self, point_type):
         pass
 
-    def addUniquePoint(self, name, room_id, type_id, source_id, description):
+    def addUniquePoint(self, point):
         pass
 
-    def addUniquePointValue(self, timestamp, point_id, value):
-        pass
+    # getAll methods select * from database and return as a dictionary with key as name
+
+    def getAllPointTypes(self):
+        known_types = {}
+        self.db.execute("SELECT * FROM PointTypes")
+        next_entry = self.db.fetchone()
+        while next_entry is not None:
+            return_type = next_entry[2]
+            this_type = PointType(next_entry[0], return_type)
+            if return_type == "enumerated":
+                this_type.enumeration_settings = next_entry[1].split(",")
+            else:
+                this_type.units = next_entry[1]
+            known_types[next_entry[0]] = this_type
+            next_entry = self.db.fetchone()
+        return known_types
 

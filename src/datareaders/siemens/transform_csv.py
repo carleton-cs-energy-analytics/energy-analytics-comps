@@ -4,7 +4,6 @@ Converts an ugly csv into a better one.
 
 import csv
 import sys
-import pandas as pd
 import os
 from src.datareaders.resources import get_data_resource
 

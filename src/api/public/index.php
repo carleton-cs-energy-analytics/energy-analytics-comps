@@ -25,6 +25,9 @@ require __DIR__.'/../src/config.php';
 // Set up dependencies
 require __DIR__ . '/../src/dependencies.php';
 
+// Set up middleware
+require __DIR__ . '/../src/middleware.php';
+
 // Register the model
 require __DIR__ . '/../src/model.php';
 

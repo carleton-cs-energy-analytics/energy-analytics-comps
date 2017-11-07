@@ -23,3 +23,11 @@ so that the person making the change knows that it is either breaking or changin
 python3 -m unittest discover --start-directory test
 ```
 
+## Dashboard
+To set up the flask app locally, cd to the dashboard directory and run
+```
+EXPORT FLASK_APP=routes.py
+flask run
+```
+You can also optionally enable debug mode with `EXPORT FLASK_DEBUG=1`
+To set up the psycopg2 connection, rename the config.example.py file to config.py and enter the appropriate config values.

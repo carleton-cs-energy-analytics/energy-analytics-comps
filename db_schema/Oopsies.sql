@@ -38,7 +38,7 @@ CREATE TABLE Points (
     PointSourceID int NOT NULL,
     Description text,
     FOREIGN KEY (RoomID) REFERENCES Rooms(ID),
-    FOREIGN KEY (EquipmentTypeID) REFERENCES EquipmentTypes(ID),
+    FOREIGN KEY (PointTypeID) REFERENCES PointTypes(ID),
     FOREIGN KEY (PointSourceID) REFERENCES PointSources(ID)
 );
 

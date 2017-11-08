@@ -10,8 +10,8 @@ class DatabaseConnection:
             conn = psycopg2.connect(**params)
             self.db = conn.cursor()
             print("database connected")
-            self.db.execute("SELECT * from Buildings")
-            print(self.db.fetchone())
+            self.db.execute("INSERT INTO Buildings(Name) VALUES ('LDC');")
+            # print(self.db.fetchone())
 
             # print("Type of conn", type(conn))
         except:
@@ -20,8 +20,8 @@ class DatabaseConnection:
     def add_building(self, name):
         insert_string = "INSERT INTO Buildings(Name) VALUES ('{}');".format(name)
         print("WE ARE ADDING A BUILDING NOW", name, "\n", insert_string)
-        # self.db.execute("INSERT INTO Buildings(Name) VALUES (%s);", (name))
-        self.db.execute(insert_string)
+        self.db.execute("INSERT INTO Buildings(Name) VALUES (%s);", (name,))
+        # self.db.execute(insert_string)
 
     def add_room(self, name, building_name):
         print("WE ARE ADDING A ROOM NOW")

@@ -20,14 +20,18 @@ class SiemensReader:
         self._add_building()
 
         for point_name in self.siemens_data.data.columns[2:]:
-            room_name = self._parse_room(point_name)
-            point_type = self._get_point_type(point_name)
-            description = self.json_dict[point_name]["Descriptor"]
+            try:
+                room_name = self._parse_room(point_name)
+                point_type = self._get_point_type(point_name)
+                description = self.json_dict[point_name]["Descriptor"]
 
-            point = Point(point_name, room_name, self.building_name, self.source, point_type, description)
+                point = Point(point_name, room_name, self.building_name, self.source, point_type, description)
 
-            self.db_connection.add_unique_room(room_name, self.building_name)
-            self.db_connection.add_unique_point(point)
+                self.db_connection.add_unique_room(room_name, self.building_name)
+                self.db_connection.add_unique_point(point)
+            except KeyError as e:
+                print("Don't know type of", point_name)
+
 
     def _add_building(self):
         self.db_connection.add_unique_building(self.building_name)

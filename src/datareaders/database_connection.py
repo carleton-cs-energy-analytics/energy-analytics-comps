@@ -12,7 +12,6 @@ class DatabaseConnection:
         self.db.execute("INSERT INTO Buildings(Name) VALUES (%s);", (name,))
 
     def add_room(self, name, building_name):
-        print("WE ARE ADDING A ROOM NOW")
         building_id = self.get_building_id(building_name)
         self.db.execute("INSERT INTO Rooms(Name, BuildingID) VALUES (%s, %s);", (name, building_id))
 
@@ -24,7 +23,6 @@ class DatabaseConnection:
     def add_point(self, point):
         room_id = self.get_room_id(point.room, point.building)
         type_id = self.get_point_type_id(point.point_type)
-        print("with name: " + point.point_type.name)
         self.db.execute("INSERT INTO Points(Name, RoomID, PointTypeID, PointSourceID, Description) VALUES (%s, %s, "
                         "%s, %s, %s);", (point.name, room_id, type_id, point.source, point.description))
 

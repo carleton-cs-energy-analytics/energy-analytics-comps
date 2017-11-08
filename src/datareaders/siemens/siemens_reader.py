@@ -43,7 +43,6 @@ class SiemensReader:
         # IF potential room is room, add it
         # ELSE find none room for this building
         # TODO add some sort of smart knowledge about whether or not this is a room
-        print("ROOM??", potential_room)
         return potential_room
 
     def _read_type_codes(self):

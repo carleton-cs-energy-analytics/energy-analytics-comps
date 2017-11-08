@@ -84,7 +84,7 @@ class SiemensReader:
 
 
 def main():
-    sr = SiemensReader("140708-141112_LDC.AUDIT.TRENDRPT1.csv", "LDC", Sources.SIEMENS)
+    sr = SiemensReader("LDC.AUDIT.TRENDRPT1_171016.csv", "LDC", Sources.SIEMENS)
     sr.add_to_db()
 
 if __name__ == '__main__':

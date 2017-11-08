@@ -52,7 +52,7 @@ class DatabaseConnection:
     def get_room_id(self, name, building_name):
         building_id = self.get_building_id(building_name)
         self.db.execute("SELECT ID from Rooms where Name = '{}' AND BuildingID = {}".format(name, building_id))
-        rid = self.db.fetchone()
+        id = self.db.fetchone()
         if id is None:
             return None
         else:

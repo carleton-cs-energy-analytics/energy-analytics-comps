@@ -57,11 +57,12 @@ class DatabaseConnection:
 
     def get_room_id(self, name, building_name):
         building_id = self.get_building_id(building_name)
-        self.db.execute("SELECT ID from Rooms where Name = '{}' AND BuildingID = {}".format(name, building_id))
+        self.db.execute("SELECT ID, Name from Rooms where Name = '{}' AND BuildingID = {}".format(name, building_id))
         id = self.db.fetchone()
         if id is None:
             return None
         else:
+            print("My room name is " + id[1])
             return id[0]
 
     def get_point_type_id(self, point_type):

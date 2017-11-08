@@ -1,16 +1,18 @@
 import psycopg2
 from src.datareaders.data_object_holders import PointType
-
+from src.datareaders.data_connection_params import params
 class DatabaseConnection:
     # some connection information
     db = None
 
     def __init__(self):
-        db_connection = psycopg2.connect("magic")
-        db = db_connection.cursor()
-        pass
+        try:
+            conn = psycopg2.connect(**params)
+            curs = conn.cursor()
+            print("database connected")
 
-    # add methods add object to database
+        except:
+            print("Connection Failed")
 
     def add_building(self, name):
         self.db.execute("INSERT INTO Buildings(Name) VALUES (%s);", (name))

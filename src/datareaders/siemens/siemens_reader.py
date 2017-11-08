@@ -25,11 +25,11 @@ class SiemensReader:
 
             point = Point(point_name, room_name, self.building_name, self.source, point_type, description)
 
-            self.db_connection.addUniqueRoom(room_name, self.building_name)
-            self.db_connection.addUniquePoint(point)
+            self.db_connection.add_unique_room(room_name, self.building_name)
+            self.db_connection.add_unique_point(point)
 
     def _add_building(self):
-        self.db_connection.addUniqueBuilding(self.building_name)
+        self.db_connection.add_unique_building(self.building_name)
 
     def _parse_room(self, point_name):
         # print(point_name)
@@ -55,7 +55,7 @@ class SiemensReader:
         If new type, name will be a concatenation of return_type and units/enumeration_settings
         """
         type_codes = self._read_type_codes()
-        known_types = self.db_connection.getAllPointTypes()
+        known_types = self.db_connection.get_all_point_types()
         if point_name in type_codes:
             return known_types[type_codes[point_name]]
         point_dict = self.json_dict[point_name]
@@ -71,7 +71,7 @@ class SiemensReader:
             type_name = return_type + ",".join(enumeration_settings)
             new_type = PointType(type_name, return_type)
             new_type.enumeration_settings = enumeration_settings
-        self.db_connection.addPointType(new_type)
+        self.db_connection.add_point_type(new_type)
         known_types[new_type.name] = new_type
         return new_type
 

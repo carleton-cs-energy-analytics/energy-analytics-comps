@@ -58,7 +58,7 @@ class DatabaseConnection:
             return id[0]
 
     def get_point_type_id(self, point_type):
-        self.db.execute("SELECT ID from PointTypes where Name = '{}';".format(point_type))
+        self.db.execute("SELECT ID from PointTypes where Name = '{}';".format(point_type.name))
         id = self.db.fetchone()
         if id is None:
             return None

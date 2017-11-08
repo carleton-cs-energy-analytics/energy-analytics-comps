@@ -8,9 +8,9 @@ class DatabaseConnection:
     def __init__(self):
         try:
             conn = psycopg2.connect(**params)
-            curs = conn.cursor()
+            self.db = conn.cursor()
             print("database connected")
-
+            print("Type of conn", type(conn))
         except:
             print("Connection Failed")
 

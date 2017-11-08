@@ -42,20 +42,36 @@ class DatabaseConnection:
 
     def get_building_id(self, name):
         self.db.execute("SELECT ID from Buildings where Name = '{}'".format(name))
-        return self.db.fetchone()[0]
+        id = self.db.fetchone()
+        if id is None:
+            return None
+        else:
+            return self.db.fetchone()[0]
 
     def get_room_id(self, name, building_name):
         building_id = self.get_building_id(building_name)
         self.db.execute("SELECT ID from Rooms where Name = '{}' AND BuildingID = {}".format(name, building_id))
-        return self.db.fetchone()[0]
+        rid = self.db.fetchone()
+        if id is None:
+            return None
+        else:
+            return self.db.fetchone()[0]
 
     def get_point_type_id(self, point_type):
         self.db.execute("SELECT ID from PointTypes where Name = '{}'".format(point_type))
-        return self.db.fetchone()[0]
+        id = self.db.fetchone()
+        if id is None:
+            return None
+        else:
+            return self.db.fetchone()[0]
 
     def get_point_id(self, point): # only need to use name and room/building combo
         self.db.execute("SELECT ID from Points where Name = '{}'".format(point.name))
-        return self.db.fetchone()[0]
+        id = self.db.fetchone()
+        if id is None:
+            return None
+        else:
+            return self.db.fetchone()[0]
 
     # addUnique methods add object to database only if it is not already in the database
 

@@ -20,21 +20,21 @@ class DatabaseConnection:
         self.db.execute("INSERT INTO Rooms(Name, BuildingID) VALUES (%s, %s);", (name, building_id))
 
     def add_point_type(self, point_type):
-        self.db.execute("INSERT INTO PointTypes(Name, Units, ReturnType, Factor) VALUES ('{}', '{}', '{}', "
-                        "'{}');".format(point_type.name, point_type.get_units_placeholder(), point_type.return_type,
+        self.db.execute("INSERT INTO PointTypes(Name, Units, ReturnType, Factor) VALUES (%s, %s, %s, %s);",
+                        (point_type.name, point_type.get_units_placeholder(), point_type.return_type,
                          self.formatSQLNone(point_type.factor)))
 
     def add_point(self, point):
         room_id = self.get_room_id(point.room, point.building)
         type_id = self.get_point_type_id(point.point_type)
         print("with name: " + point.point_type.name)
-        self.db.execute("INSERT INTO Points(Name, RoomID, PointTypeID, PointSourceID, Description) VALUES ('{}','{}' "
-                        "'{}', '{}', '{}');".format(point.name, room_id, type_id, point.source, point.description))
+        self.db.execute("INSERT INTO Points(Name, RoomID, PointTypeID, PointSourceID, Description) VALUES (%s, %s, "
+                        "%s, %s, %s);", (point.name, room_id, type_id, point.source, point.description))
 
     def add_point_value(self, timestamp, point, value):
         point_id = self.get_point_id(point)
         self.db.execute("INSERT INTO PointValues (PointTimestamp, PointID, PointValue) VALUES "
-                        "('{}','{}','{}');".format(timestamp, point_id, value))
+                        "(%s, %s, %s);", (timestamp, point_id, value))
 
     # get_-_id methods return the ID of an object if it is in the database, or None if not
 

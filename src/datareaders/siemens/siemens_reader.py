@@ -92,6 +92,7 @@ class SiemensReader:
 def main():
     sr = SiemensReader("LDC.AUDIT.TRENDRPT2_171016.csv", "LDC", Sources.SIEMENS)
     sr.add_to_db()
+    sr.db_connection.close_connection()
 
 if __name__ == '__main__':
     main()

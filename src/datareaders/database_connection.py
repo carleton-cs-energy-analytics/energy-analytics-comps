@@ -6,18 +6,7 @@ class DatabaseConnection:
     db = None
 
     def __init__(self):
-        try:
-            conn = psycopg2.connect(**params)
-            conn.autocommit = True
-            self.db = conn.cursor()
-            print("database connected")
-            # self.db.execute("INSERT INTO 'Buildings'(Name) VALUES ('LDC');")
-            # self.db.execute()
-            # print(self.db.fetchone())
-
-            # print("Type of conn", type(conn))
-        except:
-            print("Connection Failed")
+        self.open_connection()
 
     def add_building(self, name):
         insert_string = "INSERT INTO Buildings(Name) VALUES ('{}');".format(name)
@@ -124,3 +113,15 @@ class DatabaseConnection:
         else:
             return value
 
+    def open_connection(self):
+        try:
+            self.conn = psycopg2.connect(**params)
+            self.conn.autocommit = True
+            self.db = self.conn.cursor()
+            print("Database Connected")
+        except:
+            print("Database Connection Failed")
+
+    def close_connection(self):
+        self.db.close()
+        self.conn.close()

@@ -63,9 +63,11 @@ class SiemensReader:
         if "Analog Representation" in point_dict:
             return_type = point_dict["Analog Representation"]
             units = point_dict["Engineering Units"]
+            factor = point_dict["# of decimal places"]
             type_name = return_type + units
             new_type = PointType(type_name, return_type)
             new_type.units = units
+            new_type.factor = factor
         else:
             return_type = "enumerated"
             enumeration_settings = point_dict["Text Table"][1]
@@ -84,7 +86,7 @@ class SiemensReader:
 
 
 def main():
-    sr = SiemensReader("LDC.AUDIT.TRENDRPT1_171016.csv", "LDC", Sources.SIEMENS)
+    sr = SiemensReader("LDC.AUDIT.TRENDRPT2_171016.csv", "LDC", Sources.SIEMENS)
     sr.add_to_db()
 
 if __name__ == '__main__':

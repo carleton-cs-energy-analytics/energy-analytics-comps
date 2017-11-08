@@ -15,10 +15,12 @@ class DatabaseConnection:
             print("Connection Failed")
 
     def add_building(self, name):
+        print("WE ARE ADDING A BUILDING NOW")
         # self.db.execute("INSERT INTO Buildings(Name) VALUES (%s);", (name))
         self.db.execute("INSERT INTO Buildings(Name) VALUES ('{}');".format(name))
 
     def add_room(self, name, building_name):
+        print("WE ARE ADDING A ROOM NOW")
         building_id = self.get_building_id(building_name)
         self.db.execute("INSERT INTO Rooms(Name, BuildingID) VALUES ('{}', '{}');".format(name, building_id))
 

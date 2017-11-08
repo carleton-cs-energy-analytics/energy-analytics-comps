@@ -48,3 +48,5 @@ CREATE TABLE PointValues (
     PointValue int NOT NULL,
     FOREIGN KEY (PointID) REFERENCES Points(ID)
 );
+
+INSERT INTO PointSources(Name) VALUES ('LUCID'), ('SIEMENS'), ('ALC'), ('JAMES_SOLAR');

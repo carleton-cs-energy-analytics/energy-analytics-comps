@@ -30,7 +30,7 @@ class DatabaseConnection:
     def add_point(self, point):
         room_id = self.get_room_id(point.room, point.building)
         type_id = self.get_point_type_id(point.point_type)
-        self.db.execute("INSERT INTO Points(Name, RoomID, PoinTypeID, PointSourceID, Description) VALUES ('{}','{}' "
+        self.db.execute("INSERT INTO Points(Name, RoomID, PointTypeID, PointSourceID, Description) VALUES ('{}','{}' "
                         "'{}', '{}', '{}');".format(point.name, room_id, type_id, point.source, point.description))
 
     def add_point_value(self, timestamp, point, value):

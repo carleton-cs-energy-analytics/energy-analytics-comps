@@ -77,7 +77,7 @@ class SiemensReader:
             known_types[new_type.name] = new_type
             return new_type
         except KeyError as e:
-            print("Don't know type of ", str(e).split()[1:])
+            print("Don't know type of ", str(e))
             # raise e
 
     def _populate_table_with_known_types(self):  # RUN ONLY ONCE

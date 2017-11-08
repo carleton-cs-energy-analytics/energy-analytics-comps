@@ -59,22 +59,26 @@ class SiemensReader:
         known_types = self.db_connection.get_all_point_types()
         if point_name in type_codes:
             return known_types[type_codes[point_name]]
-        point_dict = self.json_dict[point_name]
-        if "Analog Representation" in point_dict:
-            return_type = point_dict["Analog Representation"]
-            units = point_dict["Engineering Units"]
-            type_name = return_type + units
-            new_type = PointType(type_name, return_type)
-            new_type.units = units
-        else:
-            return_type = "enumerated"
-            enumeration_settings = point_dict["Text Table"][1]
-            type_name = return_type + ",".join(enumeration_settings)
-            new_type = PointType(type_name, return_type)
-            new_type.enumeration_settings = enumeration_settings
-        self.db_connection.add_point_type(new_type)
-        known_types[new_type.name] = new_type
-        return new_type
+        try:
+            point_dict = self.json_dict[point_name]
+            if "Analog Representation" in point_dict:
+                return_type = point_dict["Analog Representation"]
+                units = point_dict["Engineering Units"]
+                type_name = return_type + units
+                new_type = PointType(type_name, return_type)
+                new_type.units = units
+            else:
+                return_type = "enumerated"
+                enumeration_settings = point_dict["Text Table"][1]
+                type_name = return_type + ",".join(enumeration_settings)
+                new_type = PointType(type_name, return_type)
+                new_type.enumeration_settings = enumeration_settings
+            self.db_connection.add_point_type(new_type)
+            known_types[new_type.name] = new_type
+            return new_type
+        except KeyError as e:
+            print("Don't know type of ", str(e).split()[1])
+            raise e
 
     def _populate_table_with_known_types(self):  # RUN ONLY ONCE
         """
@@ -84,7 +88,7 @@ class SiemensReader:
 
 
 def main():
-    sr = SiemensReader("LDC.AUDIT.TRENDRPT1_171016.csv", "LDC", Sources.SIEMENS)
+    sr = SiemensReader("LDC.AUDIT.TRENDRPT2_171016.csv", "LDC", Sources.SIEMENS)
     sr.add_to_db()
 
 if __name__ == '__main__':

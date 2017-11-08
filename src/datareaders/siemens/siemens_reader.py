@@ -20,14 +20,17 @@ class SiemensReader:
         self._add_building()
 
         for point_name in self.siemens_data.data.columns[2:]:
-            room_name = self._parse_room(point_name)
-            point_type = self._get_point_type(point_name)
-            description = self.json_dict[point_name]["Descriptor"]
+            try:
+                room_name = self._parse_room(point_name)
+                point_type = self._get_point_type(point_name)
+                description = self.json_dict[point_name]["Descriptor"]
 
-            point = Point(point_name, room_name, self.building_name, self.source, point_type, description)
+                point = Point(point_name, room_name, self.building_name, self.source, point_type, description)
 
-            self.db_connection.add_unique_room(room_name, self.building_name)
-            self.db_connection.add_unique_point(point)
+                self.db_connection.add_unique_room(room_name, self.building_name)
+                self.db_connection.add_unique_point(point)
+            except KeyError as e:
+                print("Don't know type of ", str(e))
 
     def _add_building(self):
         self.db_connection.add_unique_building(self.building_name)
@@ -59,26 +62,22 @@ class SiemensReader:
         known_types = self.db_connection.get_all_point_types()
         if point_name in type_codes:
             return known_types[type_codes[point_name]]
-        try:
-            point_dict = self.json_dict[point_name]
-            if "Analog Representation" in point_dict:
-                return_type = point_dict["Analog Representation"]
-                units = point_dict["Engineering Units"]
-                type_name = return_type + units
-                new_type = PointType(type_name, return_type)
-                new_type.units = units
-            else:
-                return_type = "enumerated"
-                enumeration_settings = point_dict["Text Table"][1]
-                type_name = return_type + ",".join(enumeration_settings)
-                new_type = PointType(type_name, return_type)
-                new_type.enumeration_settings = enumeration_settings
-            self.db_connection.add_point_type(new_type)
-            known_types[new_type.name] = new_type
-            return new_type
-        except KeyError as e:
-            print("Don't know type of ", str(e))
-            # raise e
+        point_dict = self.json_dict[point_name]
+        if "Analog Representation" in point_dict:
+            return_type = point_dict["Analog Representation"]
+            units = point_dict["Engineering Units"]
+            type_name = return_type + units
+            new_type = PointType(type_name, return_type)
+            new_type.units = units
+        else:
+            return_type = "enumerated"
+            enumeration_settings = point_dict["Text Table"][1]
+            type_name = return_type + ",".join(enumeration_settings)
+            new_type = PointType(type_name, return_type)
+            new_type.enumeration_settings = enumeration_settings
+        self.db_connection.add_point_type(new_type)
+        known_types[new_type.name] = new_type
+        return new_type
 
     def _populate_table_with_known_types(self):  # RUN ONLY ONCE
         """

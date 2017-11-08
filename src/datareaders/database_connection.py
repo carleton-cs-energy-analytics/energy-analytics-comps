@@ -18,7 +18,7 @@ class DatabaseConnection:
             print("Connection Failed")
 
     def add_building(self, name):
-        print("WE ARE ADDING A BUILDING NOW")
+        print("WE ARE ADDING A BUILDING NOW", name)
         # self.db.execute("INSERT INTO Buildings(Name) VALUES (%s);", (name))
         self.db.execute("INSERT INTO Buildings(Name) VALUES ('{}');".format(name))
 

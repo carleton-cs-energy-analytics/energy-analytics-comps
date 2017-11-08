@@ -15,7 +15,8 @@ class DatabaseConnection:
             print("Connection Failed")
 
     def add_building(self, name):
-        self.db.execute("INSERT INTO Buildings(Name) VALUES (%s);", (name))
+        # self.db.execute("INSERT INTO Buildings(Name) VALUES (%s);", (name))
+        self.db.execute("INSERT INTO Buildings(Name) VALUES ({});".format(name))
 
     def add_room(self, name, building_name):
         building_id = self.get_building_id(building_name)

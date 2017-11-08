@@ -11,6 +11,7 @@ class DatabaseConnection:
             self.db = conn.cursor()
             print("database connected")
             self.db.execute("INSERT INTO 'Buildings'(Name) VALUES ('LDC');")
+            self.db.execute()
             # print(self.db.fetchone())
 
             # print("Type of conn", type(conn))

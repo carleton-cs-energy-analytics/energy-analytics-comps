@@ -10,6 +10,9 @@ class DatabaseConnection:
             conn = psycopg2.connect(**params)
             self.db = conn.cursor()
             print("database connected")
+            self.db.execute("SELECT * from Buildings")
+            print(self.db.fetchone())
+
             # print("Type of conn", type(conn))
         except:
             print("Connection Failed")

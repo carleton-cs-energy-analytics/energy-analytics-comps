@@ -9,10 +9,7 @@ class DatabaseConnection:
         self.open_connection()
 
     def add_building(self, name):
-        insert_string = "INSERT INTO Buildings(Name) VALUES ('{}');".format(name)
-        print("WE ARE ADDING A BUILDING NOW", name, "\n", insert_string)
         self.db.execute("INSERT INTO Buildings(Name) VALUES (%s);", (name,))
-        # self.db.execute(insert_string)
 
     def add_room(self, name, building_name):
         print("WE ARE ADDING A ROOM NOW")
@@ -39,7 +36,7 @@ class DatabaseConnection:
     # get_-_id methods return the ID of an object if it is in the database, or None if not
 
     def get_building_id(self, name):
-        self.db.execute("SELECT ID from Buildings where Name = '{}';".format(name))
+        self.db.execute("SELECT ID from Buildings where Name = (%s);", (name,))
         id = self.db.fetchone()
         if id is None:
             return None
@@ -49,7 +46,7 @@ class DatabaseConnection:
 
     def get_room_id(self, name, building_name):
         building_id = self.get_building_id(building_name)
-        self.db.execute("SELECT ID, Name from Rooms where Name = '{}' AND BuildingID = {};".format(name, building_id))
+        self.db.execute("SELECT ID, Name from Rooms where Name = (%s) AND BuildingID = (%s);", (name, building_id))
         id = self.db.fetchone()
         if id is None:
             return None
@@ -58,7 +55,7 @@ class DatabaseConnection:
             return id[0]
 
     def get_point_type_id(self, point_type):
-        self.db.execute("SELECT ID from PointTypes where Name = '{}';".format(point_type.name))
+        self.db.execute("SELECT ID from PointTypes where Name = (%s);", (point_type.name,))
         id = self.db.fetchone()
         if id is None:
             return None
@@ -66,7 +63,7 @@ class DatabaseConnection:
             return id[0]
 
     def get_point_id(self, point): # only need to use name and room/building combo
-        self.db.execute("SELECT ID from Points where Name = '{}';".format(point.name))
+        self.db.execute("SELECT ID from Points where Name = (%s);", (point.name, ))
         id = self.db.fetchone()
         if id is None:
             return None

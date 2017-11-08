@@ -25,7 +25,7 @@ class DatabaseConnection:
     def add_point_type(self, point_type):
         self.db.execute("INSERT INTO PointTypes(Name, Units, ReturnType, Factor) VALUES ('{}', '{}', '{}', "
                         "'{}');".format(point_type.name, point_type.get_units_placeholder(), point_type.return_type,
-                         point_type.factor))
+                         self.formatSQLNone(point_type.factor)))
 
     def add_point(self, point):
         room_id = self.get_room_id(point.room, point.building)
@@ -91,4 +91,10 @@ class DatabaseConnection:
             known_types[next_entry[0]] = this_type
             next_entry = self.db.fetchone()
         return known_types
+
+    def formatSQLNone(self, value):
+        if value is None:
+            return "NULL"
+        else:
+            return value
 

@@ -30,7 +30,8 @@ class SiemensReader:
                 self.db_connection.add_unique_room(room_name, self.building_name)
                 self.db_connection.add_unique_point(point)
             except KeyError as e:
-                print("Don't know type of ", str(e))
+                print("Don't know type of", point_name)
+
 
     def _add_building(self):
         self.db_connection.add_unique_building(self.building_name)

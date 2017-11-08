@@ -10,7 +10,7 @@ class DatabaseConnection:
             conn = psycopg2.connect(**params)
             self.db = conn.cursor()
             print("database connected")
-            print("Type of conn", type(conn))
+            # print("Type of conn", type(conn))
         except:
             print("Connection Failed")
 
@@ -41,20 +41,20 @@ class DatabaseConnection:
     # get_-_id methods return the ID of an object if it is in the database, or None if not
 
     def get_building_id(self, name):
-        self.db.execute("SELECT ID from Buildings where Name = '" + name + "'")
+        self.db.execute("SELECT ID from Buildings where Name = '{}'".format(name))
         return self.db.fetchone()
 
     def get_room_id(self, name, building_name):
         building_id = self.get_building_id(building_name)
-        self.db.execute("SELECT ID from Rooms where Name = '" + name + "' AND BuildingID = " + str(building_id))
+        self.db.execute("SELECT ID from Rooms where Name = '{}' AND BuildingID = {}".format(name, building_id))
         return self.db.fetchone()
 
     def get_point_type_id(self, point_type):
-        self.db.execute("SELECT ID from PointTypes where Name = '" + point_type.name)
+        self.db.execute("SELECT ID from PointTypes where Name = '{}'".format(point_type))
         return self.db.fetchone()
 
     def get_point_id(self, point): # only need to use name and room/building combo
-        self.db.execute("SELECT ID from Points where Name = '" + point.name)
+        self.db.execute("SELECT ID from Points where Name = '{}'".format(point.name))
         return self.db.fetchone()
 
     # addUnique methods add object to database only if it is not already in the database

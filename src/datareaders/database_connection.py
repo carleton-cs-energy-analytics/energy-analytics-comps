@@ -38,30 +38,39 @@ class DatabaseConnection:
     # get_-_id methods return the ID of an object if it is in the database, or None if not
 
     def get_building_id(self, name):
-        pass
+        self.db.execute("SELECT ID from Buildings where Name = '" + name + "'")
+        return self.db.fetchone()
 
-    def get_room_id(self, name, building_id):
-        pass
+    def get_room_id(self, name, building_name):
+        building_id = self.get_building_id(building_name)
+        self.db.execute("SELECT ID from Rooms where Name = '" + name + "' AND BuildingID = " + str(building_id))
+        return self.db.fetchone()
 
     def get_point_type_id(self, point_type):
-        pass
+        self.db.execute("SELECT ID from PointTypes where Name = '" + point_type.name)
+        return self.db.fetchone()
 
     def get_point_id(self, point): # only need to use name and room/building combo
-        pass
+        self.db.execute("SELECT ID from Points where Name = '" + point.name)
+        return self.db.fetchone()
 
     # addUnique methods add object to database only if it is not already in the database
 
     def add_unique_building(self, name):
-        pass
+        if (self.get_building_id(name) is None):
+            self.add_building(name)
 
     def add_unique_room(self, name, building_name):
-        pass
+        if (self.get_room_id(name, building_name) is None):
+            self.add_room(name, building_name)
 
     def add_unique_point_type(self, point_type):
-        pass
+        if (self.get_point_type_id(point_type) is None):
+            self.add_point_type(point_type)
 
     def add_unique_point(self, point):
-        pass
+        if (self.get_point_id(point) is None):
+            self.add_point(point)
 
     # getAll methods select * from database and return as a dictionary with key as name
 

@@ -1,5 +1,4 @@
-from enum import Enum
-class Sources(Enum):
+class Sources():
     LUCID = 1
     SIEMENS = 2
     ALC = 3

@@ -13,7 +13,8 @@ class SiemensReader:
         self.db_connection = DatabaseConnection()
         self.siemens_data = SiemensData()
         self.siemens_data.read_csv(self.file_path)
-        self.json_dict = json_load("magic")
+        json_file = open(get_data_resource("csv_descriptions/testPointJson_LDC.json"), "r")
+        self.json_dict = json_load(json_file)
 
     def add_to_db(self):
         self._add_building()

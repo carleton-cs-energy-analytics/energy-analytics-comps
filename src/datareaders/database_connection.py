@@ -10,15 +10,21 @@ class DatabaseConnection:
             conn = psycopg2.connect(**params)
             self.db = conn.cursor()
             print("database connected")
+            self.db.execute("SELECT * from Buildings")
+            print(self.db.fetchone())
+
             # print("Type of conn", type(conn))
         except:
             print("Connection Failed")
 
     def add_building(self, name):
+        insert_string = "INSERT INTO Buildings(Name) VALUES ('{}');".format(name)
+        print("WE ARE ADDING A BUILDING NOW", name, "\n", insert_string)
         # self.db.execute("INSERT INTO Buildings(Name) VALUES (%s);", (name))
-        self.db.execute("INSERT INTO Buildings(Name) VALUES ('{}');".format(name))
+        self.db.execute(insert_string)
 
     def add_room(self, name, building_name):
+        print("WE ARE ADDING A ROOM NOW")
         building_id = self.get_building_id(building_name)
         self.db.execute("INSERT INTO Rooms(Name, BuildingID) VALUES (%s, %s);", (name, building_id))
 
@@ -46,12 +52,13 @@ class DatabaseConnection:
         if id is None:
             return None
         else:
+            print("ID[0]",id[0])
             return id[0]
 
     def get_room_id(self, name, building_name):
         building_id = self.get_building_id(building_name)
         self.db.execute("SELECT ID from Rooms where Name = '{}' AND BuildingID = {}".format(name, building_id))
-        rid = self.db.fetchone()
+        id = self.db.fetchone()
         if id is None:
             return None
         else:

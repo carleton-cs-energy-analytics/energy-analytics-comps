@@ -1,4 +1,9 @@
-DROP TABLE PointValues;
+/*
+Script to run when you want to reset the database
+Delete all tables & contents and re-make
+*/
+
+DROP TABLE PointValues if exists;
 DROP TABLE Points;
 DROP TABLE PointTypes;
 DROP TABLE PointSources;

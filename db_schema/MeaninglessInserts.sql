@@ -1,3 +1,7 @@
+/*
+Example SQL Insert Statements
+*/
+
 INSERT INTO Buildings(Name) VALUES ('Cassat'), ('James'), ('CMC');
 
 INSERT INTO Rooms(Name, BuildingID) VALUES ('307', '3'), ('304', '3'), ('', '2'), ('102', 1);

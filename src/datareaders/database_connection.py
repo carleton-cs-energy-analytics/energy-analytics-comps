@@ -39,7 +39,6 @@ class DatabaseConnection:
         if id is None:
             return None
         else:
-            print("ID[0]",id[0])
             return id[0]
 
     def get_room_id(self, name, building_name):
@@ -49,7 +48,6 @@ class DatabaseConnection:
         if id is None:
             return None
         else:
-            print("My room name is " + id[1])
             return id[0]
 
     def get_point_type_id(self, point_type):

@@ -18,7 +18,7 @@ class SiemensReader:
 
     def add_to_db(self):
         self._add_building()
-
+        finish_str = ""
         for point_name in self.siemens_data.data.columns[2:]:
             try:
                 room_name = self._parse_room(point_name)
@@ -29,10 +29,11 @@ class SiemensReader:
 
                 self.db_connection.add_unique_room(room_name, self.building_name)
                 self.db_connection.add_unique_point(point)
+                finish_str += "Finished for point "+point_name+"\n"
             except KeyError as e:
                 print("Don't know type of", point_name)
 
-
+        print(finish_str)
     def _add_building(self):
         self.db_connection.add_unique_building(self.building_name)
 

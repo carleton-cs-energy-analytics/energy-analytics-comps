@@ -40,7 +40,7 @@ class SiemensReader:
     def _parse_room(self, point_name):
         # print(point_name)
         l = point_name.split(".")
-        potential_room = l[1]
+        potential_room = "The string room"
         # IF potential room is room, add it
         # ELSE find none room for this building
         # TODO add some sort of smart knowledge about whether or not this is a room

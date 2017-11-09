@@ -1,7 +1,6 @@
 """
 Converts an ugly csv into a better one.
 """
-
 import csv
 import sys
 import os
@@ -37,20 +36,6 @@ def transform_csv_from_bad_format_to_better_format(data_list, new_csv_name):
         for i in range(split + 5, len(data_list), 1):
             writer.writerow(data_list[i])
 
-def main():
-    """Run "python3 siemens_parser.py transform <nameOfFile>" to read in the CSV and transform it into a better format
-    If no commandLine arguments are passed into it, then it passed the CSV into pandas."""
-    if len(sys.argv) > 1:
-        # CASE: transform the CSV from the bad input to the better one
-        if sys.argv[1] == "transform":
-            directory_path = get_data_resource('csv_files')
-            file = sys.argv[2]
-            transform_file(directory_path, file)
-
-    # CASE: transforms every .csv file in csv_files to a better format
-    else:
-        transform_all_files()
-
 def transform_all_files(directory_path = None):
     '''
     Loops over every .csv file and calls transform_file function on it
@@ -81,6 +66,22 @@ def transform_file(file_path, better_dir_path = None):
         data_list = list(reader)
     transform_csv_from_bad_format_to_better_format(data_list, better_file_name)
 
-        
+def main():
+    '''
+    Run `python3 -m src.datareaders.siemens.siemens_parser transform <file_name> to transform a CSV
+    If no commandline arguments --> Transforms all .csv files in data/csv_files/
+    :return: None
+    '''
+    if len(sys.argv) > 1:
+        # CASE: transform the CSV from the bad input to the better one
+        if sys.argv[1] == "transform":
+            directory_path = get_data_resource('csv_files')
+            file = sys.argv[2]
+            transform_file(directory_path, file)
+
+    # CASE: transforms every .csv file in csv_files to a better format
+    else:
+        transform_all_files()
+
 if __name__ == "__main__":
     main()

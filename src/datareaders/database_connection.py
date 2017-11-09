@@ -1,15 +1,47 @@
+'''
+This is the only file that has a connection to the database
+'''
 import psycopg2
 from src.datareaders.data_object_holders import PointType
 from src.datareaders.data_connection_params import params
 class DatabaseConnection:
-    # some connection information
     db = None
 
     def __init__(self):
+        '''
+        Construction takes no parameters, automatically opens connection
+        '''
         self.open_connection()
 
+    def open_connection(self):
+        '''
+        Opens connection to DB
+        :return: None
+        '''
+        try:
+            self.conn = psycopg2.connect(**params)
+            self.conn.autocommit = True # TODO Going to remove this
+            self.db = self.conn.cursor()
+            print("Database Connected")
+        except:
+            print("Database Connection Failed")
+
+    def close_connection(self):
+        '''
+        Closes connection to DB
+        :return: None
+        '''
+        self.db.close()
+        self.conn.close()
+
+    def execute_and_commit(self, *args):
+        self.db.execute(args)
+        self.db.commit()
+
     def add_building(self, name):
-        self.db.execute("INSERT INTO Buildings(Name) VALUES (%s);", (name,))
+        self.execute_and_commit("INSERT INTO Buildings(Name) VALUES (%s);", (name,))
+        # self.db.execute("INSERT INTO Buildings(Name) VALUES (%s);", (name,))
+        # self.db.commit()
 
     def add_room(self, name, building_name):
         building_id = self.get_building_id(building_name)
@@ -106,16 +138,3 @@ class DatabaseConnection:
             return "NULL"
         else:
             return value
-
-    def open_connection(self):
-        try:
-            self.conn = psycopg2.connect(**params)
-            self.conn.autocommit = True
-            self.db = self.conn.cursor()
-            print("Database Connected")
-        except:
-            print("Database Connection Failed")
-
-    def close_connection(self):
-        self.db.close()
-        self.conn.close()

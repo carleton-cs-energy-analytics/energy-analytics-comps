@@ -1,3 +1,6 @@
+'''
+Reads a given csv file and adds all information to the database
+'''
 from src.datareaders.resources import get_data_resource
 from src.datareaders.table_enumerations import Sources
 from src.datareaders.database_connection import DatabaseConnection
@@ -128,11 +131,11 @@ def main():
     Read in individual file and add all subpoints to DB
     :return:
     '''
-    csv_file = "LIBRARY.AUDIT.TRENDRPT_171016.csv"
+    csv_file = "RECCNTR.AUDIT.TRENDRPT_171016.csv"
 
     transform_file(get_data_resource("csv_files/"+csv_file))
 
-    sr = SiemensReader(get_data_resource("better_csv_files/"+csv_file), "Libe", Sources.SIEMENS)
+    sr = SiemensReader(get_data_resource("better_csv_files/"+csv_file), "Rec", Sources.SIEMENS)
     sr.add_to_db()
     sr.db_connection.close_connection()
 

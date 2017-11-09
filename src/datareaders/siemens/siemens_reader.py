@@ -128,7 +128,7 @@ def main():
     Read in individual file and add all subpoints to DB
     :return:
     '''
-    csv_file = "LDC.AUDIT.TRENDRPT1_171016.csv"
+    csv_file = "LDC.AUDIT.TRENDRPT2_171016.csv"
 
     transform_file(get_data_resource("csv_files/"+csv_file))
 

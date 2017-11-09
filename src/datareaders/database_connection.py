@@ -36,7 +36,7 @@ class DatabaseConnection:
 
     def execute_and_commit(self, *args):
         self.db.execute(*args)
-        self.db.commit()
+        self.conn.commit()
 
     def add_building(self, name):
         self.execute_and_commit("INSERT INTO Buildings(Name) VALUES (%s);", (name,))

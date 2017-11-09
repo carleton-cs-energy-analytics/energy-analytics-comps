@@ -13,7 +13,7 @@ class SiemensReader:
         self.db_connection = DatabaseConnection()
         self.siemens_data = SiemensData()
         self.siemens_data.read_csv(self.file_path)
-        json_file = open(get_data_resource("csv_descriptions/testPointJson_LDC.json"), "r")
+        json_file = open(get_data_resource("csv_descriptions/testPointJson_{}.json".format(building)), "r")
         self.json_dict = json_load(json_file)
 
     def add_to_db(self):
@@ -90,7 +90,7 @@ class SiemensReader:
 
 
 def main():
-    sr = SiemensReader("LDC.AUDIT.TRENDRPT2_171016.csv", "LDC", Sources.SIEMENS)
+    sr = SiemensReader("OLIN.AUDIT.TRENDRPT_171016.csv", "OLIN", Sources.SIEMENS)
     sr.add_to_db()
     sr.db_connection.close_connection()
 

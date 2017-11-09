@@ -17,39 +17,59 @@ class SiemensReader:
         self.json_dict = json_load(json_file)
 
     def add_to_db(self):
+        '''
+        Adds building, rooms, point types, and point to the database
+        :return: None
+        '''
         self._add_building()
-        finish_str = ""
+        finish_lst = []
+        cant_finish_lst = []
         for point_name in self.siemens_data.data.columns[2:]:
             try:
-                room_name = self._parse_room(point_name)
+                room_name = self._add_room(point_name)
                 point_type = self._get_point_type(point_name)
                 description = self.json_dict[point_name]["Descriptor"]
 
                 point = Point(point_name, room_name, self.building_name, self.source, point_type, description)
 
-                self.db_connection.add_unique_room(room_name, self.building_name)
                 self.db_connection.add_unique_point(point)
-                finish_str += "Finished for point "+point_name+"\n"
+                finish_lst.append("Finished for point "+point_name+"\n")
             except KeyError as e:
-                print("Don't know type of", point_name)
+                cant_finish_lst.append("Don't know type of "+point_name+"\n")
 
-        print(finish_str)
+        print("Was able to successfully add {} points".format(len(finish_lst)))
+        for item in finish_lst:
+            print(item)
+
+        print("Was NOT able to add {} points".format(len(cant_finish_lst)))
+        for item in cant_finish_lst:
+            print(item)
+
     def _add_building(self):
+        '''
+        Add unique building -- only adds if building not already in DB
+        :return: None
+        '''
         self.db_connection.add_unique_building(self.building_name)
 
-    def _parse_room(self, point_name):
-        # print(point_name)
-        l = point_name.split(".")
-        potential_room = "The string room"
+    def _add_room(self, point_name):
+        '''
+        Add unique room -- only adds if room not already in DB
+        :param point_name: String of point name --> not used but should be if we want real rooms!
+        :return: Room name (str)
+        '''
+        room = "{}_Room".format(self.building_name)
+        # TODO Actually get room information from point information
         # IF potential room is room, add it
         # ELSE find none room for this building
-        # TODO add some sort of smart knowledge about whether or not this is a room
-        return potential_room
+        self.db_connection.add_unique_room(room, self.building_name)
+        return room
 
     def _read_type_codes(self):
         """
         Reads code - type pairs from a given file
         """
+        # TODO Explain what a type code is @kiya has told me like 10 times and i'm still lost
         known_type_codes = {}
         return known_type_codes
 
@@ -58,12 +78,21 @@ class SiemensReader:
         Returns the point type for the given name
         If from the known type codes, name will be reasonable
         If new type, name will be a concatenation of return_type and units/enumeration_settings
+        :param point_name: String point name
+        :return: Point type (str)
         """
         type_codes = self._read_type_codes()
         known_types = self.db_connection.get_all_point_types()
         if point_name in type_codes:
             return known_types[type_codes[point_name]]
+
+        # TODO Remove this once we can successfully get point types
+        # Returns dummy point type if we don't know the point
+        # if point_name not in self.json_dict:
+        #     new_type = PointType("Point_{}_Type_Unknown".format(point_name), "string") # TODO Ask Kiya what this should be
+
         point_dict = self.json_dict[point_name]
+
         if "Analog Representation" in point_dict:
             return_type = point_dict["Analog Representation"]
             units = point_dict["Engineering Units"]
@@ -78,6 +107,7 @@ class SiemensReader:
             type_name = return_type + ",".join(enumeration_settings)
             new_type = PointType(type_name, return_type)
             new_type.enumeration_settings = enumeration_settings
+
         self.db_connection.add_point_type(new_type)
         known_types[new_type.name] = new_type
         return new_type
@@ -85,11 +115,17 @@ class SiemensReader:
     def _populate_table_with_known_types(self):  # RUN ONLY ONCE
         """
         Adds known types from a file into the database table. Meant to be called only once
+        This will be a hardcoded insert most likely in the db_scheme
         """
+        # TODO --- Delete???
         pass
 
 
 def main():
+    '''
+    Read in individual file and add all subpoints to DB
+    :return:
+    '''
     sr = SiemensReader("OLIN.AUDIT.TRENDRPT_171016.csv", "Olin", Sources.SIEMENS)
     sr.add_to_db()
     sr.db_connection.close_connection()

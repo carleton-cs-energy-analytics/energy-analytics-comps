@@ -3,11 +3,12 @@ from src.datareaders.table_enumerations import Sources
 from src.datareaders.database_connection import DatabaseConnection
 from src.datareaders.siemens.siemens_data import SiemensData
 from src.datareaders.data_object_holders import Point, PointType
+from src.datareaders.siemens.siemens_parser import transform_file
 from json import load as json_load
 
 class SiemensReader:
-    def __init__(self, file_name, building, source):
-        self.file_path = get_data_resource("better_csv_files/"+file_name)
+    def __init__(self, file_path, building, source):
+        self.file_path = file_path
         self.building_name = building
         self.source = source
         self.db_connection = DatabaseConnection()
@@ -33,17 +34,18 @@ class SiemensReader:
                 point = Point(point_name, room_name, self.building_name, self.source, point_type, description)
 
                 self.db_connection.add_unique_point(point)
-                finish_lst.append("Finished for point "+point_name+"\n")
+                finish_lst.append("Finished for point "+point_name)
             except KeyError as e:
-                cant_finish_lst.append("Don't know type of "+point_name+"\n")
+                cant_finish_lst.append("Don't know type of "+point_name)
 
-        print("Was able to successfully add {} points".format(len(finish_lst)))
         for item in finish_lst:
             print(item)
 
-        print("Was NOT able to add {} points".format(len(cant_finish_lst)))
         for item in cant_finish_lst:
             print(item)
+
+        print("Was able to successfully add {} points".format(len(finish_lst)))
+        print("Was NOT able to add {} points".format(len(cant_finish_lst)))
 
     def _add_building(self):
         '''
@@ -126,7 +128,11 @@ def main():
     Read in individual file and add all subpoints to DB
     :return:
     '''
-    sr = SiemensReader("OLIN.AUDIT.TRENDRPT_171016.csv", "Olin", Sources.SIEMENS)
+    csv_file = "LDC.AUDIT.TRENDRPT1_171016.csv"
+
+    transform_file(get_data_resource("csv_files/"+csv_file))
+
+    sr = SiemensReader(get_data_resource("better_csv_files/"+csv_file), "LDC", Sources.SIEMENS)
     sr.add_to_db()
     sr.db_connection.close_connection()
 

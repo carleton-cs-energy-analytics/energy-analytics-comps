@@ -20,7 +20,6 @@ class DatabaseConnection:
         '''
         try:
             self.conn = psycopg2.connect(**params)
-            self.conn.autocommit = True # TODO Going to remove this
             self.db = self.conn.cursor()
             print("Database Connected")
         except:

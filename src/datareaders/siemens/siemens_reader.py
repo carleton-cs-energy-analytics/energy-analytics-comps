@@ -131,11 +131,11 @@ def main():
     Read in individual file and add all subpoints to DB
     :return:
     '''
-    csv_file = "SAYLES.AUDIT.TRENDRPT_171016.csv"
+    csv_file = "HULINGS.AUDIT.TRENDRPT1_171016.csv"
 
     transform_file(get_data_resource("csv_files/"+csv_file))
 
-    sr = SiemensReader(get_data_resource("better_csv_files/"+csv_file), "Sayles", Sources.SIEMENS)
+    sr = SiemensReader(get_data_resource("better_csv_files/"+csv_file), "Hulings", Sources.SIEMENS)
     sr.add_to_db()
     sr.db_connection.close_connection()
 

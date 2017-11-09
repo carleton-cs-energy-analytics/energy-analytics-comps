@@ -90,7 +90,7 @@ class SiemensReader:
 
 
 def main():
-    sr = SiemensReader("OLIN.AUDIT.TRENDRPT_171016.csv", "OLIN", Sources.SIEMENS)
+    sr = SiemensReader("OLIN.AUDIT.TRENDRPT_171016.csv", "Olin", Sources.SIEMENS)
     sr.add_to_db()
     sr.db_connection.close_connection()
 

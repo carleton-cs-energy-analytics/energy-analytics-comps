@@ -30,3 +30,10 @@ class Point:
         self.source = source_enum_value
         self.point_type = point_type
         self.description = description
+
+
+class PointValue:
+    def __init__(self, timestamp, point, value):
+        self.timestamp = timestamp
+        self.point = point
+        self.value = value

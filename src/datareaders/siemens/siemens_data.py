@@ -2,6 +2,8 @@ from datetime import datetime
 import pandas as pd
 from src.datareaders.resources import get_data_resource
 
+
+## TODO: DElete this??? or label as deprecated
 class SiemensData:
     """ Class for reading and manipulating Siemens data from transformed CSVs.
     Contains API for accessing data, as well as function for reading the CSVs.

@@ -9,6 +9,9 @@ install:
   - travis_retry pip install -r requirements.txt
   - travis_retry pip install coveralls
 
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
+
 # all test files must be of form test*.py
 script:
   - python3 -m unittest discover --start-directory test
@@ -18,3 +21,6 @@ after_success:
 
 notifications:
     slack: carlcs-analytics:INZrta4dRGcjcdLsM6ba4L7h
+
+services:
+  - postgresql

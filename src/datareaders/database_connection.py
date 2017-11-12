@@ -5,13 +5,13 @@ import psycopg2
 from src.datareaders.data_object_holders import PointType
 from src.datareaders.data_connection_params import params
 class DatabaseConnection:
+    db = None
+    conn = None
 
     def __init__(self):
         '''
         Construction takes no parameters, automatically opens connection
         '''
-        db = None
-        conn = None
         self.open_connection()
 
     def open_connection(self):

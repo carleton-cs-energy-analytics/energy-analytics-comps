@@ -4,13 +4,9 @@ data/better_csv_files/*
 
 # Created by https://www.gitignore.io/api/macos,python,pycharm,jupyternotebook
 
-### JupyterNotebook ###
-.ipynb_checkpoints
-*/.ipynb_checkpoints/*
+### Database ###
+config.py
 
-# Remove previous ipynb_checkpoints
-#   git rm -r .ipynb_checkpoints/
-#
 ### macOS ###
 *.DS_Store
 .AppleDouble

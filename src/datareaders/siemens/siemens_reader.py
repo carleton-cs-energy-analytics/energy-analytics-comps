@@ -129,13 +129,12 @@ class SiemensReader:
         pass
 
     def _add_point_values(self):
-        for row in self.siemens_data.iterrows():
-            date = row[1][0]
-            time = row[1][0]
+        for point in self.points:
             try:
-                for point in self.points:
+                for row in self.siemens_data.iterrows():
+                    time = row[1][0]
                     formatted_value = self._format_value(point, row[1][point.name])
-                    self.db_connection.add_point_value(timestamp =  time, point = point, value = formatted_value)
+                    self.db_connection.add_point_value(timestamp=time, point=point, value=formatted_value)
             except ValueError as e:
                 print("point {} failed to go in with value {}\n".format(point.name, row[1][point.name]))
 

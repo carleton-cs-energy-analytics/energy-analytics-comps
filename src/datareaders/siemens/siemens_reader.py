@@ -51,6 +51,8 @@ class SiemensReader:
         print("Was able to successfully add {} points".format(len(finish_lst)))
         print("Was NOT able to add {} points".format(len(cant_finish_lst)))
 
+        self._add_point_values()
+
     def _add_building(self):
         '''
         Add unique building -- only adds if building not already in DB
@@ -126,7 +128,7 @@ class SiemensReader:
         # TODO --- Delete???
         pass
 
-    def find_point_values(self):
+    def _add_point_values(self):
         for row in self.siemens_data.iterrows():
             date = row[1][0]
             time = row[1][0]
@@ -157,8 +159,7 @@ def main():
     transform_file(get_data_resource("csv_files/"+csv_file))
 
     sr = SiemensReader(get_data_resource("better_csv_files/"+csv_file), "Hulings", Sources.SIEMENS)
-    # sr.add_to_db()
-
+    sr.add_to_db()
     sr.db_connection.close_connection()
 
 if __name__ == '__main__':

@@ -28,6 +28,16 @@ class LucidReader:
         :return: None
         """
 
+        self.add_points()
+        self.add_point_values()
+
+    def add_points(self):
+        """
+        Adds the points to the points table.
+
+        :return: None
+        """
+
         successfully_inserted = []
         unsuccessfully_inserted = []
         for point in self.lucid_parser.point_identities:
@@ -45,11 +55,22 @@ class LucidReader:
         print("Was able to successfully insert {} points.".format(len(successfully_inserted)))
         print("Was NOT able to successfully insert {} points.".format(len(unsuccessfully_inserted)))
 
+    def add_point_values(self):
+        """
+        Adds the point values to the point values table.
+        :return:
+        """
+        for point_value in self.lucid_parser.point_values:
+            try:
+                self.db_connection.add_point_value(timestamp=point_value.timestamp, point=point_value.point,
+                                                   value=point_value.value)
+            except:
+                print("Couldn't insert point!")
 
-    def _add_building(self):
-        '''
-        Add unique building -- only adds if building not already in DB
-        :return: None
-        '''
-        self.db_connection.add_unique_building(self.building_name)
-
+def main():
+    """
+    Initialize lucid_parser, then put data into correct tables in DB.
+    :return: None
+    """
+    lucid_reader = LucidReader(file_name="/Lucid_Data_10-16-17_to_10-16-17.csv", source=Sources.LUCID)
+    lucid_reader.add_points()

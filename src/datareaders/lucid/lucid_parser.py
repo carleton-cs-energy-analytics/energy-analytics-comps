@@ -40,7 +40,7 @@ class LucidParser:
             units = units.replace(")", "")
 
             # Create PointType class for Lucid Data Column
-            point_type = PointType(name=name, return_type="float", units=units)
+            point_type = PointType(name=name, return_type="float", units=units, factor=5)
 
             # Create Point Object from this column header information.
             new_point = Point(name=name, room_name=None, building_name=building_name,
@@ -69,7 +69,14 @@ class LucidParser:
 
             for j in range(1, len(cur_row)):
                 cur_point_identity = self.point_identities[cur_point_iden_index]  # Get point class for column we are in
-                new_point_value = PointValue(cur_timestamp, cur_point_identity, cur_row[j])
+                cur_point_value = cur_row[j]
+
+                # Round cur_point_value to 5 decimal places.
+                cur_point_value = round(cur_point_value, 5)
+                # Multiply cur_point_value by 100000 to get as long int
+                cur_point_value *= 100000
+
+                new_point_value = PointValue(cur_timestamp, cur_point_identity, cur_point_value)
                 point_values.append(new_point_value)
                 cur_point_iden_index += 1  # move to the next column.
 

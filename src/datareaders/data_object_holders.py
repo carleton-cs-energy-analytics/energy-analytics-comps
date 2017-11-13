@@ -36,4 +36,5 @@ class PointValue:
     def __init__(self, timestamp, point, value):
         self.timestamp = timestamp
         self.point = point
-        self.value = value
+        self.value = int(value) # MUST BE AB INT
+

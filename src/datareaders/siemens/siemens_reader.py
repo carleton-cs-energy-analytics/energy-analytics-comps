@@ -102,7 +102,7 @@ class SiemensReader:
         point_dict = self.json_dict[point_name]
 
         if "Analog Representation" in point_dict:
-            return_type = point_dict["Analog Representation"].lower
+            return_type = point_dict["Analog Representation"].lower()
             units = point_dict["Engineering Units"]
             factor = point_dict["# of decimal places"]
             type_name = return_type + units + factor

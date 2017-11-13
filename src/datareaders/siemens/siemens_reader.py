@@ -137,14 +137,14 @@ class SiemensReader:
                 self.db_connection.add_point_value(timestamp = time + date, point = point, value = formatted_value)
 
     def _format_value(self, point, raw_value):
-        if raw_value.point.point_type.return_type == "enumerated":
-            formatted_value = raw_value.point.point_type.enumeration_settings.index(raw_value.value)
+        if point.point_type.return_type == "enumerated":
+            formatted_value = point.point_type.enumeration_settings.index(raw_value)
             # TODO if it doesn't have that value???
-        elif raw_value.point.point_type.return_type == "float":
-            formatted_value = float(raw_value.value) * 10 ** raw_value.point.point_type.factor
+        elif point.point_type.return_type == "float":
+            formatted_value = float(raw_value) * 10 ** point.point_type.factor
             formatted_value = round(formatted_value)
         else: # it's an int!
-            formatted_value = int(raw_value.value)
+            formatted_value = int(raw_value)
 
         return formatted_value
 

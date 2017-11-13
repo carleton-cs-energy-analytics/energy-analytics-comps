@@ -70,7 +70,6 @@ class LucidParser:
             for j in range(1, len(cur_row)):
                 cur_point_identity = self.point_identities[cur_point_iden_index]  # Get point class for column we are in
                 new_point_value = PointValue(cur_timestamp, cur_point_identity, cur_row[j])
-                print(new_point_value)
                 point_values.append(new_point_value)
                 cur_point_iden_index += 1  # move to the next column.
 

@@ -2,7 +2,7 @@ from datetime import datetime
 import pandas as pd
 from src.datareaders.resources import get_data_resource
 from src.datareaders.table_enumerations import Sources
-from src.datareaders.data_object_holders import Point, PointValue
+from src.datareaders.data_object_holders import Point, PointType, PointValue
 
 
 class LucidParser:
@@ -25,17 +25,29 @@ class LucidParser:
 
         :return: None, sets the class variable to the list of new points.
         """
-        point_identities = []
+        point_identities = [] # This will be a list of each of the column headers as a Point object.
 
-        point_names = list(self.data.iloc[3].copy())
+        point_names = list(self.data.iloc[3].copy())  # Get row that includes all point name data.
         for i in range(1, len(point_names)):
+            # Get the name, the building name (sometimes the same thing) and the units information
             name, building_name, description = point_names[i].split(" - ")
 
             name = building_name + " - " + description.split("(")[0]
-            newPoint = Point(name=name, room_name=None, building_name=building_name,
-                             source_enum_value=Sources.LUCID, point_type=None,
+
+            # Clean up the unit information
+            units = description.split(" ")[-1]
+            units = units.replace("(", "")
+            units = units.replace(")", "")
+
+            # Create PointType class for Lucid Data Column
+            point_type = PointType(name=name, return_type="float", units=units)
+
+            # Create Point Object from this column header information.
+            new_point = Point(name=name, room_name=None, building_name=building_name,
+                             source_enum_value=Sources.LUCID, point_type=point_type,
                              description=description)
-            point_identities.append(newPoint)
+
+            point_identities.append(new_point)
 
         self.point_identities = point_identities
 
@@ -49,15 +61,18 @@ class LucidParser:
         point_values = []
 
         num_row, num_col = self.data.shape
-        for i in range(4, num_row):
-            cur_point_iden_index = 0
-            cur_row = list(self.data.iloc[i].copy())
-            cur_timestamp = datetime.strptime(cur_row[0], "%m/%d/%y %H:%M")
+        for i in range(4, num_row):  # Iterate through every row after column headers
+
+            cur_point_iden_index = 0  # Keep track of which column we are in.
+            cur_row = list(self.data.iloc[i].copy())  # Copy the row so pandas doesn't overwrite the data somehow
+            cur_timestamp = datetime.strptime(cur_row[0], "%m/%d/%y %H:%M")  # Get timestamp from column 0 of dataframe.
+
             for j in range(1, len(cur_row)):
-                cur_point_identity = self.point_identities[cur_point_iden_index]
-                newPointValue = PointValue(cur_timestamp, cur_point_identity, cur_row[j])
-                point_values.append(newPointValue)
-                cur_point_iden_index += 1
+                cur_point_identity = self.point_identities[cur_point_iden_index]  # Get point class for column we are in
+                new_point_value = PointValue(cur_timestamp, cur_point_identity, cur_row[j])
+                print(new_point_value)
+                point_values.append(new_point_value)
+                cur_point_iden_index += 1  # move to the next column.
 
         self.point_values = point_values
 

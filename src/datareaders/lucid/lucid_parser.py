@@ -71,6 +71,8 @@ class LucidParser:
                 cur_point_identity = self.point_identities[cur_point_iden_index]  # Get point class for column we are in
                 cur_point_value = cur_row[j]
 
+                cur_point_value = float(cur_point_value)
+
                 # Round cur_point_value to 5 decimal places.
                 cur_point_value = round(cur_point_value, 5)
                 # Multiply cur_point_value by 100000 to get as long int

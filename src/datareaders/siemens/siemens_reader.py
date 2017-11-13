@@ -101,10 +101,10 @@ class SiemensReader:
             return_type = point_dict["Analog Representation"]
             units = point_dict["Engineering Units"]
             factor = point_dict["# of decimal places"]
-            type_name = return_type + units
+            type_name = return_type + units + factor
             new_type = PointType(type_name, return_type)
             new_type.units = units
-            new_type.factor = factor
+            new_type.factor = int(factor)
         else:
             return_type = "enumerated"
             enumeration_settings = point_dict["Text Table"][1]

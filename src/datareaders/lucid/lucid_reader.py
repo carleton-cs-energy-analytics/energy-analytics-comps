@@ -77,7 +77,7 @@ def main():
     :return: None
     """
     lucid_reader = LucidReader(file_name="/Lucid_Data_10-16-17_to_10-16-17.csv", source=Sources.LUCID)
-    lucid_reader.add_points()
+    lucid_reader.add_to_db()
     lucid_reader.db_connection.close_connection()
 
 if __name__ == '__main__':

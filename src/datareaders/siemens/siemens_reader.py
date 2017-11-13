@@ -169,5 +169,6 @@ def main():
     sr.add_to_db()
     sr.db_connection.close_connection()
 
+
 if __name__ == '__main__':
     main()

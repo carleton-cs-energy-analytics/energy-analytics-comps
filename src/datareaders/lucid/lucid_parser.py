@@ -1,5 +1,6 @@
 from datetime import datetime
 import pandas as pd
+import math
 from src.datareaders.resources import get_data_resource
 from src.datareaders.table_enumerations import Sources
 from src.datareaders.data_object_holders import Point, PointType, PointValue
@@ -72,11 +73,15 @@ class LucidParser:
                 cur_point_value = cur_row[j]
 
                 cur_point_value = float(cur_point_value)
+                if math.isnan(cur_point_value):
+                    cur_point_value = -2
+                if cur_point_value > 0:
+                    # Round cur_point_value to 5 decimal places.
+                    cur_point_value = round(cur_point_value, 5)
+                    # Multiply cur_point_value by 100000 to get as long int
+                    cur_point_value *= 100000
 
-                # Round cur_point_value to 5 decimal places.
-                cur_point_value = round(cur_point_value, 5)
-                # Multiply cur_point_value by 100000 to get as long int
-                cur_point_value *= 100000
+                cur_point_value = int(cur_point_value)
 
                 new_point_value = PointValue(cur_timestamp, cur_point_identity, cur_point_value)
                 point_values.append(new_point_value)

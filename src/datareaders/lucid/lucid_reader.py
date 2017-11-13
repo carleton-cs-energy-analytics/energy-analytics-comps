@@ -44,6 +44,7 @@ class LucidReader:
             try:
                 self.db_connection.add_unique_building(point.building)
                 self.db_connection.add_unique_room(None, point.building)
+                self.db_connection.add_point_type(point.point_type)
                 self.db_connection.add_unique_point(point)
                 successfully_inserted.append("Inserted point " + point.name)
             except KeyError as e:

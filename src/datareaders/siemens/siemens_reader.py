@@ -125,6 +125,23 @@ class SiemensReader:
         # TODO --- Delete???
         pass
 
+    def _add_point_values(self, values):
+        for raw_value in values:
+            try:
+                if raw_value.point.point_type.return_type == "enumerated":
+                    db_value = raw_value.point.point_type.enumeration_settings.index(raw_value.value)
+                    # TODO if it doesn't have that value???
+                elif raw_value.point.point_type.return_type == "float":
+                    db_value = float(raw_value.value) * 10 ** raw_value.point.point_type.factor
+                    db_value = round(db_value)
+                else: # it's an int!
+                    db_value = int(raw_value.value)
+                self.db_connection.add_point_value(raw_value.timestamp, raw_value.point, db_value)
+            except ValueError as e:
+                continue
+                # TODO error logs
+
+
 
 def main():
     '''

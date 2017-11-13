@@ -63,7 +63,8 @@ class DatabaseConnection:
         :return: None
         '''
         building_id = self.get_building_id(building_name)
-        self.execute_and_commit("INSERT INTO Rooms(Name, BuildingID) VALUES (%s, %s);", (room_name, building_id))
+        self.execute_and_commit("INSERT INTO Rooms(Name, BuildingID) VALUES (%s, %s);", (self.formatSQLNone(
+            room_name), building_id))
 
     def add_point_type(self, point_type):
         '''
@@ -127,7 +128,8 @@ class DatabaseConnection:
         :return: Room id if exists, None otherwise
         '''
         building_id = self.get_building_id(building_name)
-        self.db.execute("SELECT ID, Name from Rooms where Name = (%s) AND BuildingID = (%s);", (room_name, building_id))
+        self.db.execute("SELECT ID, Name from Rooms where Name = (%s) AND BuildingID = (%s);", (self.formatSQLNone(
+            room_name), building_id))
         id = self.db.fetchone()
         if id is None:
             return None

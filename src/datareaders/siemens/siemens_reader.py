@@ -132,15 +132,18 @@ class SiemensReader:
         for point in self.points:
             try:
                 for row in self.siemens_data.iterrows():
-                    time = row[1][0]
+                    date = row[1][0]
+                    time = row[1][1]
                     formatted_value = self._format_value(point, row[1][point.name])
-                    self.db_connection.add_point_value(timestamp=time, point=point, value=formatted_value)
+                    self.db_connection.add_point_value(timestamp=date+" "+time, point=point, value=formatted_value)
             except ValueError as e:
-                print("point {} failed to go in with value {}\n".format(point.name, row[1][point.name]))
+                print("point {} failed to go in with value {}".format(point.name, row[1][point.name]))
                 continue
 
     def _format_value(self, point, raw_value):
-        if point.point_type.return_type == "enumerated":
+        if raw_value == "Data Loss":
+            formatted_value = -1
+        elif point.point_type.return_type == "enumerated":
             formatted_value = point.point_type.enumeration_settings.index(raw_value)
             # TODO if it doesn't have that value???
         elif point.point_type.return_type == "float":

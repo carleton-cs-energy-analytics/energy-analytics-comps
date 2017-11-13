@@ -4,10 +4,10 @@ Reads a given csv file and adds all information to the database
 from src.datareaders.resources import get_data_resource
 from src.datareaders.table_enumerations import Sources
 from src.datareaders.database_connection import DatabaseConnection
-from src.datareaders.siemens.siemens_data import SiemensData
 from src.datareaders.data_object_holders import Point, PointType
 from src.datareaders.siemens.siemens_parser import transform_file
 from json import load as json_load
+import pandas as pd
 
 class SiemensReader:
     def __init__(self, file_path, building, source):
@@ -15,8 +15,7 @@ class SiemensReader:
         self.building_name = building
         self.source = source
         self.db_connection = DatabaseConnection()
-        self.siemens_data = SiemensData()
-        self.siemens_data.read_csv(self.file_path)
+        self.siemens_data = pd.read_csv(file_path, dtype=object)
         json_file = open(get_data_resource("csv_descriptions/testPointJson_{}.json".format(building)), "r")
         self.json_dict = json_load(json_file)
 
@@ -102,10 +101,10 @@ class SiemensReader:
             return_type = point_dict["Analog Representation"]
             units = point_dict["Engineering Units"]
             factor = point_dict["# of decimal places"]
-            type_name = return_type + units
+            type_name = return_type + units + factor
             new_type = PointType(type_name, return_type)
             new_type.units = units
-            new_type.factor = factor
+            new_type.factor = int(factor)
         else:
             return_type = "enumerated"
             enumeration_settings = point_dict["Text Table"][1]
@@ -124,6 +123,23 @@ class SiemensReader:
         """
         # TODO --- Delete???
         pass
+
+    def _add_point_values(self, values):
+        for raw_value in values:
+            try:
+                if raw_value.point.point_type.return_type == "enumerated":
+                    db_value = raw_value.point.point_type.enumeration_settings.index(raw_value.value)
+                    # TODO if it doesn't have that value???
+                elif raw_value.point.point_type.return_type == "float":
+                    db_value = float(raw_value.value) * 10 ** raw_value.point.point_type.factor
+                    db_value = round(db_value)
+                else: # it's an int!
+                    db_value = int(raw_value.value)
+                self.db_connection.add_point_value(raw_value.timestamp, raw_value.point, db_value)
+            except ValueError as e:
+                continue
+                # TODO error logs
+
 
 
 def main():

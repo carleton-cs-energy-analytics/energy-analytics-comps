@@ -28,7 +28,7 @@ class SiemensReader:
         self._add_building()
         finish_lst = []
         cant_finish_lst = []
-        for point_name in self.siemens_data.data.columns[2:]:
+        for point_name in self.siemens_data.columns[2:]:
             try:
                 room_name = self._add_room(point_name)
                 point_type = self._get_point_type(point_name)

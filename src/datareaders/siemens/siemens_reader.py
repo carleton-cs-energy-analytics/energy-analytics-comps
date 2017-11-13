@@ -18,6 +18,7 @@ class SiemensReader:
         self.siemens_data = pd.read_csv(file_path, dtype=object)
         json_file = open(get_data_resource("csv_descriptions/testPointJson_{}.json".format(building)), "r")
         self.json_dict = json_load(json_file)
+        self.points = []
 
     def add_to_db(self):
         '''
@@ -36,6 +37,7 @@ class SiemensReader:
                 point = Point(point_name, room_name, self.building_name, self.source, point_type, description)
 
                 self.db_connection.add_unique_point(point)
+                self.points.append(point)
                 finish_lst.append("Finished for point "+point_name)
             except KeyError as e:
                 cant_finish_lst.append("Don't know type of "+point_name)
@@ -124,22 +126,25 @@ class SiemensReader:
         # TODO --- Delete???
         pass
 
-    def _add_point_values(self, values):
-        for raw_value in values:
-            try:
-                if raw_value.point.point_type.return_type == "enumerated":
-                    db_value = raw_value.point.point_type.enumeration_settings.index(raw_value.value)
-                    # TODO if it doesn't have that value???
-                elif raw_value.point.point_type.return_type == "float":
-                    db_value = float(raw_value.value) * 10 ** raw_value.point.point_type.factor
-                    db_value = round(db_value)
-                else: # it's an int!
-                    db_value = int(raw_value.value)
-                self.db_connection.add_point_value(raw_value.timestamp, raw_value.point, db_value)
-            except ValueError as e:
-                continue
-                # TODO error logs
+    def find_point_values(self):
+        for row in self.siemens_data.iterrows():
+            date = row[1][0]
+            time = row[1][0]
+            for point in self.points:
+                formatted_value = self._format_value(point, row[1][point.name])
+                self.db_connection.add_point_value(timestamp = time + date, point = point, value = formatted_value)
 
+    def _format_value(self, point, raw_value):
+        if raw_value.point.point_type.return_type == "enumerated":
+            formatted_value = raw_value.point.point_type.enumeration_settings.index(raw_value.value)
+            # TODO if it doesn't have that value???
+        elif raw_value.point.point_type.return_type == "float":
+            formatted_value = float(raw_value.value) * 10 ** raw_value.point.point_type.factor
+            formatted_value = round(formatted_value)
+        else: # it's an int!
+            formatted_value = int(raw_value.value)
+
+        return formatted_value
 
 
 def main():
@@ -152,7 +157,8 @@ def main():
     transform_file(get_data_resource("csv_files/"+csv_file))
 
     sr = SiemensReader(get_data_resource("better_csv_files/"+csv_file), "Hulings", Sources.SIEMENS)
-    sr.add_to_db()
+    # sr.add_to_db()
+
     sr.db_connection.close_connection()
 
 if __name__ == '__main__':

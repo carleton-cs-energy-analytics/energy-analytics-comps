@@ -42,6 +42,8 @@ class LucidReader:
         unsuccessfully_inserted = []
         for point in self.lucid_parser.point_identities:
             try:
+                self.db_connection.add_unique_building(point.building)
+                self.db_connection.add_unique_room(None, point.building)
                 self.db_connection.add_unique_point(point)
                 successfully_inserted.append("Inserted point " + point.name)
             except KeyError as e:

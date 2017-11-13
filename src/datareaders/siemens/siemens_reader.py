@@ -134,7 +134,7 @@ class SiemensReader:
             time = row[1][0]
             for point in self.points:
                 formatted_value = self._format_value(point, row[1][point.name])
-                self.db_connection.add_point_value(timestamp = time + date, point = point, value = formatted_value)
+                self.db_connection.add_point_value(timestamp =  time, point = point, value = formatted_value)
 
     def _format_value(self, point, raw_value):
         if raw_value.point.point_type.return_type == "enumerated":

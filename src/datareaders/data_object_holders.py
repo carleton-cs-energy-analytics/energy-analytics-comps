@@ -1,13 +1,11 @@
 class PointType:
-    name = ""
-    return_type = ""
-    units = None  # might stay undefined if not a numerical point
-    factor = None # might stay undefined if not a numerical point
-    enumeration_values = None # might stay undefined if not an enumerated point
 
-    def __init__(self, name, return_type):
+    def __init__(self, name, return_type, units=None, factor=None, enumeration_values=None):
         self.name = name
-        self.return_type = return_type
+        self.return_type = return_type  # Am I an int, a float, or enumerated?
+        self.units = units  # String, might stay undefined if not a numerical point
+        self.factor = factor  # Integer, might stay undefined if not a numerical point
+        self.enumeration_values = enumeration_values   # might stay undefined if not an enumerated point
 
     def get_units_placeholder(self):
          if (self.return_type == "enumerated"):

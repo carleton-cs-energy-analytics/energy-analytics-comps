@@ -137,6 +137,7 @@ class SiemensReader:
                     self.db_connection.add_point_value(timestamp=time, point=point, value=formatted_value)
             except ValueError as e:
                 print("point {} failed to go in with value {}\n".format(point.name, row[1][point.name]))
+                continue
 
     def _format_value(self, point, raw_value):
         if point.point_type.return_type == "enumerated":

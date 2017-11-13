@@ -4,6 +4,8 @@ This is the only file that has a connection to the database
 import psycopg2
 from src.datareaders.data_object_holders import PointType
 from src.datareaders.data_connection_params import params
+
+MAXINT = 2147483647
 class DatabaseConnection:
 
     def __init__(self):
@@ -93,10 +95,15 @@ class DatabaseConnection:
                Encoded as an integer
         :return: None
         '''
+        if value > MAXINT:
+            raise ValueError("{} is greater than MAXINT that can be stored in DB\n"
+                             "Point {} value not added".format(value, point.name))
+
         # TODO make sure we convert to value before calling this
         point_id = self.get_point_id(point)
-        self.execute_and_commit("INSERT INTO PointValues (PointTimestamp, PointID, PointValue) VALUES "
-                        "(%s, %s, %s);", (timestamp, point_id, value))
+        self.execute_and_commit("INSERT INTO PointValues (PointTimestamp, PointID, PointValue) "
+                                "VALUES (%s, %s, %s);", (timestamp, point_id, value))
+
 
     # get_-_id methods return the ID of an object if it is in the database, or None if not
     def get_building_id(self, building_name):

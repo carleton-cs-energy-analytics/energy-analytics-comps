@@ -220,8 +220,6 @@ class DatabaseConnection:
             next_entry = self.db.fetchone()
         return known_types
 
-
-    # TODO might not need this anymore now that we are using %s again
     def formatSQLNone(self, value):
         '''
         SQL doesn't like None, but it likes NULL

@@ -73,26 +73,25 @@ class SiemensReader:
         self.db_connection.add_unique_room(room, self.building_name)
         return room
 
-    def _read_type_codes(self):
+    def _read_hardcoded_types(self):
         """
-        Reads code - type pairs from a given file
+        Reads name - type pairs from a given file
         """
-        # TODO Explain what a type code is @kiya has told me like 10 times and i'm still lost
-        known_type_codes = {}
-        return known_type_codes
+        hardcoded_types = {}
+        return hardcoded_types
 
     def _get_point_type(self, point_name):
         """
         Returns the point type for the given name
-        If from the known type codes, name will be reasonable
+        If from the hardcoded types, name will be reasonable
         If new type, name will be a concatenation of return_type and units/enumeration_settings
         :param point_name: String point name
         :return: Point type (str)
         """
-        type_codes = self._read_type_codes()
+        hardcoded_types = self._read_hardcoded_types()
         known_types = self.db_connection.get_all_point_types()
-        if point_name in type_codes:
-            return known_types[type_codes[point_name]]
+        if point_name in hardcoded_types:
+            return known_types[hardcoded_types[point_name]]
 
         # TODO Remove this once we can successfully get point types
         # Returns dummy point type if we don't know the point
@@ -120,14 +119,6 @@ class SiemensReader:
         known_types[new_type.name] = new_type
         return new_type
 
-    def _populate_table_with_known_types(self):  # RUN ONLY ONCE
-        """
-        Adds known types from a file into the database table. Meant to be called only once
-        This will be a hardcoded insert most likely in the db_scheme
-        """
-        # TODO --- Delete???
-        pass
-
     def _add_point_values(self):
         for point in self.points:
             try:
@@ -142,6 +133,7 @@ class SiemensReader:
                 continue
 
     def _format_value(self, point, raw_value):
+        # TODO error catching if value not type expected
         if raw_value == "Data Loss":
             formatted_value = -1
         elif point.point_type.return_type == "enumerated":

@@ -168,8 +168,8 @@ def main():
     transform_file(get_data_resource("csv_files/"+csv_file))
 
     sr = SiemensReader(get_data_resource("better_csv_files/"+csv_file), "LDC", Sources.SIEMENS)
-    sr.add_to_db_l()
-    # sr.add_to_db()
+    # sr.add_to_db_l()
+    sr.add_to_db()
     sr.db_connection.close_connection()
 
 

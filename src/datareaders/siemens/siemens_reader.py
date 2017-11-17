@@ -131,7 +131,7 @@ class SiemensReader:
                 for i in range(len(self.siemens_data[point.name])):
                     date = self.siemens_data.Date[i]
                     time = self.siemens_data.Time[i]
-                    raw_data = self.siemens_data[point][i]
+                    raw_data = self.siemens_data[point.name][i]
                     formatted_value = self._format_value(point, raw_data)
                     self.db_connection.add_point_value(timestamp=date+" "+time, point=point, value=formatted_value)
             except ValueError as e:

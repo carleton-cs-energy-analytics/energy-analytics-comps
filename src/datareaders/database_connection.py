@@ -5,7 +5,7 @@ import psycopg2
 from src.datareaders.data_object_holders import PointType
 from src.datareaders.data_connection_params import params
 
-MAXINT = 2147483647
+MAXINT = 9223372036854775807
 class DatabaseConnection:
 
     def __init__(self):

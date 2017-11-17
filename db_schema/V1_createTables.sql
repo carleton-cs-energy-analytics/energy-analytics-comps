@@ -42,7 +42,7 @@ CREATE TABLE Points (
 CREATE TABLE PointValues (
 	PointTimestamp TIMESTAMP NOT NULL,
     PointID int NOT NULL,
-    PointValue int NOT NULL,
+    PointValue bigint NOT NULL,
     FOREIGN KEY (PointID) REFERENCES Points(ID)
 );
 

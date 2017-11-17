@@ -3,12 +3,12 @@ Script to run when you want to reset the database
 Delete all tables & contents and re-make
 */
 
-DROP TABLE PointValues if exists;
-DROP TABLE Points;
-DROP TABLE PointTypes;
-DROP TABLE PointSources;
-DROP TABLE Rooms;
-DROP TABLE Buildings;
+DROP TABLE IF EXISTS PointValues;
+DROP TABLE IF EXISTS Points;
+DROP TABLE IF EXISTS PointTypes;
+DROP TABLE IF EXISTS PointSources;
+DROP TABLE IF EXISTS Rooms;
+DROP TABLE IF EXISTS Buildings;
 
 CREATE TABLE Buildings (
 	ID SERIAL NOT NULL PRIMARY KEY,

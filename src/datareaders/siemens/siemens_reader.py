@@ -20,44 +20,44 @@ class SiemensReader:
         self.json_dict = json_load(json_file)
         self.points = []
 
-    def add_to_db(self):
-        for point_name in self.siemens_data.columns[2:]:
-            point = Point(point_name, "Dummy", self.building_name, self.source, "Dummy", "Dummy")
-            self.points.append(point)
-        self._add_point_values()
-
     # def add_to_db(self):
-    #     '''
-    #     Adds building, rooms, point types, and point to the database
-    #     :return: None
-    #     '''
-    #     self._add_building()
-    #     finish_lst = []
-    #     cant_finish_lst = []
     #     for point_name in self.siemens_data.columns[2:]:
-    #         try:
-    #             room_name = self._add_room(point_name)
-    #             point_type = self._get_point_type(point_name)
-    #             description = self.json_dict[point_name]["Descriptor"]
-    #
-    #             point = Point(point_name, room_name, self.building_name, self.source, point_type, description)
-    #
-    #             self.db_connection.add_unique_point(point)
-    #             self.points.append(point)
-    #             finish_lst.append("Finished for point "+point_name)
-    #         except KeyError as e:
-    #             cant_finish_lst.append("Don't know type of "+point_name)
-    #
-    #     for item in finish_lst:
-    #         print(item)
-    #
-    #     for item in cant_finish_lst:
-    #         print(item)
-    #
-    #     print("Was able to successfully add {} points".format(len(finish_lst)))
-    #     print("Was NOT able to add {} points".format(len(cant_finish_lst)))
-    #
+    #         point = Point(point_name, "Dummy", self.building_name, self.source, "Dummy", "Dummy")
+    #         self.points.append(point)
     #     self._add_point_values()
+
+    def add_to_db(self):
+        '''
+        Adds building, rooms, point types, and point to the database
+        :return: None
+        '''
+        self._add_building()
+        finish_lst = []
+        cant_finish_lst = []
+        for point_name in self.siemens_data.columns[2:]:
+            try:
+                room_name = self._add_room(point_name)
+                point_type = self._get_point_type(point_name)
+                description = self.json_dict[point_name]["Descriptor"]
+
+                point = Point(point_name, room_name, self.building_name, self.source, point_type, description)
+
+                self.db_connection.add_unique_point(point)
+                self.points.append(point)
+                finish_lst.append("Finished for point "+point_name)
+            except KeyError as e:
+                cant_finish_lst.append("Don't know type of "+point_name)
+
+        for item in finish_lst:
+            print(item)
+
+        for item in cant_finish_lst:
+            print(item)
+
+        print("Was able to successfully add {} points".format(len(finish_lst)))
+        print("Was NOT able to add {} points".format(len(cant_finish_lst)))
+
+        self._add_point_values()
 
     def _add_building(self):
         '''

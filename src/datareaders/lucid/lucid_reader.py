@@ -6,7 +6,6 @@ from src.datareaders.data_object_holders import Point, PointType
 from json import load as json_load
 
 
-
 class LucidReader:
     """TODO: Write docs for function. Since I'm not sure what form this is going to
        take, we'll come back to this..."""
@@ -19,7 +18,6 @@ class LucidReader:
         self.lucid_parser.read_csv(self.file_path)  # Load CSV
         self.lucid_parser.create_point_identities()  # Create values to insert into Points Table
         self.lucid_parser.create_point_values()  # Create values to insert into PointValue Table
-
 
     def add_to_db(self):
         """
@@ -68,8 +66,10 @@ class LucidReader:
             try:
                 self.db_connection.add_point_value(timestamp=point_value.timestamp, point=point_value.point,
                                                    value=point_value.value)
-            except:
+            except KeyError as e:
                 print("Couldn't insert point!")
+                print("Error: " + e)
+
 
 def main():
     """
@@ -77,8 +77,9 @@ def main():
     :return: None
     """
     lucid_reader = LucidReader(file_name="/Lucid_Data_10-16-17_to_10-16-17.csv", source=Sources.LUCID)
-    lucid_reader.add_points()
+    lucid_reader.add_to_db()
     lucid_reader.db_connection.close_connection()
+
 
 if __name__ == '__main__':
     main()

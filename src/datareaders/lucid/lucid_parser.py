@@ -35,6 +35,9 @@ class LucidParser:
 
             name = building_name + " - " + description.split("(")[0]
 
+            if "Old Meter" in description:  # We need to differentiate between old meters and new ones.
+                name = name + "(Old Meter)"
+
             # Clean up the unit information
             units = description.split(" ")[-1]
             units = units.replace("(", "")
@@ -69,7 +72,8 @@ class LucidParser:
             cur_timestamp = datetime.strptime(cur_row[0], "%m/%d/%y %H:%M")  # Get timestamp from column 0 of dataframe.
 
             for j in range(1, len(cur_row)):
-                cur_point_identity = self.point_identities[cur_point_iden_index]  # Get point class for column we are in
+                cur_point_identity = self.point_identities[cur_point_iden_index] # Get point class for column we are in
+
                 cur_point_value = cur_row[j]
 
                 cur_point_value = float(cur_point_value)

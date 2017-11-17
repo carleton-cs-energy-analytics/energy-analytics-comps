@@ -12,28 +12,25 @@ def transform_csv_from_bad_format_to_better_format(data_list, new_csv_name):
     CSV file that has mapped all the point with their name.
     """
     # Find the first empty row and create a dictionary to map the points to their names:
-    split = 1
-    point_to_name = {}
-    while "Point_" in data_list[split][0]:
-        point_to_name[(data_list[split][0])[:-1]] = data_list[split][1]
-        split += 1
+    point_index = 1
+    point_name_list = []
+    while "Point_" in data_list[point_index][0]:
+        point_name_list.append(data_list[point_index][1])
+        point_index += 1
 
     # Write the new data to a CSV:
     with open(new_csv_name, 'w') as f:
         writer = csv.writer(f)
         
         # Construct and write the first line
-        # first_line = [data_list[split + 1][0], data_list[split + 1][1]]
-        # writer.writerow(first_line)
-        # writer.writerow("")
-
         first_line = ["Date","Time"]
-        for key, value in point_to_name.items():
-            first_line.append(value)
+        for name in point_name_list:
+            first_line.append(name)
+
         writer.writerow(first_line)
 
         # Write the rest of the lines:
-        for i in range(split + 5, len(data_list), 1):
+        for i in range(point_index + 5, len(data_list), 1):
             writer.writerow(data_list[i])
 
 def transform_all_files(directory_path = None):

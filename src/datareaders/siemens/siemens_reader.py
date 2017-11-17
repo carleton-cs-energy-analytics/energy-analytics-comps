@@ -16,15 +16,16 @@ class SiemensReader:
         self.source = source
         self.db_connection = DatabaseConnection()
         self.siemens_data = pd.read_csv(file_path, dtype=object)
+        print("LOOK HERE PLS", self.siemens_data['ACDIN.AH1.RDPS'])
         json_file = open(get_data_resource("csv_descriptions/testPointJson_{}.json".format(building)), "r")
         self.json_dict = json_load(json_file)
         self.points = []
 
-    # def add_to_db(self):
-    #     for point_name in self.siemens_data.columns[2:]:
-    #         point = Point(point_name, "Dummy", self.building_name, self.source, "Dummy", "Dummy")
-    #         self.points.append(point)
-    #     self._add_point_values()
+    def add_to_db_l(self):
+        for point_name in self.siemens_data.columns[2:]:
+            point = Point(point_name, "Dummy", self.building_name, self.source, "Dummy", "Dummy")
+            self.points.append(point)
+        self._add_point_values()
 
     def add_to_db(self):
         '''
@@ -132,7 +133,7 @@ class SiemensReader:
                     date = self.siemens_data.Date[i]
                     time = self.siemens_data.Time[i]
                     raw_data = self.siemens_data[point.name][i]
-                    print("Raw data for point", point.name, "is", raw_data)
+                    # print("Raw data for point", point.name, "is", raw_data)
                     formatted_value = self._format_value(point, raw_data)
                     self.db_connection.add_point_value(timestamp=date+" "+time, point=point, value=formatted_value)
             except ValueError as e:
@@ -167,7 +168,8 @@ def main():
     transform_file(get_data_resource("csv_files/"+csv_file))
 
     sr = SiemensReader(get_data_resource("better_csv_files/"+csv_file), "LDC", Sources.SIEMENS)
-    sr.add_to_db()
+    sr.add_to_db_l()
+    # sr.add_to_db()
     sr.db_connection.close_connection()
 
 

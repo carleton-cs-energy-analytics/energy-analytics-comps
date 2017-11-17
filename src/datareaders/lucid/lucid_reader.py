@@ -69,6 +69,7 @@ class LucidReader:
             except KeyError as e:
                 print("Couldn't insert point!")
                 print("Error: " + e)
+        print("Finished trying to insert all point values!")
 
 
 def main():

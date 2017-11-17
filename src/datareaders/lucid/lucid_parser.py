@@ -73,6 +73,7 @@ class LucidParser:
                 cur_point_value = cur_row[j]
 
                 cur_point_value = float(cur_point_value)
+                # TODO: Decide how to handle null values. Currently we are setting the null values to be -2.
                 if math.isnan(cur_point_value):
                     cur_point_value = -2
                 if cur_point_value > 0:

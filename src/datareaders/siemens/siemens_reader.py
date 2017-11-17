@@ -128,7 +128,7 @@ class SiemensReader:
     def _add_point_values(self):
         for point in self.points:
             try:
-                for i in range(len(self.siemens_data[point])):
+                for i in range(len(self.siemens_data[point.name])):
                     date = self.siemens_data.Date[i]
                     time = self.siemens_data.Time[i]
                     raw_data = self.siemens_data[point][i]

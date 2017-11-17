@@ -138,11 +138,13 @@ class SiemensReader:
                 print("point {} failed to go in with value {}".format(point.name, raw_data))
                 continue
 
+
     def _format_value(self, point, raw_value):
         # TODO error catching if value not type expected
         if raw_value == "Data Loss":
             formatted_value = -1
         elif point.point_type.return_type == "enumerated":
+            print("Enumeration settings showing for ", point.name)
             formatted_value = point.point_type.enumeration_settings.index(raw_value)
             # TODO if it doesn't have that value???
         elif point.point_type.return_type == "float":

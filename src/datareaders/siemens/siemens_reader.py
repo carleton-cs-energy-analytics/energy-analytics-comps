@@ -142,7 +142,8 @@ class SiemensReader:
 
     def _format_value(self, point, raw_value):
         # TODO error catching if value not type expected
-        if raw_value == "Data Loss":
+        problem_values = ["data loss", "no data", "nan", "null"]
+        if raw_value.lower() in problem_values:
             formatted_value = -1
         elif point.point_type.return_type == "enumerated":
             formatted_value = point.point_type.enumeration_settings.index(raw_value)
@@ -156,7 +157,7 @@ class SiemensReader:
         return formatted_value
 
 
-def main(csv_file):
+def main(building, csv_file):
     '''
     Read in individual file and add all subpoints to DB
     :return:
@@ -164,13 +165,14 @@ def main(csv_file):
 
     transform_file(get_data_resource("csv_files/"+csv_file))
 
-    sr = SiemensReader(get_data_resource("better_csv_files/"+csv_file), "LDC", Sources.SIEMENS)
+    sr = SiemensReader(get_data_resource("better_csv_files/"+csv_file), building, Sources.SIEMENS)
     sr.add_to_db()
     sr.db_connection.close_connection()
 
 if __name__ == '__main__':
     if len(argv) > 1:
-        csv_file = argv[1]
-        main(csv_file)
+        building = argv[1]
+        csv_file = argv[2]
+        main(building, csv_file)
     else:
-        print("Requires a csv file parameter")
+        print("Requires a building and a csv file parameter")

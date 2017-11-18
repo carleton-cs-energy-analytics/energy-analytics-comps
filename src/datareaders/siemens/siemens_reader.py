@@ -7,6 +7,7 @@ from src.datareaders.database_connection import DatabaseConnection
 from src.datareaders.data_object_holders import Point, PointType
 from src.datareaders.siemens.siemens_parser import transform_file
 from json import load as json_load
+from sys import argv
 import pandas as pd
 
 class SiemensReader:
@@ -137,11 +138,15 @@ class SiemensReader:
             except ValueError as e:
                 print("point {} failed to go in with value {}".format(point.name, raw_data))
                 continue
+            except TypeError as e:
+                print("type error")
+                print("date is {}, time is {}".format(date,time))
 
 
     def _format_value(self, point, raw_value):
         # TODO error catching if value not type expected
-        if raw_value == "Data Loss":
+        problem_values = ["data loss", "no data", "nan", "null"]
+        if (isinstance(raw_value, str) and raw_value.lower() in problem_values) or pd.isnull(raw_value):
             formatted_value = -1
         elif point.point_type.return_type == "enumerated":
             formatted_value = point.point_type.enumeration_settings.index(raw_value)
@@ -155,19 +160,22 @@ class SiemensReader:
         return formatted_value
 
 
-def main():
+def main(building, csv_file):
     '''
     Read in individual file and add all subpoints to DB
     :return:
     '''
-    csv_file = "LDC.AUDIT.TRENDRPT1_171016.csv"
 
     transform_file(get_data_resource("csv_files/"+csv_file))
 
-    sr = SiemensReader(get_data_resource("better_csv_files/"+csv_file), "LDC", Sources.SIEMENS)
+    sr = SiemensReader(get_data_resource("better_csv_files/"+csv_file), building, Sources.SIEMENS)
     sr.add_to_db()
     sr.db_connection.close_connection()
 
-
 if __name__ == '__main__':
-    main()
+    if len(argv) > 1:
+        building = argv[1] #building should be as spelled in the data description file name
+        csv_file = argv[2]
+        main(building, csv_file)
+    else:
+        print("Requires a building name and a csv file parameter")

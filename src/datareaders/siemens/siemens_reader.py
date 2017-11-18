@@ -138,9 +138,6 @@ class SiemensReader:
             except ValueError as e:
                 print("point {} failed to go in with value {}".format(point.name, raw_data))
                 continue
-            except TypeError as e:
-                print("type error")
-                print("date is {}, time is {}".format(date,time))
 
 
     def _format_value(self, point, raw_value):

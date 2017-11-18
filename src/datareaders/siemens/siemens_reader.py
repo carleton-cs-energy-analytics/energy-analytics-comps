@@ -7,6 +7,7 @@ from src.datareaders.database_connection import DatabaseConnection
 from src.datareaders.data_object_holders import Point, PointType
 from src.datareaders.siemens.siemens_parser import transform_file
 from json import load as json_load
+from sys import argv
 import pandas as pd
 
 class SiemensReader:
@@ -155,12 +156,11 @@ class SiemensReader:
         return formatted_value
 
 
-def main():
+def main(csv_file):
     '''
     Read in individual file and add all subpoints to DB
     :return:
     '''
-    csv_file = "LDC.AUDIT.TRENDRPT1_171016.csv"
 
     transform_file(get_data_resource("csv_files/"+csv_file))
 
@@ -168,6 +168,9 @@ def main():
     sr.add_to_db()
     sr.db_connection.close_connection()
 
-
 if __name__ == '__main__':
-    main()
+    if len(argv) > 1:
+        csv_file = argv[1]
+        main(csv_file)
+    else:
+        print("Requires a csv file parameter")

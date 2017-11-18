@@ -9,6 +9,7 @@ from src.datareaders.siemens.siemens_parser import transform_file
 from json import load as json_load
 from sys import argv
 import pandas as pd
+from math import isnan
 
 class SiemensReader:
     def __init__(self, file_path, building, source):
@@ -143,7 +144,7 @@ class SiemensReader:
     def _format_value(self, point, raw_value):
         # TODO error catching if value not type expected
         problem_values = ["data loss", "no data", "nan", "null"]
-        if isinstance(raw_value, str) and raw_value.lower() in problem_values:
+        if (isinstance(raw_value, str) and raw_value.lower() in problem_values) or isnan(raw_value):
             formatted_value = -1
         elif point.point_type.return_type == "enumerated":
             formatted_value = point.point_type.enumeration_settings.index(raw_value)

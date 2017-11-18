@@ -164,6 +164,12 @@ class DatabaseConnection:
         else:
             return id[0]
 
+    def check_exists_point_value(self, timestamp, point):
+        point_id = self.get_point_id(point)
+        self.db.execute("SELECT * from PointTypes where PointTimestamp = (%s) AND PointID = (%s);",
+                        (timestamp, point_id))
+        return not self.db.fetchone() is None
+
     # addUnique methods add object to database only if it is not already in the database
     def add_unique_building(self, building_name):
         '''
@@ -201,6 +207,17 @@ class DatabaseConnection:
         '''
         if self.get_point_id(point) is None:
             self.add_point(point)
+
+    def add_unique_point_value(self, timestamp, point, value):
+        '''
+        Add unique point value only adds point to DB if doesn't already exist
+        :param timestamp: string in format of timestamp
+        :param point: Point class
+        :param value: observed value of the point at the given time
+        :return: None
+        '''
+        if not self.check_exists_point_value(timestamp, point):
+            self.add_point_value(timestamp, point, value)
 
     # getAll methods select * from database and return as a dictionary with key as name
     def get_all_point_types(self):

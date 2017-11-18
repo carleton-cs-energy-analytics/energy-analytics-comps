@@ -134,7 +134,8 @@ class SiemensReader:
                     time = self.siemens_data.Time[i]
                     raw_data = self.siemens_data[point.name][i]
                     formatted_value = self._format_value(point, raw_data)
-                    self.db_connection.add_point_value(timestamp=date+" "+time, point=point, value=formatted_value)
+                    self.db_connection.add_unique_point_value(timestamp=date+" "+time, point=point,
+                                                             value=formatted_value)
             except ValueError as e:
                 print("point {} failed to go in with value {}".format(point.name, raw_data))
                 continue

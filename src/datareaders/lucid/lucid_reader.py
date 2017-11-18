@@ -64,7 +64,7 @@ class LucidReader:
         """
         for point_value in self.lucid_parser.point_values:
             try:
-                self.db_connection.add_point_value(timestamp=point_value.timestamp, point=point_value.point,
+                self.db_connection.add_unique_point_value(timestamp=point_value.timestamp, point=point_value.point,
                                                    value=point_value.value)
             except KeyError as e:
                 print("Couldn't insert point!")

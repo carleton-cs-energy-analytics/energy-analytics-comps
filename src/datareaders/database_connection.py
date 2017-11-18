@@ -166,7 +166,7 @@ class DatabaseConnection:
 
     def check_exists_point_value(self, timestamp, point):
         point_id = self.get_point_id(point)
-        self.db.execute("SELECT * from PointTypes where PointTimestamp = (%s) AND PointID = (%s);",
+        self.db.execute("SELECT * from PointValues where PointTimestamp = (%s) AND PointID = (%s);",
                         (timestamp, point_id))
         return not self.db.fetchone() is None
 

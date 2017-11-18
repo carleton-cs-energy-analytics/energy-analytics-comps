@@ -31,6 +31,8 @@ def transform_csv_from_bad_format_to_better_format(data_list, new_csv_name):
 
         # Write the rest of the lines:
         for i in range(point_index + 5, len(data_list), 1):
+            if '*******' in data_list[i]: # End of report
+                break
             writer.writerow(data_list[i])
 
 def transform_all_files(directory_path = None):

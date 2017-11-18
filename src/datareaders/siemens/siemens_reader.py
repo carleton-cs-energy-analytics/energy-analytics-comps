@@ -143,7 +143,7 @@ class SiemensReader:
     def _format_value(self, point, raw_value):
         # TODO error catching if value not type expected
         problem_values = ["data loss", "no data", "nan", "null"]
-        if raw_value.lower() in problem_values:
+        if str(raw_value).lower() in problem_values:
             formatted_value = -1
         elif point.point_type.return_type == "enumerated":
             formatted_value = point.point_type.enumeration_settings.index(raw_value)
@@ -171,8 +171,8 @@ def main(building, csv_file):
 
 if __name__ == '__main__':
     if len(argv) > 1:
-        building = argv[1]
+        building = argv[1] #building should be as spelled in the data description file name
         csv_file = argv[2]
         main(building, csv_file)
     else:
-        print("Requires a building and a csv file parameter")
+        print("Requires a building name and a csv file parameter")

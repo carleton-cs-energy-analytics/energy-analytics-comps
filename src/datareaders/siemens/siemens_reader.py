@@ -127,9 +127,9 @@ class SiemensReader:
         return new_type
 
     def _add_point_values(self):
-        i = 0
+        point_index = 0
         for point in self.points:
-            print("starting point {}, number {}".format(point.name, i))
+            print("starting point {}, number {}".format(point.name, point_index))
             try:
                 for i in range(len(self.siemens_data[point.name])):
                     date = self.siemens_data.Date[i]
@@ -138,7 +138,7 @@ class SiemensReader:
                     formatted_value = self._format_value(point, raw_data)
                     self.db_connection.add_unique_point_value(timestamp=date+" "+time, point=point,
                                                              value=formatted_value)
-                i += 1
+                point_index += 1
                 print("finished point {}".format(point.name))
             except ValueError as e:
                 print("point {} failed to go in with value {}".format(point.name, raw_data))

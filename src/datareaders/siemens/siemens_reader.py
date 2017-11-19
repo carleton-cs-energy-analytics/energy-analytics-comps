@@ -128,6 +128,7 @@ class SiemensReader:
 
     def _add_point_values(self):
         for point in self.points:
+            print("starting point {}".format(point.name))
             try:
                 for i in range(len(self.siemens_data[point.name])):
                     date = self.siemens_data.Date[i]
@@ -136,6 +137,7 @@ class SiemensReader:
                     formatted_value = self._format_value(point, raw_data)
                     self.db_connection.add_unique_point_value(timestamp=date+" "+time, point=point,
                                                              value=formatted_value)
+                print("finished point {}".format(point.name))
             except ValueError as e:
                 print("point {} failed to go in with value {}".format(point.name, raw_data))
                 continue
@@ -171,7 +173,7 @@ def main(building, csv_file):
     sr.db_connection.close_connection()
 
 if __name__ == '__main__':
-    if len(argv) > 1:
+    if len(argv) > 2:
         building = argv[1] #building should be as spelled in the data description file name
         csv_file = argv[2]
         main(building, csv_file)

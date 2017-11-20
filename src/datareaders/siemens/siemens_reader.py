@@ -21,13 +21,13 @@ class SiemensReader:
         self.json_dict = json_load(json_file)
         self.points = []
 
-    def add_to_db_l(self):
-        for point_name in self.siemens_data.columns[2:]:
-            point = Point(point_name, "Dummy", self.building_name, self.source, "Dummy", "Dummy")
-            self.points.append(point)
-        self._add_point_values()
+    # def add_to_db_l(self):
+    #     for point_name in self.siemens_data.columns[2:]:
+    #         point = Point(point_name, "Dummy", self.building_name, self.source, "Dummy", "Dummy")
+    #         self.points.append(point)
+    #     self._add_point_values()
 
-    def add_to_db(self):
+    def add_to_db(self, skip_to_pt):
         '''
         Adds building, rooms, point types, and point to the database
         :return: None
@@ -58,7 +58,7 @@ class SiemensReader:
         print("Was able to successfully add {} points".format(len(finish_lst)))
         print("Was NOT able to add {} points".format(len(cant_finish_lst)))
 
-        self._add_point_values()
+        self._add_point_values(skip_to_pt)
 
     def _add_building(self):
         '''
@@ -126,9 +126,12 @@ class SiemensReader:
         known_types[new_type.name] = new_type
         return new_type
 
-    def _add_point_values(self):
+    def _add_point_values(self, starting_point):
         point_index = 0
         for point in self.points:
+            if point_index < starting_point:
+                print("skipping point {}, number {}".format(point.name, point_index))
+                continue
             print("starting point {}, number {}".format(point.name, point_index))
             try:
                 for i in range(len(self.siemens_data[point.name])):
@@ -162,7 +165,7 @@ class SiemensReader:
         return formatted_value
 
 
-def main(building, csv_file):
+def main(building, csv_file, skip_to_pt):
     '''
     Read in individual file and add all subpoints to DB
     :return:
@@ -171,13 +174,17 @@ def main(building, csv_file):
     transform_file(get_data_resource("csv_files/"+csv_file))
 
     sr = SiemensReader(get_data_resource("better_csv_files/"+csv_file), building, Sources.SIEMENS)
-    sr.add_to_db()
+    sr.add_to_db(skip_to_pt)
     sr.db_connection.close_connection()
 
 if __name__ == '__main__':
     if len(argv) > 2:
         building = argv[1] #building should be as spelled in the data description file name
         csv_file = argv[2]
-        main(building, csv_file)
+        if len(argv) > 3:
+            skip_to_pt = argv[3]
+        else:
+            skip_to_pt = -1
+        main(building, csv_file, skip_to_pt)
     else:
         print("Requires a building name and a csv file parameter")

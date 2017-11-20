@@ -182,7 +182,7 @@ if __name__ == '__main__':
         building = argv[1] #building should be as spelled in the data description file name
         csv_file = argv[2]
         if len(argv) > 3:
-            skip_to_pt = argv[3]
+            skip_to_pt = int(argv[3])
         else:
             skip_to_pt = -1
         main(building, csv_file, skip_to_pt)

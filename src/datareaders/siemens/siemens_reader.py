@@ -131,6 +131,7 @@ class SiemensReader:
         for point in self.points:
             if point_index < starting_point:
                 print("skipping point {}, number {}".format(point.name, point_index))
+                point_index += 1
                 continue
             print("starting point {}, number {}".format(point.name, point_index))
             try:

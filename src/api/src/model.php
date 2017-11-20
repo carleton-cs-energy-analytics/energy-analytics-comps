@@ -48,6 +48,7 @@ class Model{
 	public static function getValue($pointID, $timestamp){
 		$db = Database::getInstance();
 		$sth = $db->prepare("SELECT * FROM PointValues WHERE PointID=? 
+			LEFT JOIN PointTypes ON PointTypes.ID=Points.PointTypeID 
 			AND PointTimestamp=?");
 		$sth->execute([$pointID, $timestamp]);
 		return $sth->fetch();
@@ -55,8 +56,9 @@ class Model{
 	public static function getValuesByBuildingInRange($buildingID, $start, $end){
 		$db = Database::getInstance();
 		$sth = $db->prepare("SELECT * FROM PointValues 
-			LEFT JOIN Points ON PointValues.PointID=Point.ID 
+			LEFT JOIN Points ON PointValues.PointID=Points.ID 
 			LEFT JOIN Rooms ON Rooms.ID = Points.RoomID 
+			LEFT JOIN PointTypes ON PointTypes.ID=Points.PointTypeID 
 			WHERE Rooms.BuildingID=? AND PointTimestamp>? and PointTimestamp < ?");
 		$sth->execute([$buildingID, $start, $end]);
 		return $sth->fetch();
@@ -64,7 +66,7 @@ class Model{
 	public static function getValuesByBuildingInRangeByType($buildingID, $start, $end, $equipmentType){
 		$db = Database::getInstance();
 		$sth = $db->prepare("SELECT * FROM PointValues 
-			LEFT JOIN Points ON PointValues.PointID=Point.ID 
+			LEFT JOIN Points ON PointValues.PointID=Points.ID 
 			LEFT JOIN Rooms ON Rooms.ID = Points.RoomID 
 			LEFT JOIN PointTypes ON PointTypes.ID=Points.PointTypeID 
 			WHERE PointTypes.Name = ? AND Rooms.BuildingID=? 

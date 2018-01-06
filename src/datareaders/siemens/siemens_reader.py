@@ -1,6 +1,6 @@
-'''
+"""
 Reads a given csv file and adds all information to the database
-'''
+"""
 from src.datareaders.resources import get_data_resource
 from src.datareaders.table_enumerations import Sources
 from src.datareaders.database_connection import DatabaseConnection
@@ -21,18 +21,11 @@ class SiemensReader:
         self.json_dict = json_load(json_file)
         self.points = []
 
-    # TODO Delete this; it's so can run locally and see points
-    # def add_to_db_l(self):
-    #     for point_name in self.siemens_data.columns[2:]:
-    #         point = Point(point_name, "Dummy", self.building_name, self.source, "Dummy", "Dummy")
-    #         self.points.append(point)
-    #     self._add_point_values()
-
-    def add_to_db(self, skip_to_pt):
-        '''
+    def add_to_db(self):
+        """
         Adds building, rooms, point types, and point to the database
         :return: None
-        '''
+        """
         self._add_building()
         finish_lst = []
         cant_finish_lst = []
@@ -59,25 +52,28 @@ class SiemensReader:
         print("Was able to successfully add {} points".format(len(finish_lst)))
         print("Was NOT able to add {} points".format(len(cant_finish_lst)))
 
-        self._add_point_values(skip_to_pt)
+        self._add_point_values()
 
     def _add_building(self):
-        '''
+        """
         Add unique building -- only adds if building not already in DB
         :return: None
-        '''
+        """
         self.db_connection.add_unique_building(self.building_name)
 
     def _add_room(self, point_name):
-        '''
+        """
         Add unique room -- only adds if room not already in DB
         :param point_name: String of point name --> not used but should be if we want real rooms!
         :return: Room name (str)
-        '''
-        room = "{}_Room".format(self.building_name)
-        # TODO Actually get room information from point information
-        # IF potential room is room, add it
-        # ELSE find none room for this building
+        """
+        room = "{}_Dummy_Room".format(self.building_name)
+        point_name_split = point_name.split(".")
+        if len(point_name_split) > 1:
+            possible_room = point_name_split[1]
+            if len(possible_room) > 1 and possible_room[0] == 'R' and possible_room[1:].isdigit():
+                room = possible_room[1:]
+
         self.db_connection.add_unique_room(room, self.building_name)
         return room
 
@@ -101,11 +97,6 @@ class SiemensReader:
         if point_name in hardcoded_types:
             return known_types[hardcoded_types[point_name]]
 
-        # TODO Remove this once we can successfully get point types
-        # Returns dummy point type if we don't know the point
-        # if point_name not in self.json_dict:
-        #     new_type = PointType("Point_{}_Type_Unknown".format(point_name), "string") # TODO Ask Kiya what this should be
-
         point_dict = self.json_dict[point_name]
 
         if "Analog Representation" in point_dict:
@@ -127,13 +118,13 @@ class SiemensReader:
         known_types[new_type.name] = new_type
         return new_type
 
-    def _add_point_values(self, starting_point):
+    def _add_point_values(self):
+        """
+        Loops over all points and all values for points, adds to db
+        :return: None
+        """
         point_index = 0
         for point in self.points:
-            if point_index < starting_point:
-                print("skipping point {}, number {}".format(point.name, point_index))
-                point_index += 1
-                continue
             print("starting point {}, number {}".format(point.name, point_index))
             try:
                 for i in range(len(self.siemens_data[point.name])):
@@ -150,13 +141,19 @@ class SiemensReader:
                 continue
 
     def _format_value(self, point, raw_value):
-        # TODO error catching if value not type expected
+        """
+        Makes every given value into an integer for storage in db
+        :param point: Point name
+        :param raw_value: Value as given in csv
+        :return: Formatted value as an int corresponding to the original data
+        """
+        # TODO error catching if value not type expected, what if there is a problem value not in that list
         problem_values = ["data loss", "no data", "nan", "null"]
         if (isinstance(raw_value, str) and raw_value.lower() in problem_values) or pd.isnull(raw_value):
-            formatted_value = None #TODO make sure this works
+            formatted_value = None
         elif point.point_type.return_type == "enumerated":
             formatted_value = point.point_type.enumeration_settings.index(raw_value)
-            # TODO if it doesn't have that value???
+            # TODO if it doesn't have that value???, what if value is 'closed' and we expected 'on'/'off'
         elif point.point_type.return_type == "float":
             formatted_value = float(raw_value) * 10 ** point.point_type.factor
             formatted_value = round(formatted_value)
@@ -166,26 +163,21 @@ class SiemensReader:
         return formatted_value
 
 
-def main(building, csv_file, skip_to_pt):
-    '''
+def main(building, csv_file):
+    """
     Read in individual file and add all subpoints to DB
     :return:
-    '''
-
+    """
     transform_file(get_data_resource("csv_files/"+csv_file))
 
     sr = SiemensReader(get_data_resource("better_csv_files/"+csv_file), building, Sources.SIEMENS)
-    sr.add_to_db(skip_to_pt)
+    sr.add_to_db()
     sr.db_connection.close_connection()
 
 if __name__ == '__main__':
     if len(argv) > 2:
         building = argv[1] #building should be as spelled in the data description file name
         csv_file = argv[2]
-        if len(argv) > 3:
-            skip_to_pt = int(argv[3])
-        else:
-            skip_to_pt = -1
-        main(building, csv_file, skip_to_pt)
+        main(building, csv_file)
     else:
         print("Requires a building name and a csv file parameter")

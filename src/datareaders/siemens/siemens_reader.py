@@ -21,6 +21,7 @@ class SiemensReader:
         self.json_dict = json_load(json_file)
         self.points = []
 
+    # TODO Delete this; it's so can run locally and see points
     # def add_to_db_l(self):
     #     for point_name in self.siemens_data.columns[2:]:
     #         point = Point(point_name, "Dummy", self.building_name, self.source, "Dummy", "Dummy")
@@ -148,12 +149,11 @@ class SiemensReader:
                 print("point {} failed to go in with value {}".format(point.name, raw_data))
                 continue
 
-
     def _format_value(self, point, raw_value):
         # TODO error catching if value not type expected
         problem_values = ["data loss", "no data", "nan", "null"]
         if (isinstance(raw_value, str) and raw_value.lower() in problem_values) or pd.isnull(raw_value):
-            formatted_value = -1
+            formatted_value = None #TODO make sure this works
         elif point.point_type.return_type == "enumerated":
             formatted_value = point.point_type.enumeration_settings.index(raw_value)
             # TODO if it doesn't have that value???

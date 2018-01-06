@@ -10,6 +10,7 @@ from json import load as json_load
 from sys import argv
 import pandas as pd
 
+
 class SiemensReader:
     def __init__(self, file_path, building, source):
         self.file_path = file_path
@@ -40,7 +41,7 @@ class SiemensReader:
                 self.db_connection.add_unique_point(point)
                 self.points.append(point)
                 finish_lst.append("Finished for point "+point_name)
-            except KeyError as e:
+            except KeyError:
                 cant_finish_lst.append("Don't know type of "+point_name)
 
         for item in finish_lst:
@@ -133,7 +134,7 @@ class SiemensReader:
                     raw_data = self.siemens_data[point.name][i]
                     formatted_value = self._format_value(point, raw_data)
                     self.db_connection.add_unique_point_value(timestamp=date+" "+time, point=point,
-                                                             value=formatted_value)
+                                                              value=formatted_value)
                 point_index += 1
                 print("finished point {}".format(point.name))
             except ValueError as e:
@@ -157,7 +158,7 @@ class SiemensReader:
         elif point.point_type.return_type == "float":
             formatted_value = float(raw_value) * 10 ** point.point_type.factor
             formatted_value = round(formatted_value)
-        else: # it's an int!
+        else:  # it's an int!
             formatted_value = int(raw_value)
 
         return formatted_value
@@ -174,10 +175,11 @@ def main(building, csv_file):
     sr.add_to_db()
     sr.db_connection.close_connection()
 
+
 if __name__ == '__main__':
     if len(argv) > 2:
-        building = argv[1] #building should be as spelled in the data description file name
-        csv_file = argv[2]
-        main(building, csv_file)
+        given_building = argv[1]  # building should be as spelled in the data description file name
+        given_csv_file = argv[2]
+        main(given_building, given_csv_file)
     else:
         print("Requires a building name and a csv file parameter")

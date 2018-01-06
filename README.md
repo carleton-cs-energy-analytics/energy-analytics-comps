@@ -45,3 +45,17 @@ Tail command prints last 10 lines of nohup.out so that we can see which point it
 * What files to change if needs to change
 * Things to be aware of
 
+
+```postgres-psql
+SELECT count(pointtimestamp), pointid, array_agg(pointvalue) as point_values, points.name as point_name, Rooms.name as room_name,
+  buildings.name as building_name, pointsources.name as point_source, pointtypes.factor as factor, pointtypes.returntype as return_type
+FROM PointValues
+JOIN Points on PointValues.pointID = Points.ID
+JOIN Rooms on Points.RoomID = Rooms.ID
+JOIN Buildings on Rooms.BuildingID = Buildings.ID
+JOIN pointsources on points.pointsourceid = pointsources.id
+JOIN pointtypes on points.pointtypeid = pointtypes.id
+  WHERE buildings.name = 'Hulings'
+GROUP BY pointid, point_name, room_name, building_name, point_source, factor, return_type;
+```
+^See counts of point values in db

@@ -31,3 +31,17 @@ flask run
 ```
 You can also optionally enable debug mode with `EXPORT FLASK_DEBUG=1`
 To set up the psycopg2 connection, rename the config.example.py file to config.py and enter the appropriate config values.
+
+## Importers
+```
+nohup python3 -m -u src.datareaders.siemens.siemens_reader <Building Name> <CSV File> &
+tail nohup.out
+```
+
+Runs it in background so you can leave server and it will still add points, this is good because adding points takes a while for the very large dumps Martha gave
+Tail command prints last 10 lines of nohup.out so that we can see which point it is on!
+
+* How to run it
+* What files to change if needs to change
+* Things to be aware of
+

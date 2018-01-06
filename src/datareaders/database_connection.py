@@ -5,6 +5,7 @@ import psycopg2
 from src.datareaders.data_object_holders import PointType
 from src.datareaders.data_connection_params import params
 
+# For making sure all values can be stored in our current database configuration
 MAXINT = 9223372036854775807
 MININT = -9223372036854775808
 

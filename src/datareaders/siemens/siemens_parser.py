@@ -36,10 +36,10 @@ def transform_csv_from_bad_format_to_better_format(data_list, new_csv_name):
             writer.writerow(data_list[i])
 
 def transform_all_files(directory_path = None):
-    '''
+    """
     Loops over every .csv file and calls transform_file function on it
     :return: None (Output better files in data/better_csv_files)
-    '''
+    """
     if not directory_path:
         directory_path = get_data_resource("csv_files")
 
@@ -48,11 +48,11 @@ def transform_all_files(directory_path = None):
             transform_file(get_data_resource("csv_files/"+file))
 
 def transform_file(file_path, better_dir_path = None):
-    '''
+    """
     Transforms an individual file
     :param file: file name
     :return: None (Output is better file format in data/better_csv_files)
-    '''
+    """
     if not better_dir_path:
         better_dir_path = get_data_resource("better_csv_files")
     # Create directory for transforming csvs into better format
@@ -66,11 +66,11 @@ def transform_file(file_path, better_dir_path = None):
     transform_csv_from_bad_format_to_better_format(data_list, better_file_name)
 
 def main():
-    '''
+    """
     Run `python3 -m src.datareaders.siemens.siemens_parser transform <file_name> to transform a CSV
     If no commandline arguments --> Transforms all .csv files in data/csv_files/
     :return: None
-    '''
+    """
     if len(sys.argv) > 1:
         # CASE: transform the CSV from the bad input to the better one
         if sys.argv[1] == "transform":

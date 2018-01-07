@@ -78,3 +78,14 @@ JOIN pointtypes on points.pointtypeid = pointtypes.id
 GROUP BY pointid, point_name, room_name, building_name, point_source, factor, return_type;
 ```
 ^See counts of point values in db
+
+
+## Connect to Database
+Add a file called **data_connetion_params.py** in the src/datareaders folder.  It should contain the following, with our real password.
+
+params = {
+    'database': 'energycomps',
+    'user': 'energycomps',
+    'password': '<password>',
+    'host': 'localhost',
+}

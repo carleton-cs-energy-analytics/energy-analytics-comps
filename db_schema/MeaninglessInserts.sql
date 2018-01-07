@@ -1,10 +1,14 @@
+/*
+Example SQL Insert Statements
+*/
+
 INSERT INTO Buildings(Name) VALUES ('Cassat'), ('James'), ('CMC');
 
 INSERT INTO Rooms(Name, BuildingID) VALUES ('307', '3'), ('304', '3'), ('', '2'), ('102', 1);
 
 INSERT INTO PointSources(Name) VALUES ('Siemens'), ('ALC'), ('Lucid'), ('James Solar Panel');
 
-INSERT INTO PointTypes(Name, Units, ReturnType) VALUES ('energy', 'KiloWatts', 'float'), ('HVAC', 'N/A', 'bool');
+INSERT INTO PointTypes(Name, Units, ReturnType, Factor) VALUES ('energy', 'KiloWatts', 'float', '10'), ('HVAC', 'N/A', 'bool');
 
 INSERT INTO Points(Name, RoomID, PoinTypeID, PointSourceID, Description) VALUES
 	('VAV1', 1, 2, 2, 'The Literal Death Star');

@@ -1,4 +1,8 @@
-﻿CREATE TABLE Buildings (
+﻿/*
+Create table scripts
+*/
+
+CREATE TABLE Buildings (
 	ID SERIAL NOT NULL PRIMARY KEY,
     Name varchar(255) NOT NULL
 );
@@ -38,6 +42,11 @@ CREATE TABLE Points (
 CREATE TABLE PointValues (
 	PointTimestamp TIMESTAMP NOT NULL,
     PointID int NOT NULL,
-    PointValue int NOT NULL,
+    PointValue bigint NOT NULL,
     FOREIGN KEY (PointID) REFERENCES Points(ID)
 );
+
+/*
+Hardcoded inserts for Sources, matches our enumeration of source
+*/
+INSERT INTO PointSources(Name) VALUES ('LUCID'), ('SIEMENS'), ('ALC'), ('JAMES_SOLAR');

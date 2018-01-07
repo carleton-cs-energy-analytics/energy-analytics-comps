@@ -1,0 +1,5062 @@
+10/16/2017                      Carleton College                        02:53 PM
+Panel Point Definition Report
+
+Selection:  LI RARE BOOK HUMIDITY, LI.4TH.FLR.RMH, LI.4TH.FLR.RMT, ...
+(242 Points)
+
+
+Point System Name:       LI RARE BOOK HUMIDITY
+Point Name:              LI RARE BOOK HUMIDITY
+Point Type:              LAI
+Descriptor:              HUMIDITY
+Value:                   38.75
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       % RH
+Alarm Type:              Standard Alarms
+High Limit:              50.0
+Low Limit:               25.0
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 09 03
+Sensor Type:             Current
+Wire Resistance:         0.0
+Slope:                   0.004069
+Intercept:               -25.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LI.4TH.FLR.RMH
+Point Name:              LI.4TH.FLR.RMH
+Point Type:              LAI
+Descriptor:              4TH FLR RMH
+Value:                   51.32
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       %
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 10 01
+Sensor Type:             Voltage
+Wire Resistance:         0.0
+Slope:                   0.003906
+Intercept:               -14.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LI.4TH.FLR.RMT
+Point Name:              LI.4TH.FLR.RMT
+Point Type:              LAI
+Descriptor:              4TH FLR RMT
+Value:                   74.18
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 10 02
+Sensor Type:             Voltage
+Wire Resistance:         0.0
+Slope:                   0.001563
+Intercept:               49.4
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LI.AH03.RAD420.LOC
+Point Name:              LI.AH03.RAD420.LOC
+Point Type:              LAO
+Descriptor:              STPT ADJUST
+Value:                   69.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LI.AH03.RAD460.LOC
+Point Name:              LI.AH03.RAD460.LOC
+Point Type:              LAO
+Descriptor:              STPT ADJUST
+Value:                   70.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LI.AH03.RAD473.LOC
+Point Name:              LI.AH03.RAD473.LOC
+Point Type:              LAO
+Descriptor:              STPT ADJUST
+Value:                   65.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LI.AH03.VAV01.OCOC
+Point Name:              LI.AH03.VAV01.OCOC
+Point Type:              LDO
+Descriptor:              OCC OCC
+Value:                   ON
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDO
+0 - OFF
+1 - ON
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+
+********************************************************************************
+
+Point System Name:       LI.AH03.VAV01.TMR
+Point Name:              LI.AH03.VAV01.TMR
+Point Type:              LAO
+Descriptor:              OCC TIMER
+Value:                   1415.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       SEC
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LI.AH03.VAV02.OCOC
+Point Name:              LI.AH03.VAV02.OCOC
+Point Type:              LDO
+Descriptor:              OCC OCC
+Value:                   OFF
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDO
+0 - OFF
+1 - ON
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+
+********************************************************************************
+
+Point System Name:       LI.AH03.VAV02.TMR
+Point Name:              LI.AH03.VAV02.TMR
+Point Type:              LAO
+Descriptor:              OCC TIMER
+Value:                   6985.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       SEC
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LI.AH03.VAV03.OCOC
+Point Name:              LI.AH03.VAV03.OCOC
+Point Type:              LDO
+Descriptor:              OCC OCC
+Value:                   OFF
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDO
+0 - OFF
+1 - ON
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+
+********************************************************************************
+
+Point System Name:       LI.AH03.VAV03.TMR
+Point Name:              LI.AH03.VAV03.TMR
+Point Type:              LAO
+Descriptor:              OCC TIMER
+Value:                   63125.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       SEC
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LI.AH03.VAV04.OCOC
+Point Name:              LI.AH03.VAV04.OCOC
+Point Type:              LDO
+Descriptor:              OCC OCC
+Value:                   ON
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDO
+0 - OFF
+1 - ON
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+
+********************************************************************************
+
+Point System Name:       LI.AH03.VAV04.TMR
+Point Name:              LI.AH03.VAV04.TMR
+Point Type:              LAO
+Descriptor:              OCC TIMER
+Value:                   1125.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       SEC
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LI.AH03.VAV05.OCOC
+Point Name:              LI.AH03.VAV05.OCOC
+Point Type:              LDO
+Descriptor:              OCC OCC
+Value:                   OFF
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDO
+0 - OFF
+1 - ON
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+
+********************************************************************************
+
+Point System Name:       LI.AH03.VAV05.TMR
+Point Name:              LI.AH03.VAV05.TMR
+Point Type:              LAO
+Descriptor:              OCC TIMER
+Value:                   6990.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       SEC
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LI.AH03.VAV06.OCOC
+Point Name:              LI.AH03.VAV06.OCOC
+Point Type:              LDO
+Descriptor:              OCC OCC
+Value:                   OFF
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDO
+0 - OFF
+1 - ON
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+
+********************************************************************************
+
+Point System Name:       LI.AH03.VAV06.TMR
+Point Name:              LI.AH03.VAV06.TMR
+Point Type:              LAO
+Descriptor:              OCC TIMER
+Value:                   246870.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       SEC
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LI.AH03.VAV07.OCOC
+Point Name:              LI.AH03.VAV07.OCOC
+Point Type:              LDO
+Descriptor:              OCC OCC
+Value:                   ON
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDO
+0 - OFF
+1 - ON
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+
+********************************************************************************
+
+Point System Name:       LI.AH03.VAV07.TMR
+Point Name:              LI.AH03.VAV07.TMR
+Point Type:              LAO
+Descriptor:              OCC TIMER
+Value:                   980.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       SEC
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LI.AH03.VAV08.OCOC
+Point Name:              LI.AH03.VAV08.OCOC
+Point Type:              LDO
+Descriptor:              OCC OCC
+Value:                   ON
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDO
+0 - OFF
+1 - ON
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+
+********************************************************************************
+
+Point System Name:       LI.AH03.VAV08.TMR
+Point Name:              LI.AH03.VAV08.TMR
+Point Type:              LAO
+Descriptor:              OCC TIMER
+Value:                   0.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       SEC
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LI.AH03.VAV09.OCOC
+Point Name:              LI.AH03.VAV09.OCOC
+Point Type:              LDO
+Descriptor:              OCC OCC
+Value:                   ON
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDO
+0 - OFF
+1 - ON
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+
+********************************************************************************
+
+Point System Name:       LI.AH03.VAV09.TMR
+Point Name:              LI.AH03.VAV09.TMR
+Point Type:              LAO
+Descriptor:              OCC TIMER
+Value:                   0.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       SEC
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LI.AH03.VAV10.OCOC
+Point Name:              LI.AH03.VAV10.OCOC
+Point Type:              LDO
+Descriptor:              OCC OCC
+Value:                   ON
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDO
+0 - OFF
+1 - ON
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+
+********************************************************************************
+
+Point System Name:       LI.AH03.VAV10.TMR
+Point Name:              LI.AH03.VAV10.TMR
+Point Type:              LAO
+Descriptor:              OCC TIMER
+Value:                   0.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       SEC
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LI.AH03.VAV11.OCOC
+Point Name:              LI.AH03.VAV11.OCOC
+Point Type:              LDO
+Descriptor:              OCC OCC
+Value:                   ON
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDO
+0 - OFF
+1 - ON
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+
+********************************************************************************
+
+Point System Name:       LI.AH03.VAV11.TMR
+Point Name:              LI.AH03.VAV11.TMR
+Point Type:              LAO
+Descriptor:              OCC TIMER
+Value:                   0.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       SEC
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LI.AH03.VAV12.OCOC
+Point Name:              LI.AH03.VAV12.OCOC
+Point Type:              LDO
+Descriptor:              OCC OCC
+Value:                   ON
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDO
+0 - OFF
+1 - ON
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+
+********************************************************************************
+
+Point System Name:       LI.AH03.VAV12.TMR
+Point Name:              LI.AH03.VAV12.TMR
+Point Type:              LAO
+Descriptor:              OCC TIMER
+Value:                   0.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       SEC
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LI.AH03.VAV13.OCOC
+Point Name:              LI.AH03.VAV13.OCOC
+Point Type:              LDO
+Descriptor:              OCC OCC
+Value:                   ON
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDO
+0 - OFF
+1 - ON
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+
+********************************************************************************
+
+Point System Name:       LI.AH03.VAV13.TMR
+Point Name:              LI.AH03.VAV13.TMR
+Point Type:              LAO
+Descriptor:              OCC TIMER
+Value:                   0.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       SEC
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LI.AH03.VAV14.OCOC
+Point Name:              LI.AH03.VAV14.OCOC
+Point Type:              LDO
+Descriptor:              OCC OCC
+Value:                   OFF
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDO
+0 - OFF
+1 - ON
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+
+********************************************************************************
+
+Point System Name:       LI.AH03.VAV14.TMR
+Point Name:              LI.AH03.VAV14.TMR
+Point Type:              LAO
+Descriptor:              OCC TIMER
+Value:                   3960.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       SEC
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LI.AH03.VAV15.OCOC
+Point Name:              LI.AH03.VAV15.OCOC
+Point Type:              LDO
+Descriptor:              OCC OCC
+Value:                   OFF
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDO
+0 - OFF
+1 - ON
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+
+********************************************************************************
+
+Point System Name:       LI.AH03.VAV15.TMR
+Point Name:              LI.AH03.VAV15.TMR
+Point Type:              LAO
+Descriptor:              OCC TIMER
+Value:                   2545.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       SEC
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LI.AH03.VAV16.OCOC
+Point Name:              LI.AH03.VAV16.OCOC
+Point Type:              LDO
+Descriptor:              OCC OCC
+Value:                   ON
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDO
+0 - OFF
+1 - ON
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+
+********************************************************************************
+
+Point System Name:       LI.AH03.VAV16.TMR
+Point Name:              LI.AH03.VAV16.TMR
+Point Type:              LAO
+Descriptor:              OCC TIMER
+Value:                   0.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       SEC
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LI.COMMON.AREA.OCC
+Point Name:              LI.COMMON.AREA.OCC
+Point Type:              LDO
+Descriptor:              COMMON OCC PT
+Value:                   DAY
+Condition:               -N-
+Priority:                NONE
+Text Table:              DAY_NIGHT
+0 - DAY
+1 - NIGHT
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+
+********************************************************************************
+
+Point System Name:       LI.HWDPS
+Point Name:              LI.HWDPS
+Point Type:              LAO
+Descriptor:              HW DIFF PRS STPT
+Value:                   12.0
+Condition:               -N-
+Priority:                OPER
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PSID
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LI.HWENA
+Point Name:              LI.HWENA
+Point Type:              LDO
+Descriptor:              HW SYSTEM ENABLE
+Value:                   ON
+Condition:               -N-
+Priority:                OPER
+Text Table:              Default LDO
+0 - OFF
+1 - ON
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+
+********************************************************************************
+
+Point System Name:       LI.HWP1.SS
+Point Name:              LI.HWP1.SS
+Point Type:              L2SL
+Descriptor:              HW PUMP 1 SS
+Value:                   ON
+Condition:               -N-
+Priority:                OVRD
+Text Table:              Default L2SL
+0 - OFF
+1 - ON
+Alarm Type:              Standard Alarms
+Totalization:            None
+Field Panel:             LIBRARY2
+On/Off Point Address:    1 01 24
+Inverted:           No
+Proof Point Address:     1 01 23
+Normally Closed:    No
+Proof Delay:             60 Informational Text
+
+********************************************************************************
+
+Point System Name:       LI.HWP1.SVF
+Point Name:              LI.HWP1.SVF
+Point Type:              LAO
+Descriptor:              HWP1 FREQ REF
+Value:                   63.36
+Condition:               -N-
+Priority:                OVRD
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PERCNT
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           1 01 53
+Actuator Type            L-Type
+Slope:                   0.006104
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LI.HWP2.SS
+Point Name:              LI.HWP2.SS
+Point Type:              L2SL
+Descriptor:              HW PUMP 2 SS
+Value:                   OFF
+Condition:               -N-
+Priority:                OVRD
+Text Table:              Default L2SL
+0 - OFF
+1 - ON
+Alarm Type:              Standard Alarms
+Totalization:            None
+Field Panel:             LIBRARY2
+On/Off Point Address:    1 02 24
+Inverted:           No
+Proof Point Address:     1 02 23
+Normally Closed:    No
+Proof Delay:             60 Informational Text
+
+********************************************************************************
+
+Point System Name:       LI.HWP2.SVF
+Point Name:              LI.HWP2.SVF
+Point Type:              LAO
+Descriptor:              HWP2 FREQ REF
+Value:                   63.39
+Condition:               -N-
+Priority:                OVRD
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PERCNT
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           1 02 53
+Actuator Type            L-Type
+Slope:                   0.006104
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LI.HWVD
+Point Name:              LI.HWVD
+Point Type:              LAO
+Descriptor:              HWP FREQ REF
+Value:                   63.39
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PERCNT
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LI.PNL01.SHEDTMR
+Point Name:              LI.PNL01.SHEDTMR
+Point Type:              LAO
+Descriptor:              MBC01 SHED TIMER
+Value:                   61232304.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       SECS
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIA.MBC.HTG
+Point Name:              LIA.MBC.HTG
+Point Type:              LDO
+Descriptor:              HTG LOCKOUT
+Value:                   OFF
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDO
+0 - OFF
+1 - ON
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+
+********************************************************************************
+
+Point System Name:       LIA.MBC17.OAT
+Point Name:              LIA.MBC17.OAT
+Point Type:              LAO
+Descriptor:              VIRT OAT
+Value:                   60.92
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIA1.MAX.DMPR.COMD
+Point Name:              LIA1.MAX.DMPR.COMD
+Point Type:              LAO
+Descriptor:
+Value:                   97.6
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       %
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIA1CV
+Point Name:              LIA1CV
+Point Type:              LAO
+Descriptor:              COOLING VALVE
+Value:                   14.48
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PSI
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           0 03 01
+Actuator Type            Voltage
+Slope:                   0.000655
+Intercept:               0.0
+COV Limit:               0.994
+
+********************************************************************************
+
+Point System Name:       LIA1DA
+Point Name:              LIA1DA
+Point Type:              LAI
+Descriptor:              DIS AIR TEMP
+Value:                   55.68
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Access Group(s):         <all>
+Alarm Type:              Standard Alarms
+High Limit:              125.0
+Low Limit:               40.0
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 05 06
+Sensor Type:             Current
+Wire Resistance:         0.0
+Slope:                   0.004069
+Intercept:               -4.9993
+COV Limit:               0.99994
+
+********************************************************************************
+
+Point System Name:       LIA1DC
+Point Name:              LIA1DC
+Point Type:              LAO
+Descriptor:              MIX AIR DMPR
+Value:                   10.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PSI
+Access Group(s):         <all>
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 01 01
+Actuator Type            Voltage
+Slope:                   0.000651
+Intercept:               0.0
+COV Limit:               0.99994
+
+********************************************************************************
+
+Point System Name:       LIA1DS
+Point Name:              LIA1DS
+Point Type:              LAO
+Descriptor:              DIS AIR STPT
+Value:                   55.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Access Group(s):         <all>
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIA1HV
+Point Name:              LIA1HV
+Point Type:              LAO
+Descriptor:              HUMID VALVE
+Value:                   4.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PSI
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           0 03 05
+Actuator Type            Voltage
+Slope:                   0.000655
+Intercept:               0.0
+COV Limit:               0.994
+
+********************************************************************************
+
+Point System Name:       LIA1IV
+Point Name:              LIA1IV
+Point Type:              LAO
+Descriptor:              VANE CONTROL
+Value:                   14.49
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PSI
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           0 03 01
+Actuator Type            Voltage
+Slope:                   0.000655
+Intercept:               0.0
+COV Limit:               0.994
+
+********************************************************************************
+
+Point System Name:       LIA1LO
+Point Name:              LIA1LO
+Point Type:              LAO
+Descriptor:
+Value:                   50.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIA1MS
+Point Name:              LIA1MS
+Point Type:              LAO
+Descriptor:              MIX AIR STPT
+Value:                   47.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Access Group(s):         <all>
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIA1MT
+Point Name:              LIA1MT
+Point Type:              LAI
+Descriptor:              MIX AIR TEMP
+Value:                   71.7
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Access Group(s):         <all>
+Alarm Type:              Standard Alarms
+High Limit:              120.0
+Low Limit:               40.0
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 04 02
+Sensor Type:             Current
+Wire Resistance:         0.0
+Slope:                   0.004069
+Intercept:               -28.0
+COV Limit:               0.99994
+
+********************************************************************************
+
+Point System Name:       LIA1NC
+Point Name:              LIA1NC
+Point Type:              LDO
+Descriptor:              NIGHT COOLING
+Value:                   OFF
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDO
+0 - OFF
+1 - ON
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+
+********************************************************************************
+
+Point System Name:       LIA1OC
+Point Name:              LIA1OC
+Point Type:              LDO
+Descriptor:              AHU1 OCCUPY
+Value:                   ON
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDO
+0 - OFF
+1 - ON
+Access Group(s):         <all>
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+
+********************************************************************************
+
+Point System Name:       LIA1PS
+Point Name:              LIA1PS
+Point Type:              LAO
+Descriptor:              PRESS SETPNT
+Value:                   0.86
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       INCHES
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               0.05
+
+********************************************************************************
+
+Point System Name:       LIA1R
+Point Name:              LIA1R
+Point Type:              LAO
+Descriptor:
+Value:                   60.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIA1RH
+Point Name:              LIA1RH
+Point Type:              LAI
+Descriptor:              RET AIR HUMD
+Value:                   80.69
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PCNTRH
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           0 01 06
+Sensor Type:             Current
+Wire Resistance:         0.0
+Slope:                   0.004069
+Intercept:               -25.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIA1RS
+Point Name:              LIA1RS
+Point Type:              L2SL
+Descriptor:              AHU 3  RETURN SS
+Value:                   ON
+Condition:               -N-
+Priority:                OVRD
+Text Table:              Default L2SL
+0 - OFF
+1 - ON
+Access Group(s):         <all>
+Alarm Type:              Standard Alarms
+Totalization:            Hours
+Field Panel:             LIBRARY2
+On/Off Point Address:    2 02 24
+Inverted:           No
+Proof Point Address:     2 02 23
+Normally Closed:    No
+Proof Delay:             240 Informational Text
+
+********************************************************************************
+
+Point System Name:       LIA1SH
+Point Name:              LIA1SH
+Point Type:              LAO
+Descriptor:              HUMID SETPNT
+Value:                   35.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PCNTRH
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIA1SP
+Point Name:              LIA1SP
+Point Type:              LAI
+Descriptor:              DUCT PRESS
+Value:                   0.6
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       INCHES
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           0 01 05
+Sensor Type:             Current
+Wire Resistance:         0.0
+Slope:                   0.000406
+Intercept:               -7.5
+COV Limit:               0.09984
+
+********************************************************************************
+
+Point System Name:       LIA1SS
+Point Name:              LIA1SS
+Point Type:              L2SL
+Descriptor:              AHU 1 SS
+Value:                   ON
+Condition:               -N-
+Priority:                OVRD
+Text Table:              Default L2SL
+0 - OFF
+1 - ON
+Access Group(s):         <all>
+Alarm Type:              Standard Alarms
+Totalization:            Hours
+Field Panel:             LIBRARY2
+On/Off Point Address:    2 01 24
+Inverted:           No
+Proof Point Address:     2 01 23
+Normally Closed:    No
+Proof Delay:             30 Informational Text
+
+********************************************************************************
+
+Point System Name:       LIA1SSS
+Point Name:              LIA1SSS
+Point Type:              LDO
+Descriptor:
+Value:                   ON
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDO
+0 - OFF
+1 - ON
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 08 04
+Inverted:           No
+
+********************************************************************************
+
+Point System Name:       LIA1ST
+Point Name:              LIA1ST
+Point Type:              LAI
+Descriptor:              SPACE TEMP
+Value:                   70.76
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Access Group(s):         <all>
+Alarm Type:              Standard Alarms
+High Limit:              80.0
+Low Limit:               55.0
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 04 03
+Sensor Type:             Current
+Wire Resistance:         0.0
+Slope:                   0.004069
+Intercept:               -7.9993
+COV Limit:               0.99994
+
+********************************************************************************
+
+Point System Name:       LIA1SV
+Point Name:              LIA1SV
+Point Type:              LAO
+Descriptor:              HEATING VALVE
+Value:                   15.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PSI
+Access Group(s):         <all>
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 01 06
+Actuator Type            Voltage
+Slope:                   0.000651
+Intercept:               0.0
+COV Limit:               0.99994
+
+********************************************************************************
+
+Point System Name:       LIA1WA
+Point Name:              LIA1WA
+Point Type:              LDI
+Descriptor:              WATER ALARM
+Value:                   OFF
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDI
+0 - OFF
+1 - ON
+Alarm Type:              Standard Alarms
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 03 01
+Normally Closed:    No
+
+********************************************************************************
+
+Point System Name:       LIA2.MAX.DMPR.COMD
+Point Name:              LIA2.MAX.DMPR.COMD
+Point Type:              LAO
+Descriptor:
+Value:                   75.2
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       %
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIA2CV
+Point Name:              LIA2CV
+Point Type:              LAO
+Descriptor:              COOLING VALVE
+Value:                   9.11
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PSI
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           0 03 02
+Actuator Type            Voltage
+Slope:                   0.000655
+Intercept:               0.0
+COV Limit:               0.994
+
+********************************************************************************
+
+Point System Name:       LIA2DA
+Point Name:              LIA2DA
+Point Type:              LAI
+Descriptor:              DIS AIR TEMP
+Value:                   52.57
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Access Group(s):         <all>
+Alarm Type:              Standard Alarms
+High Limit:              125.0
+Low Limit:               40.0
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 09 08
+Sensor Type:             Current
+Wire Resistance:         0.0
+Slope:                   0.004069
+Intercept:               -4.9993
+COV Limit:               0.99994
+
+********************************************************************************
+
+Point System Name:       LIA2DC
+Point Name:              LIA2DC
+Point Type:              LAO
+Descriptor:              MIX AIR DMPR
+Value:                   10.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PSI
+Access Group(s):         <all>
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 01 02
+Actuator Type            Voltage
+Slope:                   0.000651
+Intercept:               0.0
+COV Limit:               0.99994
+
+********************************************************************************
+
+Point System Name:       LIA2DS
+Point Name:              LIA2DS
+Point Type:              LAO
+Descriptor:              DIS AIR STPT
+Value:                   55.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Access Group(s):         <all>
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIA2HV
+Point Name:              LIA2HV
+Point Type:              LAO
+Descriptor:              HUMID VALVE
+Value:                   4.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PSI
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           0 03 07
+Actuator Type            Voltage
+Slope:                   0.000655
+Intercept:               0.0
+COV Limit:               0.994
+
+********************************************************************************
+
+Point System Name:       LIA2LO
+Point Name:              LIA2LO
+Point Type:              LAO
+Descriptor:
+Value:                   50.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIA2MS
+Point Name:              LIA2MS
+Point Type:              LAO
+Descriptor:              MIX AIR STPT
+Value:                   47.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Access Group(s):         <all>
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIA2MT
+Point Name:              LIA2MT
+Point Type:              LAI
+Descriptor:              MIX AIR TEMP
+Value:                   75.28
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Access Group(s):         <all>
+Alarm Type:              Standard Alarms
+High Limit:              120.0
+Low Limit:               45.0
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 04 04
+Sensor Type:             Current
+Wire Resistance:         0.0
+Slope:                   0.004069
+Intercept:               -4.9993
+COV Limit:               0.99994
+
+********************************************************************************
+
+Point System Name:       LIA2NC
+Point Name:              LIA2NC
+Point Type:              LDO
+Descriptor:              NIGHT COOLING
+Value:                   OFF
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDO
+0 - OFF
+1 - ON
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+
+********************************************************************************
+
+Point System Name:       LIA2OC
+Point Name:              LIA2OC
+Point Type:              LDO
+Descriptor:              AHU2 OCCUPY
+Value:                   ON
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDO
+0 - OFF
+1 - ON
+Access Group(s):         <all>
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+
+********************************************************************************
+
+Point System Name:       LIA2PS
+Point Name:              LIA2PS
+Point Type:              LAO
+Descriptor:              PRESS SETPNT
+Value:                   0.25
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       INCHES
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               0.05
+
+********************************************************************************
+
+Point System Name:       LIA2R
+Point Name:              LIA2R
+Point Type:              LAO
+Descriptor:
+Value:                   60.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIA2RH
+Point Name:              LIA2RH
+Point Type:              LAI
+Descriptor:              RET AIR HUMD
+Value:                   35.1
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PCNTRH
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           0 01 08
+Sensor Type:             Current
+Wire Resistance:         0.0
+Slope:                   0.004069
+Intercept:               -21.00014
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIA2RS
+Point Name:              LIA2RS
+Point Type:              L2SL
+Descriptor:              AHU 2  RETURN SS
+Value:                   ON
+Condition:               -N-
+Priority:                OVRD
+Text Table:              Default L2SL
+0 - OFF
+1 - ON
+Access Group(s):         <all>
+Alarm Type:              Standard Alarms
+Totalization:            Hours
+Field Panel:             LIBRARY2
+On/Off Point Address:    2 04 24
+Inverted:           No
+Proof Point Address:     2 04 23
+Normally Closed:    No
+Proof Delay:             30 Informational Text
+
+********************************************************************************
+
+Point System Name:       LIA2SH
+Point Name:              LIA2SH
+Point Type:              LAO
+Descriptor:              HUMID SETPNT
+Value:                   35.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PCNTRH
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIA2SP
+Point Name:              LIA2SP
+Point Type:              LAI
+Descriptor:              DUCT PRESS
+Value:                   0.32
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       INCHES
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           0 01 07
+Sensor Type:             Current
+Wire Resistance:         0.0
+Slope:                   0.000203
+Intercept:               -1.24996
+COV Limit:               0.09984
+
+********************************************************************************
+
+Point System Name:       LIA2SS
+Point Name:              LIA2SS
+Point Type:              L2SL
+Descriptor:              AHU 2 SS
+Value:                   ON
+Condition:               -N-
+Priority:                OVRD
+Text Table:              Default L2SL
+0 - OFF
+1 - ON
+Access Group(s):         <all>
+Alarm Type:              Standard Alarms
+Totalization:            Hours
+Field Panel:             LIBRARY2
+On/Off Point Address:    2 03 24
+Inverted:           No
+Proof Point Address:     2 03 23
+Normally Closed:    No
+Proof Delay:             30 Informational Text
+
+********************************************************************************
+
+Point System Name:       LIA2ST
+Point Name:              LIA2ST
+Point Type:              LAI
+Descriptor:              SPACE TEMP
+Value:                   70.39
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Access Group(s):         <all>
+Alarm Type:              Standard Alarms
+High Limit:              80.0
+Low Limit:               55.0
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 04 05
+Sensor Type:             Current
+Wire Resistance:         0.0
+Slope:                   0.004069
+Intercept:               -6.4993
+COV Limit:               0.99994
+
+********************************************************************************
+
+Point System Name:       LIA2SV
+Point Name:              LIA2SV
+Point Type:              LAO
+Descriptor:              STEAM VALVE
+Value:                   15.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PSI
+Access Group(s):         <all>
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 02 02
+Actuator Type            Voltage
+Slope:                   0.000651
+Intercept:               0.0
+COV Limit:               0.99994
+
+********************************************************************************
+
+Point System Name:       LIA2WA
+Point Name:              LIA2WA
+Point Type:              LDI
+Descriptor:              WATER ALARM
+Value:                   OFF
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDI
+0 - OFF
+1 - ON
+Alarm Type:              Standard Alarms
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 03 02
+Normally Closed:    No
+
+********************************************************************************
+
+Point System Name:       LIA3.MAX.DMPR.COMD
+Point Name:              LIA3.MAX.DMPR.COMD
+Point Type:              LAO
+Descriptor:
+Value:                   100.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       %
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIA3CV
+Point Name:              LIA3CV
+Point Type:              LAO
+Descriptor:              cooling valve
+Value:                   9.92
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PSI
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           0 03 03
+Actuator Type            Voltage
+Slope:                   0.000655
+Intercept:               0.0
+COV Limit:               0.994
+
+********************************************************************************
+
+Point System Name:       LIA3DA
+Point Name:              LIA3DA
+Point Type:              LAI
+Descriptor:              DIS AIR TEMP
+Value:                   54.4
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Access Group(s):         <all>
+Alarm Type:              Standard Alarms
+High Limit:              125.0
+Low Limit:               40.0
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 09 06
+Sensor Type:             Current
+Wire Resistance:         0.0
+Slope:                   0.004069
+Intercept:               -4.9993
+COV Limit:               0.99994
+
+********************************************************************************
+
+Point System Name:       LIA3DC
+Point Name:              LIA3DC
+Point Type:              LAO
+Descriptor:              MIX AIR DMPR
+Value:                   10.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PSI
+Access Group(s):         <all>
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 01 03
+Actuator Type            Voltage
+Slope:                   0.000651
+Intercept:               0.0
+COV Limit:               0.99994
+
+********************************************************************************
+
+Point System Name:       LIA3DS
+Point Name:              LIA3DS
+Point Type:              LAO
+Descriptor:              DIS AIR STPT
+Value:                   55.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Access Group(s):         <all>
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIA3HV
+Point Name:              LIA3HV
+Point Type:              LAO
+Descriptor:              HUMID VALVE
+Value:                   11.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PSI
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           0 03 06
+Actuator Type            Voltage
+Slope:                   0.000655
+Intercept:               0.0
+COV Limit:               0.994
+
+********************************************************************************
+
+Point System Name:       LIA3LO
+Point Name:              LIA3LO
+Point Type:              LAO
+Descriptor:
+Value:                   50.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIA3MS
+Point Name:              LIA3MS
+Point Type:              LAO
+Descriptor:              MIX AIR STPT
+Value:                   47.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Access Group(s):         <all>
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIA3MT
+Point Name:              LIA3MT
+Point Type:              LAI
+Descriptor:              MIX AIR TEMP
+Value:                   67.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Access Group(s):         <all>
+Alarm Type:              Standard Alarms
+High Limit:              120.0
+Low Limit:               45.0
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 04 06
+Sensor Type:             Current
+Wire Resistance:         0.0
+Slope:                   0.004069
+Intercept:               -4.9993
+COV Limit:               0.99994
+
+********************************************************************************
+
+Point System Name:       LIA3NC
+Point Name:              LIA3NC
+Point Type:              LDO
+Descriptor:              NIGHT COOLING
+Value:                   OFF
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDO
+0 - OFF
+1 - ON
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+
+********************************************************************************
+
+Point System Name:       LIA3OC
+Point Name:              LIA3OC
+Point Type:              LDO
+Descriptor:              AHU3 OCCUPY
+Value:                   ON
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDO
+0 - OFF
+1 - ON
+Access Group(s):         <all>
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+
+********************************************************************************
+
+Point System Name:       LIA3PS
+Point Name:              LIA3PS
+Point Type:              LAO
+Descriptor:              PRESS SETPNT
+Value:                   1.4
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       INCHES
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               0.05
+
+********************************************************************************
+
+Point System Name:       LIA3R
+Point Name:              LIA3R
+Point Type:              LAO
+Descriptor:
+Value:                   74.05
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIA3RH
+Point Name:              LIA3RH
+Point Type:              LAI
+Descriptor:              RET AIR HUMD
+Value:                   25.02
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PCNTRH
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           0 02 02
+Sensor Type:             Current
+Wire Resistance:         0.0
+Slope:                   0.004069
+Intercept:               -25.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIA3RS
+Point Name:              LIA3RS
+Point Type:              L2SL
+Descriptor:              AHU 3  RETURN SS
+Value:                   ON
+Condition:               -N-
+Priority:                OVRD
+Text Table:              Default L2SL
+0 - OFF
+1 - ON
+Access Group(s):         <all>
+Alarm Type:              Standard Alarms
+Totalization:            Hours
+Field Panel:             LIBRARY2
+On/Off Point Address:    2 07 24
+Inverted:           No
+Proof Point Address:     2 07 23
+Normally Closed:    No
+Proof Delay:             240 Informational Text
+
+********************************************************************************
+
+Point System Name:       LIA3SH
+Point Name:              LIA3SH
+Point Type:              LAO
+Descriptor:              HUMID SETPNT
+Value:                   35.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PCNTRH
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIA3SP
+Point Name:              LIA3SP
+Point Type:              LAI
+Descriptor:              DUCT PRESS
+Value:                   1.4
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       INCHES
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           0 02 01
+Sensor Type:             Current
+Wire Resistance:         0.0
+Slope:                   0.000406
+Intercept:               -7.5
+COV Limit:               0.09984
+
+********************************************************************************
+
+Point System Name:       LIA3SS
+Point Name:              LIA3SS
+Point Type:              L2SL
+Descriptor:              AHU 3 SS
+Value:                   ON
+Condition:               -N-
+Priority:                OVRD
+Text Table:              Default L2SL
+0 - OFF
+1 - ON
+Access Group(s):         <all>
+Alarm Type:              Standard Alarms
+Totalization:            Hours
+Field Panel:             LIBRARY2
+On/Off Point Address:    2 05 24
+Inverted:           No
+Proof Point Address:     2 05 23
+Normally Closed:    No
+Proof Delay:             240 Informational Text
+
+********************************************************************************
+
+Point System Name:       LIA3ST
+Point Name:              LIA3ST
+Point Type:              LAI
+Descriptor:              SPACE TEMP
+Value:                   67.23
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Access Group(s):         <all>
+Alarm Type:              Standard Alarms
+High Limit:              80.0
+Low Limit:               55.0
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 04 07
+Sensor Type:             Current
+Wire Resistance:         0.0
+Slope:                   0.004069
+Intercept:               -5.4993
+COV Limit:               0.99994
+
+********************************************************************************
+
+Point System Name:       LIA3SV
+Point Name:              LIA3SV
+Point Type:              LAO
+Descriptor:              HEATING VALVE
+Value:                   15.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PSI
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 02 03
+Actuator Type            Voltage
+Slope:                   0.000651
+Intercept:               0.0
+COV Limit:               0.99994
+
+********************************************************************************
+
+Point System Name:       LIA3WA
+Point Name:              LIA3WA
+Point Type:              LDI
+Descriptor:              WATER ALARM
+Value:                   OFF
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDI
+0 - OFF
+1 - ON
+Alarm Type:              Standard Alarms
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 03 03
+Normally Closed:    No
+
+********************************************************************************
+
+Point System Name:       LIA4CV
+Point Name:              LIA4CV
+Point Type:              LAO
+Descriptor:              COOLING VALVE
+Value:                   9.74
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PSI
+Access Group(s):         <all>
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           0 03 04
+Actuator Type            Voltage
+Slope:                   0.000651
+Intercept:               0.0
+COV Limit:               0.99994
+
+********************************************************************************
+
+Point System Name:       LIA4DA
+Point Name:              LIA4DA
+Point Type:              LAI
+Descriptor:              DIS AIR TEMP
+Value:                   55.14
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Access Group(s):         <all>
+Alarm Type:              Standard Alarms
+High Limit:              125.0
+Low Limit:               40.0
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 09 07
+Sensor Type:             Current
+Wire Resistance:         0.0
+Slope:                   0.004069
+Intercept:               -4.9993
+COV Limit:               0.99994
+
+********************************************************************************
+
+Point System Name:       LIA4DC
+Point Name:              LIA4DC
+Point Type:              LAO
+Descriptor:              MIX AIR DMPR
+Value:                   10.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PSI
+Access Group(s):         <all>
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 01 04
+Actuator Type            Voltage
+Slope:                   0.000651
+Intercept:               0.0
+COV Limit:               0.99994
+
+********************************************************************************
+
+Point System Name:       LIA4DS
+Point Name:              LIA4DS
+Point Type:              LAO
+Descriptor:              DIS AIR STPT
+Value:                   55.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Access Group(s):         <all>
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIA4HV
+Point Name:              LIA4HV
+Point Type:              LAO
+Descriptor:              HUMID VALVE
+Value:                   4.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PSI
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           0 03 08
+Actuator Type            Voltage
+Slope:                   0.000655
+Intercept:               0.0
+COV Limit:               0.994
+
+********************************************************************************
+
+Point System Name:       LIA4LO
+Point Name:              LIA4LO
+Point Type:              LAO
+Descriptor:
+Value:                   50.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIA4MS
+Point Name:              LIA4MS
+Point Type:              LAO
+Descriptor:              MIX AIR STPT
+Value:                   47.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Access Group(s):         <all>
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIA4MT
+Point Name:              LIA4MT
+Point Type:              LAI
+Descriptor:              MIX AIR TEMP
+Value:                   64.52
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Access Group(s):         <all>
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 04 08
+Sensor Type:             Current
+Wire Resistance:         0.0
+Slope:                   0.004069
+Intercept:               -4.9993
+COV Limit:               0.99994
+
+********************************************************************************
+
+Point System Name:       LIA4NC
+Point Name:              LIA4NC
+Point Type:              LDO
+Descriptor:              NIGHT COOLING
+Value:                   OFF
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDO
+0 - OFF
+1 - ON
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+
+********************************************************************************
+
+Point System Name:       LIA4OC
+Point Name:              LIA4OC
+Point Type:              LDO
+Descriptor:              AHU4 OCCUPY
+Value:                   ON
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDO
+0 - OFF
+1 - ON
+Access Group(s):         <all>
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+
+********************************************************************************
+
+Point System Name:       LIA4PS
+Point Name:              LIA4PS
+Point Type:              LAO
+Descriptor:              PRESS SETPNT
+Value:                   1.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       INCHES
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIA4R
+Point Name:              LIA4R
+Point Type:              LAO
+Descriptor:
+Value:                   60.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIA4RH
+Point Name:              LIA4RH
+Point Type:              LAI
+Descriptor:              RET AIR HUMD
+Value:                   40.6
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PCNTRH
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           0 02 04
+Sensor Type:             Current
+Wire Resistance:         0.0
+Slope:                   0.004069
+Intercept:               -18.00014
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIA4SH
+Point Name:              LIA4SH
+Point Type:              LAO
+Descriptor:              HUMID SETPNT
+Value:                   35.0
+Condition:               -N-
+Priority:                OPER
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PCNTRH
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIA4SP
+Point Name:              LIA4SP
+Point Type:              LAI
+Descriptor:              DUCT PRESS
+Value:                   0.98
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       INCHES
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           0 02 03
+Sensor Type:             Current
+Wire Resistance:         0.0
+Slope:                   0.000203
+Intercept:               -1.25
+COV Limit:               0.09984
+
+********************************************************************************
+
+Point System Name:       LIA4SS
+Point Name:              LIA4SS
+Point Type:              L2SL
+Descriptor:              AHU 4 SS
+Value:                   ON
+Condition:               -N-
+Priority:                OVRD
+Text Table:              Default L2SL
+0 - OFF
+1 - ON
+Access Group(s):         <all>
+Alarm Type:              Standard Alarms
+Totalization:            Hours
+Field Panel:             LIBRARY2
+On/Off Point Address:    2 06 24
+Inverted:           No
+Proof Point Address:     2 06 23
+Normally Closed:    No
+Proof Delay:             120 Informational Text
+
+********************************************************************************
+
+Point System Name:       LIA4ST
+Point Name:              LIA4ST
+Point Type:              LAI
+Descriptor:              SPACE TEMP
+Value:                   71.98
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Access Group(s):         <all>
+Alarm Type:              Standard Alarms
+High Limit:              80.0
+Low Limit:               55.0
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 05 01
+Sensor Type:             Current
+Wire Resistance:         0.0
+Slope:                   0.004069
+Intercept:               -4.4993
+COV Limit:               0.99994
+
+********************************************************************************
+
+Point System Name:       LIA4SV
+Point Name:              LIA4SV
+Point Type:              LAO
+Descriptor:              STEAM VALVE
+Value:                   15.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PSI
+Access Group(s):         <all>
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 02 04
+Actuator Type            Voltage
+Slope:                   0.000651
+Intercept:               0.0
+COV Limit:               0.99994
+
+********************************************************************************
+
+Point System Name:       LIA4XX
+Point Name:              LIA4XX
+Point Type:              LAO
+Descriptor:
+Value:                   0.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIA5CV
+Point Name:              LIA5CV
+Point Type:              LAO
+Descriptor:              COOLING CNTRL
+Value:                   16.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PSI
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 02 05
+Actuator Type            Voltage
+Slope:                   0.000651
+Intercept:               0.0
+COV Limit:               0.5
+
+********************************************************************************
+
+Point System Name:       LIA5DA
+Point Name:              LIA5DA
+Point Type:              LAI
+Descriptor:              DIS AIR TEMP
+Value:                   59.34
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Access Group(s):         <all>
+Alarm Type:              Standard Alarms
+High Limit:              125.0
+Low Limit:               40.0
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 05 07
+Sensor Type:             Current
+Wire Resistance:         0.0
+Slope:                   0.004069
+Intercept:               -4.9993
+COV Limit:               0.99994
+
+********************************************************************************
+
+Point System Name:       LIA5DC
+Point Name:              LIA5DC
+Point Type:              LAO
+Descriptor:              MIX AIR DMPR
+Value:                   15.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PSI
+Access Group(s):         <all>
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 01 07
+Actuator Type            Voltage
+Slope:                   0.000651
+Intercept:               0.0
+COV Limit:               0.99994
+
+********************************************************************************
+
+Point System Name:       LIA5HC
+Point Name:              LIA5HC
+Point Type:              LAO
+Descriptor:              HEATING CNTRL
+Value:                   8.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PSI
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 01 08
+Actuator Type            Voltage
+Slope:                   0.000651
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIA5HS
+Point Name:              LIA5HS
+Point Type:              LAO
+Descriptor:              HUMID SETPNT
+Value:                   35.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PCNTRH
+Access Group(s):         <all>
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIA5HV
+Point Name:              LIA5HV
+Point Type:              LAO
+Descriptor:              HUMID VALVE
+Value:                   0.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PSI
+Access Group(s):         <all>
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 02 01
+Actuator Type            Voltage
+Slope:                   0.000651
+Intercept:               0.0
+COV Limit:               0.99994
+
+********************************************************************************
+
+Point System Name:       LIA5R
+Point Name:              LIA5R
+Point Type:              LAO
+Descriptor:              LOOP
+Value:                   45.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:
+Access Group(s):         <all>
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIA5RS
+Point Name:              LIA5RS
+Point Type:              LAO
+Descriptor:              ROOM SETPNT
+Value:                   60.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Access Group(s):         <all>
+Alarm Type:              Standard Alarms
+High Limit:              70.0
+Low Limit:               55.0
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIA5SS
+Point Name:              LIA5SS
+Point Type:              LDI
+Descriptor:              AHU5 ALARM
+Value:                   OFF
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDI
+0 - OFF
+1 - ON
+Access Group(s):         <all>
+Alarm Type:              Standard Alarms
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 03 05
+Normally Closed:    Yes
+
+********************************************************************************
+
+Point System Name:       LIARWA
+Point Name:              LIARWA
+Point Type:              LDI
+Descriptor:              ARCHIVE ALM
+Value:                   OFF
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDI
+0 - OFF
+1 - ON
+Access Group(s):         <all>
+Alarm Type:              Standard Alarms
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 03 07
+Normally Closed:    Yes
+
+********************************************************************************
+
+Point System Name:       LIBLDP
+Point Name:              LIBLDP
+Point Type:              LAI
+Descriptor:              BLDG PRESS
+Value:                   0.02
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       IN H2O
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           0 02 06
+Sensor Type:             Current
+Wire Resistance:         0.0
+Slope:                   0.00002
+Intercept:               -0.37491
+COV Limit:               0.1
+
+********************************************************************************
+
+Point System Name:       LIBLDS
+Point Name:              LIBLDS
+Point Type:              LAO
+Descriptor:              BLDG PPRESS STPT
+Value:                   0.01
+Condition:               -N-
+Priority:                OPER
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       IN H2O
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               0.01
+
+********************************************************************************
+
+Point System Name:       LIBRARY.ELEC
+Point Name:              LIBRARY.ELEC
+Point Type:              LPACI
+Descriptor:              LPACI
+Value:                   6512676.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     4
+Engineering Units:       KWH
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           0 01 04
+Gain:                    1.0
+Count Both Edges:        No
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIBRARY.ELEC.DEMAND
+Point Name:              LIBRARY.ELEC.DEMAND
+Point Type:              LAO
+Descriptor:              ELECTRIC DEMAND
+Value:                   95.25
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       KWH
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIBRARY.ELEC.METER.READING
+Point Name:              LIBRARY.ELEC.METER.READING
+Point Type:              LAO
+Descriptor:              TOTAL CONSUMPTN
+Value:                   6512676.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       KW
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               10.0
+
+********************************************************************************
+
+Point System Name:       LIBRARY.H2O.METER.READING
+Point Name:              LIBRARY.H2O.METER.READING
+Point Type:              LAO
+Descriptor:              TOTAL CONSUMPTN
+Value:                   14083871
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Integer
+# of decimal places:     2
+Engineering Units:       GAL
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               10.0
+
+********************************************************************************
+
+Point System Name:       LIBRARY.LAST.MONTH.ELEC.CONSUM
+Point Name:              LIBRARY.LAST.MONTH.ELEC.CONSUM
+Point Type:              LAO
+Descriptor:              LAST MNTH CONSMP
+Value:                   53290.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       KW
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIBRARY.LAST.MONTH.H2O.CONSUMP
+Point Name:              LIBRARY.LAST.MONTH.H2O.CONSUMP
+Point Type:              LAO
+Descriptor:              LAST MNTH CONSMP
+Value:                   43690
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Integer
+# of decimal places:     2
+Engineering Units:       GAL
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIBRARY.LAST.MONTH.STEAM.CONSU
+Point Name:              LIBRARY.LAST.MONTH.STEAM.CONSU
+Point Type:              LAO
+Descriptor:              LAST MONTH STEAM
+Value:                   8179.17
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       LBM
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               100.0
+
+********************************************************************************
+
+Point System Name:       LIBRARY.LAST.WEEK.ELEC.CONSUMP
+Point Name:              LIBRARY.LAST.WEEK.ELEC.CONSUMP
+Point Type:              LAO
+Descriptor:              LAST WEEK CONSMP
+Value:                   12948.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       KW
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIBRARY.LAST.WEEK.H2O.CONSUMP
+Point Name:              LIBRARY.LAST.WEEK.H2O.CONSUMP
+Point Type:              LAO
+Descriptor:              LAST WEEK CONSMP
+Value:                   14500
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Integer
+# of decimal places:     2
+Engineering Units:       GAL
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIBRARY.LAST.WEEK.STEAM.CONSU
+Point Name:              LIBRARY.LAST.WEEK.STEAM.CONSU
+Point Type:              LAO
+Descriptor:              LAST WEEK STEAM
+Value:                   1331.96
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       LBM
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               100.0
+
+********************************************************************************
+
+Point System Name:       LIBRARY.MONTH.ELEC.CONSUMP
+Point Name:              LIBRARY.MONTH.ELEC.CONSUMP
+Point Type:              LAO
+Descriptor:              THIS MNTH CONSMP
+Value:                   28173.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       KW
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIBRARY.MONTH.H2O.CONSUMP
+Point Name:              LIBRARY.MONTH.H2O.CONSUMP
+Point Type:              LAO
+Descriptor:              THIS MNTH CONSMP
+Value:                   33940
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Integer
+# of decimal places:     2
+Engineering Units:       GAL
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIBRARY.MONTH.STEAM.CONSUMP
+Point Name:              LIBRARY.MONTH.STEAM.CONSUMP
+Point Type:              LAO
+Descriptor:              MONTH STEAM
+Value:                   2612.72
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       LBM
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               100.0
+
+********************************************************************************
+
+Point System Name:       LIBRARY.STEAM.DEMAND
+Point Name:              LIBRARY.STEAM.DEMAND
+Point Type:              LAI
+Descriptor:              STEAM DEMAND
+Value:                   4.13
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       LBM/HR
+Alarm Type:              Not Alarmable
+Totalization:            Hours
+Field Panel:             LIBRARY2
+Point Address:           0 02 07
+Sensor Type:             Current
+Wire Resistance:         0.0
+Slope:                   0.336385
+Intercept:               -2066.75
+COV Limit:               50.0
+
+********************************************************************************
+
+Point System Name:       LIBRARY.TODAY.ELEC.CONSUMP
+Point Name:              LIBRARY.TODAY.ELEC.CONSUMP
+Point Type:              LAO
+Descriptor:              TODAY CONSUMPT
+Value:                   1080.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       KW
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIBRARY.TODAY.H2O.CONSUMP
+Point Name:              LIBRARY.TODAY.H2O.CONSUMP
+Point Type:              LAO
+Descriptor:              TODAY CONSUMPT
+Value:                   1120
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Integer
+# of decimal places:     2
+Engineering Units:       GAL
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIBRARY.TODAY.STEAM.CONSUMP
+Point Name:              LIBRARY.TODAY.STEAM.CONSUMP
+Point Type:              LAO
+Descriptor:              TODAY STEAM
+Value:                   53.34
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       LBM
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               100.0
+
+********************************************************************************
+
+Point System Name:       LIBRARY.TUNNEL
+Point Name:              LIBRARY.TUNNEL
+Point Type:              LDI
+Descriptor:              DOOR ALARM
+Value:                   OFF
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDI
+0 - OFF
+1 - ON
+Alarm Type:              Standard Alarms
+Totalization:            None
+Field Panel:             LEIGHTON
+Point Address:           0 09 10
+Normally Closed:    Yes
+
+********************************************************************************
+
+Point System Name:       LIBRARY.WATER.DEMAND
+Point Name:              LIBRARY.WATER.DEMAND
+Point Type:              LAO
+Descriptor:              H2O DEMAND
+Value:                   247.5
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       GPM
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIBRARY.WATER.HI
+Point Name:              LIBRARY.WATER.HI
+Point Type:              LPACI
+Descriptor:              LPACI
+Value:                   14008340.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     4
+Engineering Units:       GAL
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           0 01 02
+Gain:                    10.0
+Count Both Edges:        No
+COV Limit:               10.0
+
+********************************************************************************
+
+Point System Name:       LIBRARY.WATER.HIGH
+Point Name:              LIBRARY.WATER.HIGH
+Point Type:              LAO
+Descriptor:              PDL WATER HIGH
+Value:                   247.5
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       GPM
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIBRARY.WATER.LO
+Point Name:              LIBRARY.WATER.LO
+Point Type:              LPACI
+Descriptor:              LPACI
+Value:                   75531.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     4
+Engineering Units:       GAL
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           0 01 03
+Gain:                    1.0
+Count Both Edges:        No
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIBRARY.WATER.LOW
+Point Name:              LIBRARY.WATER.LOW
+Point Type:              LAO
+Descriptor:              PDL WATER LOW
+Value:                   0.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       GPM
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIBRARY.WEEK.ELEC.CONSUMP
+Point Name:              LIBRARY.WEEK.ELEC.CONSUMP
+Point Type:              LAO
+Descriptor:              WEEK CONSUMPT
+Value:                   0.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       KW
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIBRARY.WEEK.H2O.CONSUMP
+Point Name:              LIBRARY.WEEK.H2O.CONSUMP
+Point Type:              LAO
+Descriptor:              WEEK CONSUMPT
+Value:                   0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Integer
+# of decimal places:     2
+Engineering Units:       GAL
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIBRARY.WEEK.STEAM.CONSUMP
+Point Name:              LIBRARY.WEEK.STEAM.CONSUMP
+Point Type:              LAO
+Descriptor:              WEEK STEAM
+Value:                   0.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       LBM
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               100.0
+
+********************************************************************************
+
+Point System Name:       LIBRARY.YEST.ELEC.CONSUMP
+Point Name:              LIBRARY.YEST.ELEC.CONSUMP
+Point Type:              LAO
+Descriptor:              YEST CONSUMPT
+Value:                   1587.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       KW
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIBRARY.YEST.H2O.CONSUMP
+Point Name:              LIBRARY.YEST.H2O.CONSUMP
+Point Type:              LAO
+Descriptor:              YEST CONSUMPT
+Value:                   1140
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Integer
+# of decimal places:     2
+Engineering Units:       GAL
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIBRARY.YEST.STEAM.CONSUMP
+Point Name:              LIBRARY.YEST.STEAM.CONSUMP
+Point Type:              LAO
+Descriptor:              YEST STEAM
+Value:                   121.91
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       LBM
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               100.0
+
+********************************************************************************
+
+Point System Name:       LICHWR
+Point Name:              LICHWR
+Point Type:              LAI
+Descriptor:              CHW RET TEMP
+Value:                   53.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Access Group(s):         <all>
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 05 03
+Sensor Type:             Current
+Wire Resistance:         0.0
+Slope:                   0.004069
+Intercept:               -4.9993
+COV Limit:               0.99994
+
+********************************************************************************
+
+Point System Name:       LICHWS
+Point Name:              LICHWS
+Point Type:              LAI
+Descriptor:              CHW SUP TEMP
+Value:                   47.11
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Access Group(s):         <all>
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 05 02
+Sensor Type:             Current
+Wire Resistance:         0.0
+Slope:                   0.007324
+Intercept:               -13.0
+COV Limit:               0.99994
+
+********************************************************************************
+
+Point System Name:       LICONM
+Point Name:              LICONM
+Point Type:              LPACI
+Descriptor:              LIBRARY CND MTR
+Value:                   0.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     4
+Engineering Units:       GAL
+Access Group(s):         <all>
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 04 01
+Gain:                    1.0
+Count Both Edges:        No
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LICONS
+Point Name:              LICONS
+Point Type:              LAO
+Descriptor:              CONV SETPNT
+Value:                   126.99
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Access Group(s):         <all>
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LICORP
+Point Name:              LICORP
+Point Type:              LDO
+Descriptor:              CONDEN  RPT
+Value:                   OFF
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDO
+0 - OFF
+1 - ON
+Access Group(s):         <all>
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+
+********************************************************************************
+
+Point System Name:       LIDEWF
+Point Name:              LIDEWF
+Point Type:              LAI
+Descriptor:              OA DEWPOINT
+Value:                   26.24
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Access Group(s):         <all>
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 09 05
+Sensor Type:             Current
+Wire Resistance:         0.0
+Slope:                   0.006918
+Intercept:               -83.80106
+COV Limit:               1.00279
+
+********************************************************************************
+
+Point System Name:       LIECON
+Point Name:              LIECON
+Point Type:              LDO
+Descriptor:              ECONOMIZE MD
+Value:                   ON
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDO
+0 - OFF
+1 - ON
+Access Group(s):         <all>
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+
+********************************************************************************
+
+Point System Name:       LIEMTS
+Point Name:              LIEMTS
+Point Type:              LDI
+Descriptor:              LI EMER TS
+Value:                   OFF
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDI
+0 - OFF
+1 - ON
+Access Group(s):         <all>
+Alarm Type:              Standard Alarms
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 03 04
+Normally Closed:    No
+
+********************************************************************************
+
+Point System Name:       LIEXF1
+Point Name:              LIEXF1
+Point Type:              LDO
+Descriptor:              EX FAN 1SS
+Value:                   ON
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDO
+0 - OFF
+1 - ON
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 08 05
+Inverted:           No
+
+********************************************************************************
+
+Point System Name:       LIEXF4
+Point Name:              LIEXF4
+Point Type:              L2SL
+Descriptor:              LIB 4TH FLR EXF
+Value:                   ON
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default L2SL
+0 - OFF
+1 - ON
+Alarm Type:              Standard Alarms
+Totalization:            None
+Field Panel:             LIBRARY2
+On/Off Point Address:    0 04 01
+Inverted:           No
+Proof Point Address:     0 05 01
+Normally Closed:    No
+Proof Delay:             30 Informational Text
+
+********************************************************************************
+
+Point System Name:       LIFIRE
+Point Name:              LIFIRE
+Point Type:              LDI
+Descriptor:               FIRE ALARM
+Value:                   OFF
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDI
+0 - OFF
+1 - ON
+Alarm Type:              Standard Alarms
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           0 01 01
+Normally Closed:    No
+
+********************************************************************************
+
+Point System Name:       LIFREECOOL
+Point Name:              LIFREECOOL
+Point Type:              LDO
+Descriptor:              FREE.COOL
+Value:                   OFF
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDO
+0 - OFF
+1 - ON
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+
+********************************************************************************
+
+Point System Name:       LIHUMD
+Point Name:              LIHUMD
+Point Type:              LAO
+Descriptor:              HUMIDITY
+Value:                   62.4
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PCNTRH
+Access Group(s):         <all>
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               2.0
+
+********************************************************************************
+
+Point System Name:       LIHWCV
+Point Name:              LIHWCV
+Point Type:              LAO
+Descriptor:              HW CONV VLVE
+Value:                   7.01
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PSI
+Access Group(s):         <all>
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 01 05
+Actuator Type            Voltage
+Slope:                   0.000651
+Intercept:               0.0
+COV Limit:               0.99994
+
+********************************************************************************
+
+Point System Name:       LIHWDP
+Point Name:              LIHWDP
+Point Type:              LAI
+Descriptor:              HW DIF PRESS
+Value:                   11.94
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PSI
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY2
+Point Address:           0 02 05
+Sensor Type:             Current
+Wire Resistance:         0.0
+Slope:                   0.001017
+Intercept:               -6.25011
+COV Limit:               0.2
+
+********************************************************************************
+
+Point System Name:       LIHWLD
+Point Name:              LIHWLD
+Point Type:              LDO
+Descriptor:              HW PMP LEAD
+Value:                   ON
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDO
+0 - OFF
+1 - ON
+Access Group(s):         <all>
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+
+********************************************************************************
+
+Point System Name:       LIHWRT
+Point Name:              LIHWRT
+Point Type:              LAI
+Descriptor:              HW RET TEMP
+Value:                   116.54
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Access Group(s):         <all>
+Alarm Type:              Standard Alarms
+High Limit:              199.99
+Low Limit:               49.99
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 05 04
+Sensor Type:             Current
+Wire Resistance:         0.0
+Slope:                   0.006103
+Intercept:               32.50106
+COV Limit:               1.00189
+
+********************************************************************************
+
+Point System Name:       LIHWST
+Point Name:              LIHWST
+Point Type:              LAI
+Descriptor:              HW SUP TEMP
+Value:                   127.09
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Access Group(s):         <all>
+Alarm Type:              Standard Alarms
+High Limit:              210.0
+Low Limit:               65.0
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 05 05
+Sensor Type:             Current
+Wire Resistance:         0.0
+Slope:                   0.006103
+Intercept:               32.50106
+COV Limit:               1.00189
+
+********************************************************************************
+
+Point System Name:       LISWGA
+Point Name:              LISWGA
+Point Type:              LDI
+Descriptor:              SEWAGE ALARM
+Value:                   OFF
+Condition:               -N-
+Priority:                NONE
+Text Table:              Default LDI
+0 - OFF
+1 - ON
+Access Group(s):         <all>
+Alarm Type:              Standard Alarms
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 03 06
+Normally Closed:    No
+
+********************************************************************************
+
+Point System Name:       LITEMP
+Point Name:              LITEMP
+Point Type:              LAI
+Descriptor:              LIBERARY OAT
+Value:                   66.38
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Access Group(s):         <all>
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 10 03
+Sensor Type:             Current
+Wire Resistance:         0.0
+Slope:                   0.007324
+Intercept:               -103.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV01.ORGSTPT
+Point Name:              LIV01.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV02.ORGSTPT
+Point Name:              LIV02.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV04.ORGSTPT
+Point Name:              LIV04.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV05.ORGSTPT
+Point Name:              LIV05.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV07.ORGSTPT
+Point Name:              LIV07.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV09.ORGSTPT
+Point Name:              LIV09.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV10.ORGSTPT
+Point Name:              LIV10.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV14.ORGSTPT
+Point Name:              LIV14.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV16.ORGSTPT
+Point Name:              LIV16.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV18.ORGSTPT
+Point Name:              LIV18.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV21.ORGSTPT
+Point Name:              LIV21.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV23.ORGSTPT
+Point Name:              LIV23.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV24.ORGSTPT
+Point Name:              LIV24.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV25.ORGSTPT
+Point Name:              LIV25.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV26.ORGSTPT
+Point Name:              LIV26.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV29.ORGSTPT
+Point Name:              LIV29.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV30.ORGSTPT
+Point Name:              LIV30.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV33.ORGSTPT
+Point Name:              LIV33.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV34.ORGSTPT
+Point Name:              LIV34.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV36.ORGSTPT
+Point Name:              LIV36.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV37.ORGSTPT
+Point Name:              LIV37.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   74.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV38.ORGSTPT
+Point Name:              LIV38.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV39.ORGSTPT
+Point Name:              LIV39.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV41.ORGSTPT
+Point Name:              LIV41.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV42.ORGSTPT
+Point Name:              LIV42.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV45.ORGSTPT
+Point Name:              LIV45.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV47.ORGSTPT
+Point Name:              LIV47.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV49.ORGSTPT
+Point Name:              LIV49.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV51.ORGSTPT
+Point Name:              LIV51.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV54.ORGSTPT
+Point Name:              LIV54.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV55.ORGSTPT
+Point Name:              LIV55.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV60.ORGSTPT
+Point Name:              LIV60.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV61.ORGSTPT
+Point Name:              LIV61.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV62.ORGSTPT
+Point Name:              LIV62.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV63.ORGSTPT
+Point Name:              LIV63.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV64.ORGSTPT
+Point Name:              LIV64.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV65.ORGSTPT
+Point Name:              LIV65.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV66.ORGSTPT
+Point Name:              LIV66.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV67.ORGSTPT
+Point Name:              LIV67.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV68.ORGSTPT
+Point Name:              LIV68.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV71.ORGSTPT
+Point Name:              LIV71.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV72.ORGSTPT
+Point Name:              LIV72.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV75.ORGSTPT
+Point Name:              LIV75.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV76.ORGSTPT
+Point Name:              LIV76.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV77.ORGSTPT
+Point Name:              LIV77.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIV80.ORGSTPT
+Point Name:              LIV80.ORGSTPT
+Point Type:              LAO
+Descriptor:              ORIG CTL STPT
+Value:                   72.0
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Alarm Type:              Not Alarmable
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           -Virtual-
+Actuator Type            Voltage
+Slope:                   1.0
+Intercept:               0.0
+COV Limit:               1.0
+
+********************************************************************************
+
+Point System Name:       LIVALH
+Point Name:              LIVALH
+Point Type:              LAI
+Descriptor:              VAULT HUMID
+Value:                   41.72
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       PER RH
+Alarm Type:              Standard Alarms
+High Limit:              50.0
+Low Limit:               30.0
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 09 01
+Sensor Type:             Current
+Wire Resistance:         0.0
+Slope:                   0.004069
+Intercept:               -25.0
+COV Limit:               0.99994
+
+********************************************************************************
+
+Point System Name:       LIVALT
+Point Name:              LIVALT
+Point Type:              LAI
+Descriptor:              VAULT TEMP
+Value:                   64.2
+Condition:               -N-
+Priority:                NONE
+Analog Representation:   Float
+# of decimal places:     2
+Engineering Units:       DEG F
+Access Group(s):         <all>
+Alarm Type:              Standard Alarms
+High Limit:              75.0
+Low Limit:               50.0
+Totalization:            None
+Field Panel:             LIBRARY1
+Point Address:           0 09 02
+Sensor Type:             Current
+Wire Resistance:         0.0
+Slope:                   0.004069
+Intercept:               -4.9993
+COV Limit:               0.99994
+
+********************************************************************************
+******************************** End of Report *********************************

@@ -9,7 +9,7 @@ script:
 after_success:
   - coveralls
   - eval "$(ssh-agent -s)" #start the ssh agent
-  - chmod 600 .travis/deploy_rsa.enc # this key should have push access
+  - chmod 600 .travis/deploy_rsa # this key should have push access
   - ssh-add travis/deploy_rsa.enc
   - git remote add deploy energycomps.its.carleton.edu
   - git push deploy

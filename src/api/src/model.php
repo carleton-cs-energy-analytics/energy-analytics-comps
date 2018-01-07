@@ -56,7 +56,7 @@ class Model{
 	public static function getValuesByBuildingInRange($buildingID, $start, $end){
 		$db = Database::getInstance();
 		$sth = $db->prepare("SELECT * FROM PointValues 
-			LEFT JOIN Points ON PointValues.PointID=Points.ID 
+			LEFT JOIN Points ON PointValues.PointID=Points.ID
 			LEFT JOIN Rooms ON Rooms.ID = Points.RoomID 
 			LEFT JOIN PointTypes ON PointTypes.ID=Points.PointTypeID 
 			WHERE Rooms.BuildingID=? AND PointTimestamp>? and PointTimestamp < ?");

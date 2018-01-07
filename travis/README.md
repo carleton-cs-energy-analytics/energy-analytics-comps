@@ -1,4 +1,4 @@
-1. I installed [The Travis Client](https://github.com/travis-ci/travis.rb#readme), which requires Ruby.
+1. I installed [The Travis Client](https://github.com/travis-ci/travis.rb#readme) with `gem install travis`, which requires Ruby.
 (I'm using the tool [rbenv](https://github.com/rbenv/rbenv)).
 
 2. I signed in, with `travis login`
@@ -28,6 +28,13 @@
     git add deploy_rsa.enc .travis.yml
     ```
 
+I modified to `.travis.yml` file to ssh into the server after tests pass, by adding this code:
+
 ```bash
-gem install travis
+after_success:
+  - eval "$(ssh-agent -s)" #start the ssh agent
+  - chmod 600 .travis/deploy_rsa.enc # this key should have push access
+  - ssh-add travis/deploy_rsa.enc
+  - git remote add deploy energycomps.its.carleton.edu
+  - git push deploy
 ```

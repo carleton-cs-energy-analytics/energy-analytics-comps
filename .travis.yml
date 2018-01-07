@@ -1,20 +1,20 @@
 language: python
-# https://docs.travis-ci.com/user/customizing-the-build/
-
-# Can add more versions here if we want to test on multiple pythons
 python:
-  - "3.4"
-
+  - '3.4'
 install:
   - travis_retry pip install -r requirements.txt
   - travis_retry pip install coveralls
-
-# all test files must be of form test*.py
 script:
   - python3 -m unittest discover --start-directory test
-
 after_success:
   - coveralls
-
+  - eval "$(ssh-agent -s)" #start the ssh agent
+  - chmod 600 .travis/deploy_rsa.enc # this key should have push access
+  - ssh-add travis/deploy_rsa.enc
+  - git remote add deploy energycomps.its.carleton.edu
+  - git push deploy
 notifications:
-    slack: carlcs-analytics:INZrta4dRGcjcdLsM6ba4L7h
+  slack: carlcs-analytics:INZrta4dRGcjcdLsM6ba4L7h
+before_install:
+  - openssl aes-256-cbc -K $encrypted_26d5205ad747_key -iv $encrypted_26d5205ad747_iv
+  -in deploy_rsa.enc -out deploy_rsa -d

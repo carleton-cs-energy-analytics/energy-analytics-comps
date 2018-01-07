@@ -38,3 +38,11 @@ after_success:
   - git remote add deploy energycomps.its.carleton.edu
   - git push deploy
 ```
+
+The `--add` flag in the step above automaticlly added this to `.travis.yml` file, which decodes the key:
+
+```bash
+before_install:
+  - openssl aes-256-cbc -K $encrypted_26d5205ad747_key -iv $encrypted_26d5205ad747_iv
+-in deploy_rsa.enc -out deploy_rsa -d
+```

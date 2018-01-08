@@ -55,13 +55,13 @@ class Model{
 	}
 	public static function getValuesByBuildingInRange($buildingID, $start, $end){
 		$db = Database::getInstance();
-		$sth = $db->prepare("SELECT * FROM PointValues 
-			LEFT JOIN Points ON PointValues.PointID=Points.ID
+		$sth = $db->prepare("SELECT PointValues.*, PointTypes.* FROM PointValues 
+			LEFT JOIN Points ON PointValues.PointID=Points.ID 
 			LEFT JOIN Rooms ON Rooms.ID = Points.RoomID 
 			LEFT JOIN PointTypes ON PointTypes.ID=Points.PointTypeID 
 			WHERE Rooms.BuildingID=? AND PointTimestamp>? and PointTimestamp < ?");
 		$sth->execute([$buildingID, $start, $end]);
-		return $sth->fetch();
+		return $sth->fetchAll(PDO::FETCH_ASSOC);
 	}
 	public static function getValuesByBuildingInRangeByType($buildingID, $start, $end, $equipmentType){
 		$db = Database::getInstance();
@@ -69,7 +69,7 @@ class Model{
 			LEFT JOIN Points ON PointValues.PointID=Points.ID 
 			LEFT JOIN Rooms ON Rooms.ID = Points.RoomID 
 			LEFT JOIN PointTypes ON PointTypes.ID=Points.PointTypeID 
-			WHERE PointTypes.Name = ? AND Rooms.BuildingID=? 
+			WHERE PointTypes.ID = ? AND Rooms.BuildingID=? 
 			AND PointTimestamp>? and PointTimestamp < ?");
 		$sth->execute([$equipmentType, $buildingID, $start, $end]);
 		return $sth->fetchAll(PDO::FETCH_ASSOC);

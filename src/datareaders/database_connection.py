@@ -100,7 +100,7 @@ class DatabaseConnection:
                Encoded as an integer
         :return: None
         """
-        if value > MAXINT or value < MININT:
+        if value and value > MAXINT or value < MININT:
             raise ValueError("{} is greater than MAXINT or smaller than MININT that can be stored in DB\n"
                              "Point {} value not added".format(value, point.name))
 

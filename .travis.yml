@@ -1,19 +1,20 @@
 language: python
 python:
-  - '3.4'
+- '3.4'
 install:
-  - travis_retry pip install -r requirements.txt
-  - travis_retry pip install coveralls
+- travis_retry pip install -r requirements.txt
+- travis_retry pip install coveralls
 script:
-  - python3 -m unittest discover --start-directory test
+- python3 -m unittest discover --start-directory test
 after_success:
-  - coveralls
-  - eval "$(ssh-agent -s)" #start the ssh agent
-  - chmod 600 travis/deploy_rsa # this key should have push access
-  - ssh-add travis/deploy_rsa
-  - git remote add deploy energycomps.its.carleton.edu
-  - git push deploy
+- coveralls
+- eval "$(ssh-agent -s)"
+- chmod 600 travis/deploy_rsa
+- ssh-add travis/deploy_rsa
+- git remote add deploy energycomps.its.carleton.edu
+- git push deploy
 notifications:
   slack: carlcs-analytics:INZrta4dRGcjcdLsM6ba4L7h
 before_install:
-  - openssl aes-256-cbc -K $encrypted_26d5205ad747_key -iv $encrypted_26d5205ad747_iv -in travis/deploy_rsa.enc -out travis/deploy_rsa -d
+- openssl aes-256-cbc -K $encrypted_26d5205ad747_key -iv $encrypted_26d5205ad747_iv
+  -in travis/deploy_rsa.enc -out travis/deploy_rsa -d

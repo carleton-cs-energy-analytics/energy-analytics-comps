@@ -55,3 +55,6 @@ CREATE TABLE PointValues (
 );
 
 INSERT INTO PointSources(Name) VALUES ('LUCID'), ('SIEMENS'), ('ALC'), ('JAMES_SOLAR');
+
+ALTER TABLE PointValues ALTER COLUMN PointValue bigint NULL;
+

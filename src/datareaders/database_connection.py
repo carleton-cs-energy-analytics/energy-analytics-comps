@@ -100,6 +100,12 @@ class DatabaseConnection:
                Encoded as an integer
         :return: None
         """
+        if value is None:
+            point_id = self.get_point_id(point)
+            self.execute_and_commit("INSERT INTO PointValues (PointTimestamp, PointID, PointValue) "
+                                    "VALUES (%s, %s, NULL);", (timestamp, point_id))
+            return
+
         if value > MAXINT or value < MININT:
             raise ValueError("{} is greater than MAXINT or smaller than MININT that can be stored in DB\n"
                              "Point {} value not added".format(value, point.name))

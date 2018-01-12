@@ -137,7 +137,7 @@ class SiemensReader:
                                                               value=formatted_value)
                 point_index += 1
                 print("finished point {}".format(point.name))
-            except ValueError as e:
+            except ValueError:
                 print("point {} failed to go in with value {}".format(point.name, raw_data))
                 continue
 

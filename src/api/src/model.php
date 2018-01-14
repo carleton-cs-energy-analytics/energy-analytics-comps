@@ -34,38 +34,63 @@ class Model{
 		$sth = $db->prepare("SELECT * FROM Points 
 			LEFT JOIN PointTypes ON PointTypes.ID = Points.PointTypeID 
 			LEFT JOIN Rooms ON Rooms.ID = Points.RoomID 
-			WHERE Rooms.buildingID=? AND PointTypes.Name=?");
+			WHERE Rooms.buildingID=? AND PointTypes.ID = ?");
 		$sth->execute([$buildingID, $equipmentType]);
 		return $sth->fetchAll(PDO::FETCH_ASSOC);
 	}
 	public static function getValuesInRange($pointID, $start, $end){
 		$db = Database::getInstance();
-		$sth = $db->prepare("SELECT * FROM PointValues WHERE PointID=? 
-			AND PointTimestamp>? and PointTimestamp < ?");
+		$sth = $db->prepare("SELECT PointValues.*, PointTypes.* FROM PointValues
+			LEFT JOIN Points ON PointValues.PointID=Points.ID 
+			LEFT JOIN PointTypes ON PointTypes.ID=Points.PointTypeID 
+		 	WHERE PointValues.PointID=? 
+			AND PointValues.PointTimestamp>? and PointValues.PointTimestamp < ?");
 		$sth->execute([$pointID, $start, $end]);
 		return $sth->fetchAll(PDO::FETCH_ASSOC);
 	}
 	public static function getValue($pointID, $timestamp){
 		$db = Database::getInstance();
-		$sth = $db->prepare("SELECT * FROM PointValues WHERE PointID=? 
+		$sth = $db->prepare("SELECT PointValues.*, PointTypes.* FROM PointValues 
+			LEFT JOIN Points ON PointValues.PointID=Points.ID 
 			LEFT JOIN PointTypes ON PointTypes.ID=Points.PointTypeID 
-			AND PointTimestamp=?");
+			WHERE PointValues.PointID=? 
+			AND PointValues.PointTimestamp=?");
 		$sth->execute([$pointID, $timestamp]);
 		return $sth->fetch();
 	}
-	public static function getValuesByBuildingInRange($buildingID, $start, $end){
+    public static function getValuesByBuildingInRange($buildingID, $start, $end){
+        $db = Database::getInstance();
+        $sth = $db->prepare("SELECT PointValues.*, PointTypes.* FROM PointValues 
+            LEFT JOIN Points ON PointValues.PointID=Points.ID 
+            LEFT JOIN Rooms ON Rooms.ID = Points.RoomID 
+            LEFT JOIN PointTypes ON PointTypes.ID=Points.PointTypeID 
+            WHERE Rooms.BuildingID=? AND PointTimestamp>? and PointTimestamp < ?");
+        $sth->execute([$buildingID, $start, $end]);
+        return $sth->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public static function getBuildingValuesAtTime($buildingID, $timestamp){
+        $db = Database::getInstance();
+        $sth = $db->prepare("SELECT PointValues.*, PointTypes.* FROM PointValues 
+            LEFT JOIN Points ON PointValues.PointID=Points.ID 
+            LEFT JOIN Rooms ON Rooms.ID = Points.RoomID 
+            LEFT JOIN PointTypes ON PointTypes.ID=Points.PointTypeID 
+            WHERE Rooms.BuildingID=? AND PointTimestamp=?");
+        $sth->execute([$buildingID, $timestamp]);
+        return $sth->fetchAll(PDO::FETCH_ASSOC);
+    }
+	public static function getValuesAtTime($timestamp){
 		$db = Database::getInstance();
 		$sth = $db->prepare("SELECT PointValues.*, PointTypes.* FROM PointValues 
 			LEFT JOIN Points ON PointValues.PointID=Points.ID 
 			LEFT JOIN Rooms ON Rooms.ID = Points.RoomID 
 			LEFT JOIN PointTypes ON PointTypes.ID=Points.PointTypeID 
-			WHERE Rooms.BuildingID=? AND PointTimestamp>? and PointTimestamp < ?");
-		$sth->execute([$buildingID, $start, $end]);
+			WHERE PointTimestamp=?");
+		$sth->execute([$timestamp]);
 		return $sth->fetchAll(PDO::FETCH_ASSOC);
 	}
 	public static function getValuesByBuildingInRangeByType($buildingID, $start, $end, $equipmentType){
 		$db = Database::getInstance();
-		$sth = $db->prepare("SELECT * FROM PointValues 
+		$sth = $db->prepare("SELECT PointValues.*, PointTypes.* FROM PointValues 
 			LEFT JOIN Points ON PointValues.PointID=Points.ID 
 			LEFT JOIN Rooms ON Rooms.ID = Points.RoomID 
 			LEFT JOIN PointTypes ON PointTypes.ID=Points.PointTypeID 

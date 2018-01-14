@@ -41,51 +41,67 @@ $app->get('/values/building/:id/:start/:end', function ($id, $start, $end) {
     $result = getValuesByBuildingInRange($id, $start, $end);
     echo json_encode($result);
 });
+$app->get('/values/building/:id/:timestamp', function ($id, $timestamp) {
+    $result = getBuildingValuesAtTime($id, $timestamp);
+    echo json_encode($result);
+});
+$app->get('/values/:timestamp', function ($timestamp) {
+    $result = getValuesAtTime($timestamp);
+    echo json_encode($result);
+});
 $app->get('/values/building/:id/:start/:end/:type', function ($id, $start, $end, $type) {
     $result = getValuesByBuildingInRangeByType($id, $type, $start, $end);
     echo json_encode($result);
 });
 
 function getBuildingIDs(){
-	return Model::getBuildingIDs();
+    return Model::getBuildingIDs();
 }
 function getBuildingIDByName($name){
-	return Model::getBuildingIDByName($name);
+    return Model::getBuildingIDByName($name);
 }
 function getRoomsInBuilding($buildingID){
-	return Model::getRoomsInBuilding($buildingID);
+    return Model::getRoomsInBuilding($buildingID);
 }
 function getPointsInBuilding($buildingID){
-	return Model::getPointsInBuilding($buildingID);
+    return Model::getPointsInBuilding($buildingID);
 }
 function getPointsOfTypeInBuilding($equipmentType, $buildingID){
-	return Model::getPointsOfTypeInBuilding($equipmentType, $buildingID);
+    return Model::getPointsOfTypeInBuilding($equipmentType, $buildingID);
 }
 function getValuesInRange($pointID, $start, $end){
-	return transformData(Model::getValuesInRange($pointID, $start, $end));
+    return transformData(Model::getValuesInRange($pointID, $start, $end));
 }
 function getValue($pointID, $timestamp){
-	return transformData(Model::getValue($pointID, $timestamp));
+    return transformData(Model::getValue($pointID, $timestamp));
 }
 function getValuesByBuildingInRange($buildingID, $start, $end){
-	return transformData(Model::getValuesByBuildingInRange($buildingID, $start, $end));
+    return transformData(Model::getValuesByBuildingInRange($buildingID, $start, $end));
+}
+function getBuildingValuesAtTime($buildingID, $timestamp){
+    return transformData(Model::getBuildingValuesAtTime($buildingID, $timestamp));
+}
+function getValuesAtTime($timestamp){
+    return transformData(Model::getValuesAtTime($timestamp));
 }
 function getValuesByBuildingInRangeByType($buildingID, $start, $end, $equipmentType){
-	return transformData(Model::getValuesByBuildingInRangeByType($buildingID, $start, $end, $equipmentType));
+    return transformData(Model::getValuesByBuildingInRangeByType($buildingID, $start, $end, $equipmentType));
 }
 
 function transformData($data){
-  foreach ($data as $row) {
-      if($data[TYPE_COL] == FLOAT_TYPE){
-          $data[DATA_COL] = $data[DATA_COL] / 10^$data[FACTOR_COL];
-      }elseif ($data[TYPE_COL] == ENUM_TYPE) {
-          # didn't see any examples of this in the code, so wasn't sure how to handle these
-          # for now just returning unformatted
-          continue;
-      }else{
-          # handle ints and unknown types by just returning the data unformatted
-          continue;
-      }
-  }
-  return $data;
+    $result = [];
+    foreach ($data as $row) {
+        if($row[TYPE_COL] == FLOAT_TYPE){
+            $row[DATA_COL] = $row[DATA_COL] / pow(10, $row[FACTOR_COL]);
+        }elseif ($row[TYPE_COL] == ENUM_TYPE) {
+            # didn't see any examples of this in the code, so wasn't sure how to handle these
+            # for now just returning unformatted
+            break;
+        }else{
+            # handle ints and unknown types by just returning the data unformatted
+            break;
+        }
+        array_push($result, $row);
+    }
+    return $result;
 }

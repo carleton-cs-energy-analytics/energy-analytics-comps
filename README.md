@@ -83,9 +83,10 @@ GROUP BY pointid, point_name, room_name, building_name, point_source, factor, re
 ## Connect to Database
 Add a file called **data_connetion_params.py** in the src/datareaders folder.  It should contain the following, with our real password.
 
+```python
 params = {
     'database': 'energycomps',
     'user': 'energycomps',
     'password': '<password>',
     'host': 'localhost',
-}
+}```

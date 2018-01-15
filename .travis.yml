@@ -11,8 +11,10 @@ after_success:
 - eval "$(ssh-agent -s)"
 - chmod 600 travis/deploy_rsa
 - ssh-add travis/deploy_rsa
-- git remote add master energycomps.its.carleton.edu
-- git push master
+- ssh michelsd@energycomps.its.carleton.edu <<EOF # Ideally we'd redo this with a user who is not dustin
+  cd /var/www/html/energy-analytics-comps
+  git pull # Change to whatever commands you need!
+EOF
 notifications:
   slack: carlcs-analytics:INZrta4dRGcjcdLsM6ba4L7h
 before_install:

@@ -40,7 +40,7 @@ class Model{
     }
     public static function getValuesInRange($pointID, $start, $end){
         $db = Database::getInstance();
-        $sth = $db->prepare("SELECT PointValues.*, PointTypes.* FROM PointValues
+        $sth = $db->prepare("SELECT PointValues.*, PointTypes.*, Points.Name as pointname FROM PointValues
             LEFT JOIN Points ON PointValues.PointID=Points.ID 
             LEFT JOIN PointTypes ON PointTypes.ID=Points.PointTypeID 
             WHERE PointValues.PointID=? 
@@ -50,7 +50,7 @@ class Model{
     }
     public static function getValue($pointID, $timestamp){
         $db = Database::getInstance();
-        $sth = $db->prepare("SELECT PointValues.*, PointTypes.* FROM PointValues 
+        $sth = $db->prepare("SELECT PointValues.*, PointTypes.*, Points.Name as pointname FROM PointValues 
             LEFT JOIN Points ON PointValues.PointID=Points.ID 
             LEFT JOIN PointTypes ON PointTypes.ID=Points.PointTypeID 
             WHERE PointValues.PointID=? 
@@ -60,7 +60,7 @@ class Model{
     }
     public static function getValuesByBuildingInRange($buildingID, $start, $end){
         $db = Database::getInstance();
-        $sth = $db->prepare("SELECT PointValues.*, PointTypes.* FROM PointValues 
+        $sth = $db->prepare("SELECT PointValues.*, PointTypes.*, Points.Name as pointname FROM PointValues 
             LEFT JOIN Points ON PointValues.PointID=Points.ID 
             LEFT JOIN Rooms ON Rooms.ID = Points.RoomID 
             LEFT JOIN PointTypes ON PointTypes.ID=Points.PointTypeID 
@@ -70,7 +70,7 @@ class Model{
     }
     public static function getBuildingValuesAtTime($buildingID, $timestamp){
         $db = Database::getInstance();
-        $sth = $db->prepare("SELECT PointValues.*, PointTypes.* FROM PointValues 
+        $sth = $db->prepare("SELECT PointValues.*, PointTypes.*, Points.Name as pointname FROM PointValues 
             LEFT JOIN Points ON PointValues.PointID=Points.ID 
             LEFT JOIN Rooms ON Rooms.ID = Points.RoomID 
             LEFT JOIN PointTypes ON PointTypes.ID=Points.PointTypeID 
@@ -80,7 +80,7 @@ class Model{
     }
     public static function getValuesAtTime($timestamp){
         $db = Database::getInstance();
-        $sth = $db->prepare("SELECT PointValues.*, PointTypes.* FROM PointValues 
+        $sth = $db->prepare("SELECT PointValues.*, PointTypes.*, Points.Name as pointname FROM PointValues 
             LEFT JOIN Points ON PointValues.PointID=Points.ID 
             LEFT JOIN Rooms ON Rooms.ID = Points.RoomID 
             LEFT JOIN PointTypes ON PointTypes.ID=Points.PointTypeID 
@@ -90,7 +90,7 @@ class Model{
     }
     public static function getValuesByBuildingInRangeByType($buildingID, $start, $end, $equipmentType){
         $db = Database::getInstance();
-        $sth = $db->prepare("SELECT PointValues.*, PointTypes.* FROM PointValues 
+        $sth = $db->prepare("SELECT PointValues.*, PointTypes.*, Points.Name as pointname FROM PointValues 
             LEFT JOIN Points ON PointValues.PointID=Points.ID 
             LEFT JOIN Rooms ON Rooms.ID = Points.RoomID 
             LEFT JOIN PointTypes ON PointTypes.ID=Points.PointTypeID 

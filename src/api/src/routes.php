@@ -3,71 +3,105 @@
 use Slim\Http\Request;
 use Slim\Http\Response;
 
-// Routes
 
-$app->get('/buildings', function (Request $request, Response $response, array $args) {
+$app->get('/', function () {
+    echo 'API Homepage';
+});
+$app->get('/buildings', function () {
     $result = getBuildingIDs();
-    return $response->withJson($result);
+    echo json_encode($result);
 });
 
-$app->get('/building/{name}', function (Request $request, Response $response, array $args) {
-    $result = getBuildingIDByName($args['name']);
-    return $response->withJson($result);
+$app->get('/building/:name', function ($name) {
+    $result = getBuildingIDByName($name);
+    echo json_encode($result);
 });
 
-$app->get('/building/{id}/rooms', function (Request $request, Response $response, array $args) {
-    $result = getRoomsInBuilding($args['id']);
-    return $response->withJson($result);
+$app->get('/building/:id/rooms', function ($id) {
+    $result = getRoomsInBuilding($id);
+    echo json_encode($result);
 });
-$app->get('/building/{id}/points', function (Request $request, Response $response, array $args) {
-    $result = getPointsInBuilding($args['id']);
-    return $response->withJson($result);
+$app->get('/building/:id/points', function ($id) {
+    $result = getPointsInBuilding($id);
+    echo json_encode($result);
 });
-$app->get('/building/{id}/points/{type}', function (Request $request, Response $response, array $args) {
-    $result = getPointsOfTypeInBuilding($args['type'], $args['id']);
-    return $response->withJson($result);
+$app->get('/building/:id/points/:type', function ($id, $type) {
+    $result = getPointsOfTypeInBuilding($type, $id);
+    echo json_encode($result);
 });
-$app->get('/values/point/{id}/{start}/{end}', function (Request $request, Response $response, array $args) {
-    $result = getValuesInRange($args['id'], $args['start'], $args['end']);
-    return $response->withJson($result);
+$app->get('/values/point/:id/:start/:end', function ($id, $start, $end) {
+    $result = getValuesInRange($id, $start, $end);
+    echo json_encode($result);
 });
-$app->get('/value/point/{id}/{timestamp}', function (Request $request, Response $response, array $args) {
-    $result = getValue($args['id'], $args['timestamp']);
-    return $response->withJson($result);
+$app->get('/value/point/:id/:timestamp', function ($id, $timestamp) {
+    $result = getValue($id, $timestamp);
+    echo json_encode($result);
 });
-$app->get('/values/building/{id}/{start}/{end}', function (Request $request, Response $response, array $args) {
-    $result = getValuesByBuildingInRange($args['id'], $args['start'], $args['end']);
-    return $response->withJson($result);
+$app->get('/values/building/:id/:start/:end', function ($id, $start, $end) {
+    $result = getValuesByBuildingInRange($id, $start, $end);
+    echo json_encode($result);
 });
-$app->get('/values/building/{id}/{start}/{end}/{type}', function (Request $request, Response $response, array $args) {
-    $result = getValuesByBuildingInRangeByType($args['id'], $args['type'], $args['start'], $args['end']);
-    return $response->withJson($result);
+$app->get('/values/building/:id/:timestamp', function ($id, $timestamp) {
+    $result = getBuildingValuesAtTime($id, $timestamp);
+    echo json_encode($result);
+});
+$app->get('/values/:timestamp', function ($timestamp) {
+    $result = getValuesAtTime($timestamp);
+    echo json_encode($result);
+});
+$app->get('/values/building/:id/:start/:end/:type', function ($id, $start, $end, $type) {
+    $result = getValuesByBuildingInRangeByType($id, $type, $start, $end);
+    echo json_encode($result);
 });
 
 function getBuildingIDs(){
-	return Model::getBuildingIDs();
+    return Model::getBuildingIDs();
 }
 function getBuildingIDByName($name){
-	return Model::getBuildingIDByName($name);
+    return Model::getBuildingIDByName($name);
 }
 function getRoomsInBuilding($buildingID){
-	return Model::getRoomsInBuilding($buildingID);
+    return Model::getRoomsInBuilding($buildingID);
 }
 function getPointsInBuilding($buildingID){
-	return Model::getPointsInBuilding($buildingID);
+    return Model::getPointsInBuilding($buildingID);
 }
 function getPointsOfTypeInBuilding($equipmentType, $buildingID){
-	return Model::getPointsOfTypeInBuilding($equipmentType, $buildingID);
+    return Model::getPointsOfTypeInBuilding($equipmentType, $buildingID);
 }
 function getValuesInRange($pointID, $start, $end){
-	return Model::getValuesInRange($pointID, $start, $end);
+    return transformData(Model::getValuesInRange($pointID, $start, $end));
 }
 function getValue($pointID, $timestamp){
-	return Model::getValue($pointID, $timestamp);
+    return transformData(Model::getValue($pointID, $timestamp));
 }
 function getValuesByBuildingInRange($buildingID, $start, $end){
-	return Model::getValuesByBuildingInRange($buildingID, $start, $end);
+    return transformData(Model::getValuesByBuildingInRange($buildingID, $start, $end));
+}
+function getBuildingValuesAtTime($buildingID, $timestamp){
+    return transformData(Model::getBuildingValuesAtTime($buildingID, $timestamp));
+}
+function getValuesAtTime($timestamp){
+    return transformData(Model::getValuesAtTime($timestamp));
 }
 function getValuesByBuildingInRangeByType($buildingID, $start, $end, $equipmentType){
-	return Model::getValuesByBuildingInRangeByType($buildingID, $start, $end, $equipmentType);
+    return transformData(Model::getValuesByBuildingInRangeByType($buildingID, $start, $end, $equipmentType));
+}
+
+function transformData($data){
+    $result = [];
+    foreach ($data as $row) {
+        if($row[TYPE_COL] == FLOAT_TYPE){
+            $row[DATA_COL] = $row[DATA_COL] / pow(10, $row[FACTOR_COL]);
+        }elseif ($row[TYPE_COL] == ENUM_TYPE) {
+            # didn't see any examples of this in the code, so wasn't sure how to handle these
+            # for now just returning unformatted
+            break;
+        }else{
+            # handle ints and unknown types by just returning the data unformatted
+            break;
+        }
+        array_push($result, $row);
+    }
+    return $result;
 }

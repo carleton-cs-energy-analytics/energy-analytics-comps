@@ -6,7 +6,6 @@
 class Database{
     public $db;
     private static $instance;
-
     private function __construct() {
         $this->db = new PDO(
             "pgsql:dbname=".DB_NAME.";host=".DB_HOST,

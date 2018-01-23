@@ -47,7 +47,7 @@ class LucidParser:
             point_type = PointType(name=name, return_type="float", units=units, factor=5)
 
             # Create Point Object from this column header information.
-            new_point = Point(name=name, room_name=None, building_name=building_name,
+            new_point = Point(name=name, room_name="{}_Dummy_Room".format(building_name), building_name=building_name,
                              source_enum_value=Sources.LUCID, point_type=point_type,
                              description=description)
 

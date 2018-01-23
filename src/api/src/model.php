@@ -38,6 +38,14 @@ class Model{
         $sth->execute([$buildingID, $equipmentType]);
         return $sth->fetchAll(PDO::FETCH_ASSOC);
     }
+    public static function getPointInfoByName($name){
+        $db = Database::getInstance();
+        $sth = $db->prepare("SELECT Points.*, PointTypes.* FROM Points 
+            LEFT JOIN PointTypes ON PointTypes.ID = Points.PointTypeID 
+            WHERE Points.Name = ?");
+        $sth->execute([$name]);
+        return $sth->fetchAll(PDO::FETCH_ASSOC);
+    }
     public static function getValuesInRange($pointID, $start, $end){
         $db = Database::getInstance();
         $sth = $db->prepare("SELECT PointValues.*, PointTypes.*, Points.Name as pointname FROM PointValues

@@ -29,6 +29,10 @@ $app->get('/building/:id/points/:type', function ($id, $type) {
     $result = getPointsOfTypeInBuilding($type, $id);
     echo json_encode($result);
 });
+$app->get('/point/:name', function ($name) {
+    $result = getPointInfoByName($name);
+    echo json_encode($result);
+});
 $app->get('/values/point/:id/:start/:end', function ($id, $start, $end) {
     $result = getValuesInRange($id, $start, $end);
     echo json_encode($result);
@@ -68,6 +72,9 @@ function getPointsInBuilding($buildingID){
 }
 function getPointsOfTypeInBuilding($equipmentType, $buildingID){
     return Model::getPointsOfTypeInBuilding($equipmentType, $buildingID);
+}
+function getPointInfoByName($name){
+    return Model::getPointInfoByName($name);
 }
 function getValuesInRange($pointID, $start, $end){
     return transformData(Model::getValuesInRange($pointID, $start, $end));

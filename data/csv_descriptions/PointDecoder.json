@@ -1,0 +1,14 @@
+{
+	"VAV":{"name":["VAV"], "indexed":"True", "type":"Equipement", "descriptor":"Variable Air Volume Box"},
+	"RAD":{"name":["RAD"], "indexed":"True", "type":"Equipement", "descriptor":"Radiator"},
+	"HX":{"name":["HX"], "indexed":"True", "type":"Equipement", "descriptor":"Heat Exchange Unit"},
+	"CHW":{"name":["CHW"], "indexed":"True", "type":"Equipement", "descriptor":"Chilled Water"},
+	"AH":{"name":["AH", "AHU"], "indexed":"True", "type":"Equipement", "descriptor":"Air Handling Unit"},
+	"EF":{"name":["EF"], "indexed":"True", "type":"Measurement", "descriptor": "on / off indicator for exhaust fans", "units":"Enum ON/OFF"},
+	"HULINGS":{"name":["HU", "HULINGS"], "indexed":"False", "type":"Building", "descriptor": "Hulings (bio) building"},
+	"EV":{"name":["EV"], "indexed":"False", "type":"Building", "descriptor": "Evens (dorm) building"},
+	"LDC":{"name":["ACDIN"], "indexed":"False", "type":"Building", "descriptor": "East Language and Dining building"},
+	"BURTON":{"name":["BURTON"], "indexed":"False", "type":"Building", "descriptor": "Burton (dining hall / dorm) building"}
+}
+
+

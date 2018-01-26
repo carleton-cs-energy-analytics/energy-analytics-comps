@@ -8,8 +8,21 @@ def main():
         fileReader = csv.reader(csvFile)
         fileContents = list(fileReader)
     
-    # Remove empty lines and removes spaces
-    newList = [line[0].strip() for line in fileContents if len(line) > 0]
+    oldFormat = False
+    newList = []
+    if (oldFormat):
+        # Remove empty lines and removes spaces
+        newList = [line[0].strip() for line in fileContents if len(line) > 0]
+    else:
+        # Same thing but for a different output format
+        combLine = []
+        for line in fileContents:
+            if (len(line) > 0):
+               if (len(line) > 1):
+                   newList.append(line[0].strip() + " " + line[1].strip())
+               else:
+                   newList.append(line[0].strip())
+    
     
     baseJsonDict = {}
     index = 0;
@@ -42,19 +55,23 @@ def main():
                              splitString[0].startswith("None"))):
                              
                         # Make a new list to append the enumeration to
-	                    if (memEntry[2]):
-	                        memEntry = (memEntry[0], memEntry[1], False)
-	                        dictToAppend[memEntry[0]] = {}
-	                        dictToAppend[memEntry[0]][memEntry[1]] = []
-	                    toAppend = splitString[0].split('-')
-	                    
-	                    # If the format is really bad: exit
-	                    if (len(toAppend) != 2):
-	                        print("AHHHHHHHH NNNNNOOOOOOO!", toAppend[0], index)
-	                        exit(2)
-	                        
-	                    # Append enumeration
-	                    dictToAppend[memEntry[0]][memEntry[1]].append(toAppend[1].strip())
+                        if (memEntry[2]):
+                            memEntry = (memEntry[0], memEntry[1], False)
+                            dictToAppend[memEntry[0]] = {}
+                            dictToAppend[memEntry[0]][memEntry[1]] = []
+                        toAppend = splitString[0].split('-')
+                        
+                        # If the format is really bad: exit
+                        if (len(toAppend) != 2):
+                            print("AHHHHHHHH NNNNNOOOOOOO!", toAppend[0], index)
+                            exit(2)
+                            
+                        # Append enumeration
+                        dictToAppend[memEntry[0]][memEntry[1]].append(toAppend[1].strip())
+                    
+                    # More Exception Stuff
+                    if (splitString[0].startswith("BACnet Command Priority Array")):
+                        index += 1
                 index += 1
                 
         # We aren't starting a new point, so ignore this line
@@ -68,4 +85,4 @@ def main():
     print("Done!")
 
 if (__name__ == "__main__"):
-	main()
+    main()

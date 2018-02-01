@@ -80,7 +80,7 @@ class DatabaseConnection:
         :return: room id
         """
         return self.execute_commit_and_return("INSERT INTO Rooms(Name, BuildingID) VALUES (%s, %s) RETURNING id;",
-                                           (self.format_sql_none(room_name), building_id))
+                                              (self.format_sql_none(room_name), building_id))
 
     def add_point_type(self, point_type):
         """
@@ -89,10 +89,10 @@ class DatabaseConnection:
         :return: point type id
         """
         return self.execute_commit_and_return("INSERT INTO PointTypes(Name, Units, ReturnType, Factor) VALUES (%s, %s, "
-                                           "%s, %s) RETURNING id;", (point_type.name,
-                                                                     point_type.get_units_placeholder(),
-                                                                     point_type.return_type,
-                                                                     self.format_sql_none(point_type.factor)))
+                                              "%s, %s) RETURNING id;", (point_type.name,
+                                                                        point_type.get_units_placeholder(),
+                                                                        point_type.return_type,
+                                                                        self.format_sql_none(point_type.factor)))
 
     def add_point(self, point):
         """
@@ -100,16 +100,16 @@ class DatabaseConnection:
         :param point: Point class has name, room_id, type_id, source, and description
         :return: point id
         """
-        type_id = self.get_point_type_id(point.point_type)
         return self.execute_commit_and_return("INSERT INTO Points(Name, RoomID, PointTypeID, PointSourceID, "
-                                             "Description) VALUES (%s,%s, %s, %s, %s) RETURNING id;",
-                                              (point.name, point.room, type_id, point.source, point.description))
+                                              "Description) VALUES (%s,%s, %s, %s, %s) RETURNING id;",
+                                              (point.name, point.room, point.point_type, point.source,
+                                               point.description))
 
     def add_point_value(self, timestamp, point_id, value):
         """
         Adds a value for given point at specified timestamp
         :param timestamp: Timestamp of point, str
-        :param point: Point class
+        :param point_id: point id (int)
         :param value: Data value to be recorded for given timestamp, point
                Encoded as an integer
         :return: None
@@ -145,7 +145,7 @@ class DatabaseConnection:
         """
         Looks in DB for room with room name
         :param room_name: Room name, str
-        :param building_id: Building id, str
+        :param building_id: Building id, int
         :return: Room id if exists, None otherwise
         """
         self.db.execute("SELECT ID, Name from Rooms where Name = (%s) AND BuildingID = (%s);", (self.format_sql_none(
@@ -203,7 +203,7 @@ class DatabaseConnection:
         """
         Add unique room only adds room to DB if doesn't already exist
         :param room_name: Room name, str
-        :param building_name: Building name, str
+        :param building_id: Building id, int
         :return: room id
         """
         room_id = self.get_room_id(room_name, building_id)
@@ -237,7 +237,7 @@ class DatabaseConnection:
         """
         Add unique point value only adds point to DB if doesn't already exist
         :param timestamp: string in format of timestamp
-        :param point: Point class
+        :param point_id: point id (int)
         :param value: observed value of the point at the given time
         :return: None
         """

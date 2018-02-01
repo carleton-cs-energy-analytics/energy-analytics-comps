@@ -61,7 +61,7 @@ class SiemensReader:
         Add unique building from the building tag of a point
         Only adds building if not in DB, adds dummy "Carleton Campus" building if no building tag
         :param tags: a dictionary of tags for a point
-        :return: The building id (str) added to the database
+        :return: The building id (int) added to the database
         """
         building = "Carleton Campus"  # dummy building
         if "building" in tags:
@@ -75,7 +75,7 @@ class SiemensReader:
         Add unique room -- only adds if room not already in DB
         :param tags: a dictionary of tags for a point
         :param building_name: Building name of point (string)
-        :return: Room id (str)
+        :return: Room id (int)
         """
         room = "{}_Dummy_Room".format(building_name)
         if "room" in tags:
@@ -92,7 +92,7 @@ class SiemensReader:
         """
         description = ""
         for key, value in tags.items():
-            description += self.tag_dict[value]["descriptor"] # TODO: get the description for the tag in the json
+            description += self.tag_dict[value]["descriptor"]  # TODO: get the description for the tag in the json
         return description
 
     def _get_point_type(self, tags):
@@ -114,7 +114,7 @@ class SiemensReader:
         """
         Gets point type information from tags and adds to databse
         :param tags: a dictionary of tags for a point
-        :return: point type id (str)
+        :return: point type id (int)
         """
         point_type_name = self._get_point_type(tags)
         # TODO: differentiate between enum and float
@@ -122,7 +122,7 @@ class SiemensReader:
             point_type = PointType(point_type_name, "enumerated")
             point_type.enumeration_values = self.tag_dict[point_type_name]["units"].split(",")
         else:
-            point_type = PointType(point_type_name, "float") # TODO: get return type
+            point_type = PointType(point_type_name, "float")  # TODO: get return type
             point_type.units = self.tag_dict[point_type_name]["units"]
             point_type.units = self.tag_dict[point_type_name]["factor"]
 
@@ -175,7 +175,7 @@ class SiemensReader:
 
 
 def test_insert():
-    tags = {"building":"TEST BUILDING", "room": "TEST ROOM", "measurement": "TEST TYPE"}
+    tags = {"building": "TEST BUILDING", "room": "TEST ROOM", "measurement": "TEST TYPE"}
     sr = SiemensReader("LDC.AUDIT.TRENDRPT1_171016.csv")
     building_id, building_name = sr._add_building(tags)
     room_id = sr._add_room(tags, building_name, building_id)
@@ -186,7 +186,6 @@ def test_insert():
 
     point_id = sr.db_connection.add_unique_point(point)
     print("Inserted point: " + str(point_id))
-
 
 
 def main(building, csv_file):

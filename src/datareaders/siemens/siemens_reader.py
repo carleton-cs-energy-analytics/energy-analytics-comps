@@ -19,7 +19,6 @@ class SiemensReader:
         self.siemens_data = pd.read_csv(file_path, dtype=object)
         tag_json = open(get_data_resource("csv_descriptions/PointDecoder.json"))
         self.tag_dict = json_load(tag_json)
-        self.points = []
 
     def add_to_db(self):
         """
@@ -28,18 +27,20 @@ class SiemensReader:
         """
         finish_lst = []
         cant_finish_lst = []
+        points_with_ids = []
         for point_name in self.siemens_data.columns[2:]:
             try:
                 tags = {}  # TODO: get tags
-                building_name = self._add_building(tags)
-                room_name = self._add_room(tags, building_name)
-                point_type = self._get_point_type(point_name)
+                building_id, building_name = self._add_building(tags)
+                room_id = self._add_room(tags, building_name, building_id)
+                point_type_id = self._add_point_type(tags)
                 description = self._make_point_description(tags)
 
-                point = Point(point_name, room_name, building_name, self.source, point_type, description)
+                point = Point(point_name, room_id, building_id, self.source, point_type_id, description)
 
-                self.db_connection.add_unique_point(point)
-                self.points.append(point)
+                point_id = self.db_connection.add_unique_point(point)
+                point.id = point_id
+                points_with_ids.append(point)
                 finish_lst.append("Finished for point "+point_name)
             except KeyError:
                 cant_finish_lst.append("Don't know type of "+point_name)
@@ -53,35 +54,35 @@ class SiemensReader:
         print("Was able to successfully add {} points".format(len(finish_lst)))
         print("Was NOT able to add {} points".format(len(cant_finish_lst)))
 
-        self._add_point_values()
+        self._add_point_values(points_with_ids)
 
     def _add_building(self, tags):
         """
         Add unique building from the building tag of a point
         Only adds building if not in DB, adds dummy "Carleton Campus" building if no building tag
         :param tags: a dictionary of tags for a point
-        :return: The building name (str) added to the database
+        :return: The building id (str) added to the database
         """
         building = "Carleton Campus"  # dummy building
         if "building" in tags:
             building = tags["building"]  # TODO: might change key
 
-        self.db_connection.add_unique_building(building)
-        return building
+        building_id = self.db_connection.add_unique_building(building)
+        return building_id, building
 
-    def _add_room(self, tags, building_name):
+    def _add_room(self, tags, building_name, building_id):
         """
         Add unique room -- only adds if room not already in DB
         :param tags: a dictionary of tags for a point
         :param building_name: Building name of point (string)
-        :return: Room name (str)
+        :return: Room id (str)
         """
         room = "{}_Dummy_Room".format(building_name)
         if "room" in tags:
             room = tags["room"]  # TODO: might change key
 
-        self.db_connection.add_unique_room(room, building_name)
-        return room
+        room_id = self.db_connection.add_unique_room(room, building_id)
+        return room_id
 
     def _make_point_description(self, tags):
         """
@@ -109,48 +110,32 @@ class SiemensReader:
             print("This point does not have a type")
             return None
 
-    # def _get_point_type(self, point_name):
-    #     # TODO: maybe let database_connection read json for info, but make sure only open file once
-    #     """
-    #     Returns the point type for the given name
-    #     If from the hardcoded types, name will be reasonable
-    #     If new type, name will be a concatenation of return_type and units/enumeration_settings
-    #     :param point_name: String point name
-    #     :return: Point type (str)
-    #     """
-    #     hardcoded_types = {}
-    #     known_types = self.db_connection.get_all_point_types()
-    #     if point_name in hardcoded_types:
-    #         return known_types[hardcoded_types[point_name]]
-    #
-    #     point_dict = self.json_dict[point_name]
-    #
-    #     if "Analog Representation" in point_dict:
-    #         return_type = point_dict["Analog Representation"].lower()
-    #         units = point_dict["Engineering Units"]
-    #         factor = point_dict["# of decimal places"]
-    #         type_name = return_type + units + factor
-    #         new_type = PointType(type_name, return_type)
-    #         new_type.units = units
-    #         new_type.factor = int(factor)
-    #     else:
-    #         return_type = "enumerated"
-    #         enumeration_settings = point_dict["Text Table"][1]
-    #         type_name = return_type + ",".join(enumeration_settings)
-    #         new_type = PointType(type_name, return_type)
-    #         new_type.enumeration_settings = enumeration_settings
-    #
-    #     self.db_connection.add_point_type(new_type)
-    #     known_types[new_type.name] = new_type
-    #     return new_type
+    def _add_point_type(self, tags):
+        """
+        Gets point type information from tags and adds to databse
+        :param tags: a dictionary of tags for a point
+        :return: point type id (str)
+        """
+        point_type_name = self._get_point_type(tags)
+        # TODO: differentiate between enum and float
+        if self.tag_dict[point_type_name]["return type"] == "enum":
+            point_type = PointType(point_type_name, "enumerated")
+            point_type.enumeration_values = self.tag_dict[point_type_name]["units"].split(",")
+        else:
+            point_type = PointType(point_type_name, "float") # TODO: get return type
+            point_type.units = self.tag_dict[point_type_name]["units"]
+            point_type.units = self.tag_dict[point_type_name]["factor"]
 
-    def _add_point_values(self):
+        point_type_id = self.db_connection.add_unique_point_type(point_type)
+        return point_type_id
+
+    def _add_point_values(self, points_with_ids):
         """
         Loops over all points and all values for points, adds to db
         :return: None
         """
         point_index = 0
-        for point in self.points:
+        for point in points_with_ids:
             print("starting point {}, number {}".format(point.name, point_index))
             try:
                 for i in range(len(self.siemens_data[point.name])):
@@ -158,7 +143,7 @@ class SiemensReader:
                     time = self.siemens_data.Time[i]
                     raw_data = self.siemens_data[point.name][i]
                     formatted_value = self._format_value(point, raw_data)
-                    self.db_connection.add_unique_point_value(timestamp=date+" "+time, point=point,
+                    self.db_connection.add_unique_point_value(timestamp=date+" "+time, point_id = point.id,
                                                               value=formatted_value)
                 point_index += 1
                 print("finished point {}".format(point.name))
@@ -188,10 +173,20 @@ class SiemensReader:
 
         return formatted_value
 
+
 def test_insert():
-    db_connection = DatabaseConnection()
-    building_index = db_connection.add_building("TEST BUILDING")
-    print("Inserted building: " + str(building_index))
+    tags = {"building":"TEST BUILDING", "room": "TEST ROOM", "measurement": "TEST TYPE"}
+    sr = SiemensReader("LDC.AUDIT.TRENDRPT1_171016.csv")
+    building_id, building_name = sr._add_building(tags)
+    room_id = sr._add_room(tags, building_name, building_id)
+    point_type_id = sr._add_point_type(tags)
+    description = sr._make_point_description(tags)
+
+    point = Point("TEST POINT", room_id, building_id, Sources.SIEMENS, point_type_id, description)
+
+    point_id = sr.db_connection.add_unique_point(point)
+    print("Inserted point: " + str(point_id))
+
 
 
 def main(building, csv_file):

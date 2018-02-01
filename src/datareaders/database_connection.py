@@ -92,7 +92,7 @@ class DatabaseConnection:
                                            "%s, %s) RETURNING id;", (point_type.name,
                                                                      point_type.get_units_placeholder(),
                                                                      point_type.return_type,
-                                                                     self.format_sql_none(point_type.factor)))
+                                                                     point_type.factor))
 
     def add_point(self, point):
         """

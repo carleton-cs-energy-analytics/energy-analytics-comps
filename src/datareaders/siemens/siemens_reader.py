@@ -16,7 +16,7 @@ class SiemensReader:
         self.file_path = file_path
         self.source = Sources.SIEMENS
         self.db_connection = DatabaseConnection()
-        self.siemens_data = pd.read_csv(file_path, dtype=object)
+        #self.siemens_data = pd.read_csv(file_path, dtype=object)
         tag_json = open(get_data_resource("csv_descriptions/PointDecoder.json"))
         self.tag_dict = json_load(tag_json)
 
@@ -176,7 +176,7 @@ class SiemensReader:
 
 def test_insert():
     tags = {"building":"TEST BUILDING", "room": "TEST ROOM", "measurement": "TEST TYPE"}
-    sr = SiemensReader("LDC.AUDIT.TRENDRPT1_171016.csv")
+    sr = SiemensReader("")
     building_id, building_name = sr._add_building(tags)
     room_id = sr._add_room(tags, building_name, building_id)
     point_type_id = sr._add_point_type(tags)

@@ -33,10 +33,11 @@ class SiemensReader:
                 tags = {}  # TODO: get tags
                 building_id, building_name = self._add_building(tags)
                 room_id = self._add_room(tags, building_name, building_id)
-                point_type_id = self._add_point_type(tags)
+                point_type_id, point_type = self._add_point_type(tags)
                 description = self._make_point_description(tags)
 
                 point = Point(point_name, room_id, building_id, self.source, point_type_id, description)
+                point.point_type = point_type
 
                 point_id = self.db_connection.add_unique_point(point)
                 point.id = point_id
@@ -128,7 +129,7 @@ class SiemensReader:
             point_type.units = self.tag_dict[point_type_name]["factor"]
 
         point_type_id = self.db_connection.add_unique_point_type(point_type)
-        return point_type_id
+        return point_type_id, point_type
 
     def _add_point_values(self, points_with_ids):
         """
@@ -180,10 +181,11 @@ def test_insert():
     sr = SiemensReader("")
     building_id, building_name = sr._add_building(tags)
     room_id = sr._add_room(tags, building_name, building_id)
-    point_type_id = sr._add_point_type(tags)
+    point_type_id, point_type = sr._add_point_type(tags)
     description = sr._make_point_description(tags)
 
     point = Point("TEST POINT", room_id, building_id, Sources.SIEMENS, point_type_id, description)
+    point.point_type = point_type
 
     point_id = sr.db_connection.add_unique_point(point)
     print("Inserted point: " + str(point_id))

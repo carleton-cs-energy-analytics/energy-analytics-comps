@@ -92,7 +92,8 @@ class SiemensReader:
         """
         description = ""
         for key, value in tags.items():
-            description += self.tag_dict[value]["descriptor"]  # TODO: get the description for the tag in the json
+            description += self.tag_dict[value]["descriptor"] + ", "
+        description = description[:len(description)-2]f
         return description
 
     def _get_point_type(self, tags):

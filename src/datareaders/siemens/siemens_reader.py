@@ -165,7 +165,7 @@ class SiemensReader:
         if (isinstance(raw_value, str) and raw_value.lower() in problem_values) or pd.isnull(raw_value):
             formatted_value = None
         elif point.point_type.return_type == "enumerated":
-            formatted_value = point.point_type.enumeration_settings.index(raw_value)
+            formatted_value = point.point_type.enumeration_values.index(raw_value)
             # TODO if it doesn't have that value???, what if value is 'closed' and we expected 'on'/'off'
         elif point.point_type.return_type == "float":
             formatted_value = float(raw_value) * 10 ** point.point_type.factor
@@ -193,9 +193,9 @@ def test_insert():
     sr.db_connection.add_unique_point_value(timestamp="2016-08-18 00:45:00", point_id=point_id,
                                             value=None)
     sr.db_connection.add_unique_point_value(timestamp="2016-08-18 00:30:00", point_id=point_id,
-                                            value=point.point_type.enumeration_settings.index("ON"))
+                                            value=point.point_type.enumeration_values.index("ON"))
     sr.db_connection.add_unique_point_value(timestamp="2016-08-18 00:15:00", point_id=point_id,
-                                            value=point.point_type.enumeration_settings.index("OFF"))
+                                            value=point.point_type.enumeration_values.index("OFF"))
 
 
 def main(building, csv_file):

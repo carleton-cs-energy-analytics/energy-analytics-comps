@@ -257,7 +257,7 @@ class DatabaseConnection:
             return_type = next_entry[2]
             this_type = PointType(next_entry[0], return_type)
             if return_type == "enumerated":
-                this_type.enumeration_settings = next_entry[1].split(",")
+                this_type.enumeration_values = next_entry[1].split(",")
             else:
                 this_type.units = next_entry[1]
             known_types[next_entry[0]] = this_type

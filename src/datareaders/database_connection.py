@@ -102,7 +102,7 @@ class DatabaseConnection:
         """
         return self.execute_commit_and_return("INSERT INTO Points(Name, RoomID, PointTypeID, PointSourceID, "
                                               "Description) VALUES (%s,%s, %s, %s, %s) RETURNING id;",
-                                              (point.name, point.room, point.point_type, point.source,
+                                              (point.name, point.room_id, point.point_type_id, point.source,
                                                point.description))
 
     def add_point_value(self, timestamp, point_id, value):

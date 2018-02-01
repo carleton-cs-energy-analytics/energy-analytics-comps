@@ -188,9 +188,9 @@ class SiemensReader:
 
         return formatted_value
 
-def test_insert(self):
+def test_insert():
     db_connection = DatabaseConnection()
-    building_index = db_connection.add_unique_building("TEST BUILDING")
+    building_index = db_connection.add_building("TEST BUILDING")
     print("Inserted building: " + str(building_index))
 
 

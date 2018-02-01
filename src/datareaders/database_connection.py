@@ -71,7 +71,8 @@ class DatabaseConnection:
         :return: None
         """
         #self.execute_and_commit("INSERT INTO Buildings(Name) VALUES (%s);", (building_name,))
-        return self.execute_commit_return_id("INSERT INTO Buildings(Name) VALUES (%s);", (building_name,))
+        row_id = self.execute_commit_return_id("INSERT INTO Buildings(Name) VALUES (%s) RETURNING id;", (building_name,))
+        return row_id
 
     def add_room(self, room_name, building_name):
         """

@@ -188,11 +188,11 @@ def test_insert():
     point_id = sr.db_connection.add_unique_point(point)
     print("Inserted point: " + str(point_id))
 
-    sr.db_connection.add_unique_point_value(timestamp="2016-08-18 00:45:00", point_id=point.id,
+    sr.db_connection.add_unique_point_value(timestamp="2016-08-18 00:45:00", point_id=point_id,
                                             value=None)
-    sr.db_connection.add_unique_point_value(timestamp="2016-08-18 00:30:00", point_id=point.id,
+    sr.db_connection.add_unique_point_value(timestamp="2016-08-18 00:30:00", point_id=point_id,
                                             value=point.point_type.enumeration_settings.index("ON"))
-    sr.db_connection.add_unique_point_value(timestamp="2016-08-18 00:15:00", point_id=point.id,
+    sr.db_connection.add_unique_point_value(timestamp="2016-08-18 00:15:00", point_id=point_id,
                                             value=point.point_type.enumeration_settings.index("OFF"))
 
 

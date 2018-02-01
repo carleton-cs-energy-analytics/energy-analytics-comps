@@ -16,7 +16,7 @@ class SiemensReader:
         self.file_path = file_path
         self.source = Sources.SIEMENS
         self.db_connection = DatabaseConnection()
-        #self.siemens_data = pd.read_csv(file_path, dtype=object)
+        self.siemens_data = pd.read_csv(file_path, dtype=object)
         tag_json = open(get_data_resource("csv_descriptions/PointDecoder.json"))
         self.tag_dict = json_load(tag_json)
 
@@ -177,6 +177,8 @@ class SiemensReader:
 
 
 def test_insert():
+    # TODO: delete this, just for note purposes
+    # this works if the self.siemens_data = ... line above is commented out (don't need to csv)
     tags = {"building":"TEST BUILDING", "room": "TEST ROOM", "measurement": "TEST TYPE"}
     sr = SiemensReader("")
     building_id, building_name = sr._add_building(tags)

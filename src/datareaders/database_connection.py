@@ -51,13 +51,27 @@ class DatabaseConnection:
         self.db.execute(*args)
         self.conn.commit()
 
+    def execute_commit_return_id(self, *args):
+        """
+        Takes in any number of execute arguments
+        Ensures that our execute and commit statements are always paired
+        :param args: SQL String, if any "(%s)" in string -- needs (fill_string,)
+               Args match db.execute(args)
+        :return: ID of the row just inserted (or first col if no ID)
+        """
+        self.db.execute(*args)
+        row_id = self.db.fetchone()[0]
+        self.conn.commit()
+        return row_id
+
     def add_building(self, building_name):
         """
         Adds a given building to the buildings table of the database
         :param building_name: Building name (str)
         :return: None
         """
-        self.execute_and_commit("INSERT INTO Buildings(Name) VALUES (%s);", (building_name,))
+        #self.execute_and_commit("INSERT INTO Buildings(Name) VALUES (%s);", (building_name,))
+        return self.execute_commit_return_id("INSERT INTO Buildings(Name) VALUES (%s);", (building_name,))
 
     def add_room(self, room_name, building_name):
         """

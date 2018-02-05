@@ -5,19 +5,19 @@ from src.datareaders.resources import get_data_resource
 from src.datareaders.table_enumerations import Sources
 from src.datareaders.database_connection import DatabaseConnection
 from src.datareaders.data_object_holders import Point, PointType
-from src.datareaders.siemens.siemens_parser import transform_file
+from src.datareaders.siemens.siemens_parser import transform_file, transform_string
 from json import load as json_load
-from sys import argv
+import sys
 import pandas as pd
 
 
 class SiemensReader:
-    def __init__(self, file_path, building, source):
-        self.file_path = file_path
+    def __init__(self, input_stream, building, source):
         self.building_name = building
         self.source = source
         self.db_connection = DatabaseConnection()
-        self.siemens_data = pd.read_csv(file_path, dtype=object)
+        self.siemens_data = pd.read_csv(input_stream, dtype=object)
+        print(self.siemens_data)
         json_file = open(get_data_resource("csv_descriptions/testPointJson_{}.json".format(building)), "r")
         self.json_dict = json_load(json_file)
         self.points = []
@@ -128,6 +128,7 @@ class SiemensReader:
         for point in self.points:
             print("starting point {}, number {}".format(point.name, point_index))
             try:
+                print(self.siemens_data[point.name])
                 for i in range(len(self.siemens_data[point.name])):
                     date = self.siemens_data.Date[i]
                     time = self.siemens_data.Time[i]
@@ -169,17 +170,26 @@ def main(building, csv_file):
     Read in individual file and add all subpoints to DB
     :return:
     """
-    transform_file(get_data_resource("csv_files/"+csv_file))
+    transformed_file = transform_file(get_data_resource("csv_files/"+csv_file))
 
-    sr = SiemensReader(get_data_resource("better_csv_files/"+csv_file), building, Sources.SIEMENS)
+    sr = SiemensReader(transformed_file, building, Sources.SIEMENS)
+    sr.add_to_db()
+    sr.db_connection.close_connection()
+
+def stream_main(building, input_string):
+    transformed_file = transform_string(input_string)
+    sr = SiemensReader(transformed_file, building, Sources.SIEMENS)
     sr.add_to_db()
     sr.db_connection.close_connection()
 
 
 if __name__ == '__main__':
-    if len(argv) > 2:
-        given_building = argv[1]  # building should be as spelled in the data description file name
-        given_csv_file = argv[2]
+    if len(sys.argv) > 2:
+        given_building = sys.argv[1]  # building should be as spelled in the data description file name
+        given_csv_file = sys.argv[2]
         main(given_building, given_csv_file)
+    elif len(sys.argv) > 1 and not sys.stdin.isatty():
+        given_building = sys.argv[1]
+        stream_main(given_building, sys.stdin.read())
     else:
         print("Requires a building name and a csv file parameter")

@@ -53,8 +53,12 @@ $app->get('/values/:timestamp', function ($timestamp) {
     $result = getValuesAtTime($timestamp);
     echo json_encode($result);
 });
-$app->get('/values/building/:id/:start/:end/:type', function ($id, $start, $end, $type) {
-    $result = getValuesByBuildingInRangeByType($id, $type, $start, $end);
+$app->get('/values/building/:id/:start/:end/type/:type', function ($id, $start, $end, $type) {
+    $result = getValuesByBuildingInRangeByType($id, $start, $end, $type);
+    echo json_encode($result);
+});
+$app->get('/values/building/:id/:start/:end/source/:source', function ($id, $start, $end, $source) {
+    $result = getValuesByBuildingInRangeBySource($id, $start, $end, $source);
     echo json_encode($result);
 });
 
@@ -94,6 +98,10 @@ function getValuesAtTime($timestamp){
 function getValuesByBuildingInRangeByType($buildingID, $start, $end, $equipmentType){
     return transformData(Model::getValuesByBuildingInRangeByType($buildingID, $start, $end, $equipmentType));
 }
+function getValuesByBuildingInRangeBySource($buildingID, $start, $end, $source){
+    return transformData(Model::getValuesByBuildingInRangeBySource($buildingID, $start, $end, $equipmentType));
+}
+
 
 function transformData($data){
     $result = [];

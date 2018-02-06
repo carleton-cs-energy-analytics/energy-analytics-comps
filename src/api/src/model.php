@@ -52,7 +52,7 @@ class Model{
             LEFT JOIN Points ON PointValues.PointID=Points.ID 
             LEFT JOIN PointTypes ON PointTypes.ID=Points.PointTypeID 
             WHERE PointValues.PointID=? 
-            AND PointValues.PointTimestamp>? and PointValues.PointTimestamp < ?");
+            AND PointValues.PointTimestamp>=? and PointValues.PointTimestamp < ?");
         $sth->execute([$pointID, $start, $end]);
         return $sth->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -72,7 +72,7 @@ class Model{
             LEFT JOIN Points ON PointValues.PointID=Points.ID 
             LEFT JOIN Rooms ON Rooms.ID = Points.RoomID 
             LEFT JOIN PointTypes ON PointTypes.ID=Points.PointTypeID 
-            WHERE Rooms.BuildingID=? AND PointTimestamp>? and PointTimestamp < ?");
+            WHERE Rooms.BuildingID=? AND PointTimestamp>=? and PointTimestamp < ?");
         $sth->execute([$buildingID, $start, $end]);
         return $sth->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -103,7 +103,7 @@ class Model{
             LEFT JOIN Rooms ON Rooms.ID = Points.RoomID 
             LEFT JOIN PointTypes ON PointTypes.ID=Points.PointTypeID 
             WHERE PointTypes.ID = ? AND Rooms.BuildingID=? 
-            AND PointTimestamp>? and PointTimestamp < ?");
+            AND PointTimestamp>=? and PointTimestamp < ?");
         $sth->execute([$equipmentType, $buildingID, $start, $end]);
         return $sth->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -114,7 +114,7 @@ class Model{
             LEFT JOIN Rooms ON Rooms.ID = Points.RoomID 
             LEFT JOIN PointTypes ON PointTypes.ID=Points.PointTypeID 
             WHERE Points.PointSourceID = ? AND Rooms.BuildingID=? 
-            AND PointTimestamp>? and PointTimestamp < ?");
+            AND PointTimestamp>=? and PointTimestamp < ?");
         $sth->execute([$source, $buildingID, $start, $end]);
         return $sth->fetchAll(PDO::FETCH_ASSOC);
     }

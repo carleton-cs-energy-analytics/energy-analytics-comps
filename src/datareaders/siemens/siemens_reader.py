@@ -17,7 +17,6 @@ class SiemensReader:
         self.source = source
         self.db_connection = DatabaseConnection()
         self.siemens_data = pd.read_csv(input_stream, dtype=object)
-        print(self.siemens_data)
         json_file = open(get_data_resource("csv_descriptions/testPointJson_{}.json".format(building)), "r")
         self.json_dict = json_load(json_file)
         self.points = []
@@ -128,7 +127,6 @@ class SiemensReader:
         for point in self.points:
             print("starting point {}, number {}".format(point.name, point_index))
             try:
-                print(self.siemens_data[point.name])
                 for i in range(len(self.siemens_data[point.name])):
                     date = self.siemens_data.Date[i]
                     time = self.siemens_data.Time[i]

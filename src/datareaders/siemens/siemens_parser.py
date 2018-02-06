@@ -31,7 +31,6 @@ def transform_csv(input_stream):
         first_line.append(name)
 
     writer.writerow(first_line)
-    print(data_list)
     # Write the rest of the lines:
     for i in range(point_index + 5, len(data_list), 1):
         try:

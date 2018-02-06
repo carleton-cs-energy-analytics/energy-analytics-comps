@@ -60,6 +60,9 @@ $app->get('/values/building/:id/:start/:end/:type', function ($id, $start, $end,
 
 $app->post('/values/:building/:source', function($building, $source){
     $cmd = sprintf('cd ../..;pwd & nohup python3 -u -m src.datareaders.siemens.siemens_reader %s', $building);
+    if($source == 'Lucid'){
+        $cmd = sprintf('cd ../..;pwd & nohup python3 -u -m src.datareaders.lucid.lucid_reader', $building);
+    }
 
     $descriptorspec = array(
        0 => array("pipe", "r"),  // stdin is a pipe that the child will read from

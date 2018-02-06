@@ -16,8 +16,8 @@ class LucidParser:
         self.point_identities = None
         self.point_values = None
 
-    def read_csv(self, file_name):
-        self.data = pd.read_csv(file_name, dtype=object)
+    def read_csv(self, input_stream):
+        self.data = pd.read_csv(input_stream, dtype=object)
 
     def create_point_identities(self):
         """

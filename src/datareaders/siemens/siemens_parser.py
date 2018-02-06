@@ -49,10 +49,12 @@ def transform_all_files(directory_path = None):
     """
     if not directory_path:
         directory_path = get_data_resource("csv_files")
+    results = []
 
     for file in os.listdir(directory_path):
         if file.endswith(".csv"):
-            transform_file(get_data_resource("csv_files/"+file))
+            results.append(transform_file(get_data_resource("csv_files/"+file)))
+    return results
 
 def transform_file(file_path):
     """

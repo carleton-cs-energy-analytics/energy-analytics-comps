@@ -58,10 +58,10 @@ $app->get('/values/building/:id/:start/:end/:type', function ($id, $start, $end,
     echo json_encode($result);
 });
 
-$app->post('/values/:building/:source', function($building, $source){
+$app->post('/values/:source(/:building)', function($source, $building='Hulings'){
     $cmd = sprintf('cd ../..;pwd & nohup python3 -u -m src.datareaders.siemens.siemens_reader %s', $building);
     if($source == 'Lucid'){
-        $cmd = sprintf('cd ../..;pwd & nohup python3 -u -m src.datareaders.lucid.lucid_reader', $building);
+        $cmd = sprintf('cd ../..;pwd & nohup python3 -u -m src.datareaders.lucid.lucid_reader');
     }
 
     $descriptorspec = array(

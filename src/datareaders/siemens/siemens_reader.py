@@ -212,8 +212,6 @@ def stream_main(building, input_string):
 
 
 if __name__ == '__main__':
-    import time
-    millis = int(round(time.time() * 1000))
     if len(sys.argv) > 2:
         given_building = sys.argv[1]  # building should be as spelled in the data description file name
         given_csv_file = sys.argv[2]
@@ -223,4 +221,3 @@ if __name__ == '__main__':
         stream_main(given_building, sys.stdin.read())
     else:
         print("Requires a building name and a csv file parameter")
-    print(int(round(time.time() * 1000))-millis)

@@ -230,14 +230,12 @@ class DatabaseConnection:
         :return: point id
         """
 
-        return self.execute_commit_and_return("BEGIN"
-                                              "IF NOT EXISTS (SELECT * FROM Points "
-                                              "WHERE Name = %s)"
-                                              "BEGIN INSERT INTO Points(Name, RoomID, PointTypeID, "
+        return self.execute_commit_and_return("INSERT INTO Points(Name, RoomID, PointTypeID, "
                                               "PointSourceID, Description) "
-                                              "VALUES (%s,%s, %s, %s, %s) RETURNING id END END;",
-                                              (point.name, point.name, point.room_id, point.point_type_id, point.source,
-                                               point.description))
+                                              "VALUES (%s,%s, %s, %s, %s) RETURNING id "
+                                              "WHERE NOT EXISTS (SELECT * FROM Points WHERE Name = %s);",
+                                              (point.name, point.room_id, point.point_type_id, point.source,
+                                               point.description, point.name))
 
     def add_unique_point_value(self, timestamp, point_id, value):
         """

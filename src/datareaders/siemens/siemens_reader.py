@@ -9,6 +9,7 @@ from src.datareaders.siemens.siemens_parser import transform_file
 from json import load as json_load
 from sys import argv
 import pandas as pd
+import time
 
 
 class SiemensReader:
@@ -186,19 +187,17 @@ def test_insert():
     point_type_id, point_type = sr._add_point_type(tags)
     description = sr._make_point_description(tags)
 
-    point = Point("TEST POINT", room_id, building_id, Sources.SIEMENS, point_type_id, description)
-    point.point_type = point_type
+    start = time.time()
 
-    point_id = sr.db_connection.add_unique_point(point)
-    print("Inserted point: " + str(point_id))
+    for i in range(100):
+        point = Point("TEST POINT" + str(i), room_id, building_id, Sources.SIEMENS, point_type_id, description)
+        point.point_type = point_type
 
-    sr.db_connection.add_unique_point_value(timestamp="2016-08-18 00:45:00", point_id=point_id,
-                                            value=None)
-    sr.db_connection.add_unique_point_value(timestamp="2016-08-18 00:30:00", point_id=point_id,
-                                            value=point.point_type.enumeration_values.index("ON"))
-    sr.db_connection.add_unique_point_value(timestamp="2016-08-18 00:15:00", point_id=point_id,
-                                            value=point.point_type.enumeration_values.index("OFF"))
+        point_id = sr.db_connection.add_unique_point(point)
 
+    end = time.time()
+    length = end - start
+    print("Inserts took " + str(length))
 
 def main(building, csv_file):
     """

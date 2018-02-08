@@ -239,7 +239,7 @@ class DatabaseConnection:
         sql_statement = "with s as (select id from Points where Name = '"
         sql_statement += point.name # identifying columns of points
         sql_statement += "'), i as (INSERT INTO Points(Name, RoomID, PointTypeID, PointSourceID, Description)"
-        sql_statement += "SELECT (%s, %s, %s, %s, %s) WHERE NOT EXISTS (SELECT * FROM Points WHERE Name = '"
+        sql_statement += "SELECT %s, %s, %s, %s, %s WHERE NOT EXISTS (SELECT * FROM Points WHERE Name = '"
         sql_statement += point.name # identifying columns of points
         sql_statement += "') RETURNING id) select id from i union all select id from s;"
 

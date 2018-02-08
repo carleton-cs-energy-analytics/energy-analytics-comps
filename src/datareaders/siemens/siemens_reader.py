@@ -16,7 +16,7 @@ class SiemensReader:
         self.file_path = file_path
         self.source = Sources.SIEMENS
         self.db_connection = DatabaseConnection()
-        self.siemens_data = pd.read_csv(file_path, dtype=object)
+        #self.siemens_data = pd.read_csv(file_path, dtype=object)
         tag_json = open(get_data_resource("csv_descriptions/PointDecoder.json"))
         self.tag_dict = json_load(tag_json)
 

@@ -197,6 +197,7 @@ class DatabaseConnection:
         building_id = self.get_building_id(building_name)
         if building_id is None:
             building_id = self.add_building(building_name)
+
         return building_id
 
     def add_unique_room(self, room_name, building_id):
@@ -215,7 +216,7 @@ class DatabaseConnection:
         """
         Add unique point type only adds point type to DB if doesn't already exist
         :param point_type: PointType class
-        :return: None
+        :return: point type id
         """
         point_type_id = self.get_point_type_id(point_type)
         if point_type_id is None:
@@ -226,12 +227,17 @@ class DatabaseConnection:
         """
         Add unique point only adds point to DB if doesn't already exist
         :param point: Point class
-        :return: None
+        :return: point id
         """
-        point_id = self.get_point_id(point)
-        if point_id is None:
-            point_id = self.add_point(point)
-        return point_id
+
+        return self.execute_commit_and_return("BEGIN"
+                                              "IF NOT EXISTS (SELECT * FROM Points "
+                                              "WHERE Name = %s)"
+                                              "BEGIN INSERT INTO Points(Name, RoomID, PointTypeID, "
+                                              "PointSourceID, Description) "
+                                              "VALUES (%s,%s, %s, %s, %s) RETURNING id END END;",
+                                              (point.name, point.name, point.room_id, point.point_type_id, point.source,
+                                               point.description))
 
     def add_unique_point_value(self, timestamp, point_id, value):
         """

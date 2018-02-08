@@ -230,20 +230,21 @@ class DatabaseConnection:
         :return: point id
         """
 
-        '''return self.execute_commit_and_return("with s as (select id from Points where Name = %s),"
-                                                      " i as (INSERT INTO Points(Name, RoomID, PointTypeID, PointSourceID, "
-                                                      "Description) SELECT (%s, %s, %s, %s, %s) WHERE NOT EXISTS ("
-                                                      "SELECT * FROM Points WHERE Name = %s) RETURNING id) select "
-                                                      "id from i union all select id from s;",
-                                                      (point.name, # identifying columns of points
-                                                       point.name, point.room_id, point.point_type_id, point.source,
-                                                       point.description, # columns to insert
-                                                       point.name)) # identifying columns of points'''
+        '''point_id = self.get_point_id(point)
+                if point_id is None:
+                    point_id = self.add_point(point)
+                return point_id'''
 
-        point_id = self.get_point_id(point)
-        if point_id is None:
-            point_id = self.add_point(point)
-        return point_id
+        # TODO: input cleaning / security
+        sql_statement = "with s as (select id from Points where Name = '"
+        sql_statement += point.name # identifying columns of points
+        sql_statement += "'), i as (INSERT INTO Points(Name, RoomID, PointTypeID, PointSourceID, Description)"
+        sql_statement += "SELECT (%s, %s, %s, %s, %s) WHERE NOT EXISTS (SELECT * FROM Points WHERE Name = '"
+        sql_statement += point.name # identifying columns of points
+        sql_statement += "') RETURNING id) select id from i union all select id from s;"
+
+        return self.execute_commit_and_return(sql_statement,(point.name, point.room_id, point.point_type_id,
+                                                             point.source, point.description))
 
     def add_unique_point_value(self, timestamp, point_id, value):
         """

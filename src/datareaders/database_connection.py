@@ -4,6 +4,8 @@ This is the only file that has a connection to the database
 import psycopg2
 from src.datareaders.data_object_holders import PointType
 from src.datareaders.data_connection_params import params
+from io import StringIO
+import pandas as pd
 
 # For making sure all values can be stored in our current database configuration
 MAXINT = 9223372036854775807
@@ -50,46 +52,63 @@ class DatabaseConnection:
         """
         self.db.execute(*args)
         self.conn.commit()
+    def execute_commit_and_return(self, *args):
+        """
+        Takes in any number of execute arguments
+        Ensures that our execute and commit statements are always paired
+        :param args: SQL String, if any "(%s)" in string -- needs (fill_string,)
+               Args match db.execute(args)
+        :return: First value returned by execute statement, usually the id of inserted row
+        """
+        self.db.execute(*args)
+        row_id = self.db.fetchone()[0]
+        self.conn.commit()
+        return row_id
+
 
     def add_building(self, building_name):
         """
         Adds a given building to the buildings table of the database
         :param building_name: Building name (str)
-        :return: None
+        :return: building id
         """
-        self.execute_and_commit("INSERT INTO Buildings(Name) VALUES (%s);", (building_name,))
+        return self.execute_commit_and_return("INSERT INTO Buildings(Name) VALUES (%s) RETURNING id;", (building_name,))
 
     def add_room(self, room_name, building_name):
         """
         Adds a room to Rooms table with building name as foreign key
         :param room_name: str room name
-        :param building_name: str building name
-        :return: None
+        :param building_id: str building id
+        :return: room id
         """
         building_id = self.get_building_id(building_name)
-        self.execute_and_commit("INSERT INTO Rooms(Name, BuildingID) VALUES (%s, %s);", (self.format_sql_none(
-            room_name), building_id))
+        return self.execute_commit_and_return("INSERT INTO Rooms(Name, BuildingID) VALUES (%s, %s) RETURNING id;",
+                                              (self.format_sql_none(room_name), building_id))
 
     def add_point_type(self, point_type):
         """
         Adds a point type to the point type table
         :param point_type: PointType class, has values name, units, return type, and factor
-        :return: None
+        :return: point type id
         """
-        self.execute_and_commit("INSERT INTO PointTypes(Name, Units, ReturnType, Factor) VALUES (%s, %s, %s, %s);",
-                                (point_type.name, point_type.get_units_placeholder(), point_type.return_type,
-                                    self.format_sql_none(point_type.factor)))
+        return self.execute_commit_and_return("INSERT INTO PointTypes(Name, Units, ReturnType, Factor) VALUES (%s, %s, "
+                                              "%s, %s) RETURNING id;", (point_type.name,
+                                                                        point_type.get_units_placeholder(),
+                                                                        point_type.return_type,
+                                                                        point_type.factor))
 
     def add_point(self, point):
         """
         Adds point to Points table
         :param point: Point class has name, room_id, type_id, source, and description
-        :return: None
+        :return: point id
         """
         room_id = self.get_room_id(point.room, point.building)
         type_id = self.get_point_type_id(point.point_type)
-        self.execute_and_commit("INSERT INTO Points(Name, RoomID, PointTypeID, PointSourceID, Description) VALUES (%s, "
-                                "%s, %s, %s, %s);", (point.name, room_id, type_id, point.source, point.description))
+        return self.execute_commit_and_return("INSERT INTO Points(Name, RoomID, PointTypeID, PointSourceID, "
+                                              "Description) VALUES (%s,%s, %s, %s, %s) RETURNING id;",
+                                              (point.name, room_id, type_id, point.source,
+                                               point.description))
 
     def add_point_value(self, timestamp, point, value):
         """
@@ -182,20 +201,24 @@ class DatabaseConnection:
         """
         Add unique building only adds building to DB if doesn't exist already
         :param building_name: Building name, str
-        :return: None
+        :return: building id
         """
-        if self.get_building_id(building_name) is None:
-            self.add_building(building_name)
+        building_id = self.get_building_id(building_name)
+        if building_id is None:
+            building_id = self.add_building(building_name)
+        return building_id
 
-    def add_unique_room(self, room_name, building_name):
+    def add_unique_room(self, room_name, building_id):
         """
         Add unique room only adds room to DB if doesn't already exist
         :param room_name: Room name, str
-        :param building_name: Building name, str
-        :return: None
+        :param building_id: Building id, int
+        :return: room id
         """
-        if self.get_room_id(room_name, building_name) is None:
-            self.add_room(room_name, building_name)
+        room_id = self.get_room_id(room_name, building_id)
+        if room_id is None:
+            room_id = self.add_room(room_name, building_id)
+        return room_id
 
     def add_unique_point_type(self, point_type):
         """
@@ -203,8 +226,10 @@ class DatabaseConnection:
         :param point_type: PointType class
         :return: None
         """
-        if self.get_point_type_id(point_type) is None:
-            self.add_point_type(point_type)
+        point_type_id = self.get_point_type_id(point_type)
+        if point_type_id is None:
+            point_type_id = self.add_point_type(point_type)
+        return point_type_id
 
     def add_unique_point(self, point):
         """
@@ -212,8 +237,10 @@ class DatabaseConnection:
         :param point: Point class
         :return: None
         """
-        if self.get_point_id(point) is None:
-            self.add_point(point)
+        point_id = self.get_point_id(point)
+        if point_id is None:
+            point_id = self.add_point(point)
+        return point_id
 
     def add_unique_point_value(self, timestamp, point, value):
         """
@@ -256,3 +283,20 @@ class DatabaseConnection:
             return "NULL"
         else:
             return value
+
+    def bulk_add_point_values(self, df):
+        data = StringIO()
+        df.to_csv(data,header=False, index=False)
+        data.seek(0)
+        curs = self.db
+        table = pd.io.sql.get_schema(df, 'PointValues', con = self.conn)
+        self.db.copy_from(data, 'PointValues', columns=('pointvalue', 'pointtimestamp', 'pointid'), sep = ',', null='None')
+        self.conn.commit()
+        dedupe_cmd = """DELETE  from PointValues T1
+                          USING       PointValues T2
+                        WHERE  T1.ctid    < T2.ctid   
+                          AND  T1.pointid    = T2.pointid      
+                          AND  T1.pointtimestamp = T2.pointtimestamp;"""
+        print("Deduping")
+        self.db.execute(dedupe_cmd)
+        self.conn.commit()

@@ -30,6 +30,7 @@ class Point:
         self.description = description
 
 
+
 class PointValue:
     def __init__(self, timestamp, point, value):
         self.timestamp = timestamp

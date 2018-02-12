@@ -5,7 +5,6 @@ from src.datareaders.resources import get_data_resource
 # Call with: python3 nameParser <dictionary_file> <name of point>
 # Where <dictionary_file> will almost always be ????? (Ask Carolyn)
 
-
 def main():
     nameLookUpDictionary = {}
     with open(get_data_resource("csv_descriptions/"+sys.argv[1]), 'r') as jsonFile:
@@ -44,7 +43,6 @@ def stringHumanReadable(tags, dictionary):
 ## Build in exceptions for:
 #   > Building names with room number accocieted
 #   > Electric/Water meter data (today v. month v. yest) 
-#   > CH: [E]AST, MH: [W]EST
 #   > SPTA -> Actual
 #        FCU -> Fan cooling unit
 
@@ -78,6 +76,16 @@ def decodeName(name, dictionary):
              else:
                  tag = ""
                  for tagPossible in revDict[substring]:
+#                     if ("parent" in dictionary[tagPossible]):
+#                         validTag = False
+#                         for currTag in tagList:
+#                             if (currTag[0] == dictionary[tag]["parent"]):
+#                                 validTag = True
+#                         if (validTag):
+#                             tag = tagPossible
+#                         else:
+#                             return None
+#                     else:
                      tag = tagPossible
                  addedTag = False
                  if (dictionary[tag]["indexed"] == "True"):
@@ -92,13 +100,8 @@ def decodeName(name, dictionary):
                              testIndex += 1
                              tagList.append([tag])
                              tagList.append(["VAV", getTokenString(nameSubstrings[testIndex])])
+                             tagList.append(["ROOM", getTokenString(nameSubstrings[testIndex])])
                              addedTag = True
-#                         if (isNumberToken(nameSubstrings[testIndex + 1]) and not name.startswith('BIG')):
-#                             testIndex += 1
-#                             tagList.append([tag])
-#                             tagList.append(["ROOM", getTokenString(nameSubstrings[testIndex])])
-#                             addedTag = True
-#                             print ("----> hello", name)
                  if ("toss" in dictionary[tag]):
                      for toToss in dictionary[tag]["toss"]:
                          toToss = 't' + toToss

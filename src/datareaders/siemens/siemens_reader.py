@@ -160,6 +160,8 @@ class SiemensReader:
         # drop all of the old cols
         df.drop(['Date', 'Time', 'pointname'], axis=1, inplace=True)
         # Now format it to go into the sql
+        df = df[['pointvalue', 'pointtimestamp', 'pointid']]
+        
         print("COPY FROM FORMATTING FINISHED")
         self.db_connection.bulk_add_point_values(df)
 

@@ -74,7 +74,7 @@ class DatabaseConnection:
         """
         return self.execute_commit_and_return("INSERT INTO Buildings(Name) VALUES (%s) RETURNING id;", (building_name,))
 
-    def add_room(self, room_name, building_id):
+    def add_room(self, room_name, building_name):
         """
         Adds a room to Rooms table with building name as foreign key
         :param room_name: str room name

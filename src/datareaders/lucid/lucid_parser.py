@@ -1,6 +1,7 @@
 from datetime import datetime
 import pandas as pd
 import math
+from src.datareaders.database_connection import DatabaseConnection
 from src.datareaders.resources import get_data_resource
 from src.datareaders.table_enumerations import Sources
 from src.datareaders.data_object_holders import Point, PointType, PointValue
@@ -13,25 +14,30 @@ class LucidParser:
 
     def __init__(self):
         self.data = None  # Pandas DataFrame for storing CSV
-        self.point_identities = None
+        self.point_identities = {}
         self.point_values = None
+        self.db_connection = DatabaseConnection()
 
     def read_csv(self, input_stream):
-        self.data = pd.read_csv(input_stream, dtype=object)
+        self.data = pd.read_csv(input_stream, skiprows=4, dtype=object)
 
-    def create_point_identities(self):
+    def add_points(self):
         """
         Function to create the point names for the Points database.
         Iterates through the column headers row 4 of Lucid CSV to parse out names with units.
 
         :return: None, sets the class variable to the list of new points.
         """
-        point_identities = [] # This will be a list of each of the column headers as a Point object.
+        point_identities = {} # This will be a list of each of the column headers as a Point object.
 
-        point_names = list(self.data.iloc[3].copy())  # Get row that includes all point name data.
+        point_names = list(self.data.columns)  # Get row that includes all point name data.
         for i in range(1, len(point_names)):
-            # Get the name, the building name (sometimes the same thing) and the units information
-            name, building_name, description = point_names[i].split(" - ")
+            try:
+                # Get the name, the building name (sometimes the same thing) and the units information
+                name, building_name, description = point_names[i].split(" - ")
+            except ValueError:
+                name, description = point_names[i].split(" - ")
+                building_name = name
 
             name = building_name + " - " + description.split("(")[0]
 
@@ -47,60 +53,92 @@ class LucidParser:
             point_type = PointType(name=name, return_type="float", units=units, factor=5)
 
             # Create Point Object from this column header information.
-            new_point = Point(name=name, room_name="{}_Dummy_Room".format(building_name), building_name=building_name,
+            room_name = "{}_Dummy_Room".format(building_name)
+            new_point = Point(name=name, room_name=room_name, building_name=building_name,
                              source_enum_value=Sources.LUCID, point_type=point_type,
                              description=description)
-
-            point_identities.append(new_point)
+            self.db_connection.add_point_type(point_type)
+            self.db_connection.add_unique_building(building_name)
+            self.db_connection.add_unique_room(room_name, building_name)
+            point_id = self.db_connection.add_unique_point(new_point)
+            new_point.id = point_id
+            point_identities[point_names[i]] = new_point
 
         self.point_identities = point_identities
 
-    def create_point_values(self):
+
+    def add_point_values(self):
         """
-        Function to create the point values for the PointValues database.
-        Iterates through rows 5 - len(csv) to match timestamp with point value and name.
-
-        :return: None, sets class variable to list of new timestamp, point, value tuples.
+        Loops over all points and all values for points, adds to db
+        :return: None
         """
-        point_values = []
+        df = self.data
+        keep_cols = ['Timestamp']
+        point_names = [x for x in list(df.columns.values) if x not in keep_cols]
+        # first melt the point name headers into the table
+        # so that point name is now a row variable, not a header
+        df = pd.melt(df, id_vars=keep_cols, value_vars=point_names, var_name='pointname', value_name='pointvalue')
+        print("Melted")
+        # transform pointnames to pointids based on the mapping that we constructed earlier
+        # get rid of cases where we get a null point id- means we couldn't map a type to the point
+        df['pointid'] = df['pointname'].apply(self._map_point_names_id)
+        df = df.rename(columns={'Timestamp': 'pointtimestamp'})
 
-        num_row, num_col = self.data.shape
-        for i in range(4, num_row):  # Iterate through every row after column headers
+        df.dropna(axis=0, how='any', inplace=True)
+        print('Null Points Dropped')
 
-            cur_point_iden_index = 0  # Keep track of which column we are in.
-            cur_row = list(self.data.iloc[i].copy())  # Copy the row so pandas doesn't overwrite the data somehow
-            cur_timestamp = datetime.strptime(cur_row[0], "%m/%d/%y %H:%M")  # Get timestamp from column 0 of dataframe.
+        df['pointid'] = df['pointid'].astype(int)
+        print("Points Mapped")
 
-            for j in range(1, len(cur_row)):
-                cur_point_identity = self.point_identities[cur_point_iden_index] # Get point class for column we are in
+        #finally get our formatted point values by inputting the row into format_value
+        if df.empty:
+            # Just check to make sure we don't have an empty df- otherwise it errors here if we do
+            print("Invalid insert- double check that the points are successfully getting inserted")
+            return
 
-                cur_point_value = cur_row[j]
+        df['pointvalue'] = df.apply(self._format_value, axis=1).astype(str)
+        df = df[df['pointvalue'] != "Invalid"]
+        print('Bad Point Values Dropped')
 
-                cur_point_value = float(cur_point_value)
-                # TODO: Decide how to handle null values. Currently we are setting the null values to be -2.
-                if math.isnan(cur_point_value):
-                    cur_point_value = -2
-                if cur_point_value > 0:
-                    # Round cur_point_value to 5 decimal places.
-                    cur_point_value = round(cur_point_value, 5)
-                    # Multiply cur_point_value by 100000 to get as long int
-                    cur_point_value *= 100000
+        # drop the old col
+        df.drop(['pointname'], axis=1, inplace=True)
 
-                cur_point_value = int(cur_point_value)
+        #replace all NaNs with None for sql
+        print("Values Formatted")
 
-                new_point_value = PointValue(cur_timestamp, cur_point_identity, cur_point_value)
-                point_values.append(new_point_value)
-                cur_point_iden_index += 1  # move to the next column.
+        # Now format it to go into the sql
+        print("COPY FROM FORMATTING FINISHED")
+        df = df[['pointvalue', 'pointtimestamp', 'pointid']]
+        self.db_connection.bulk_add_point_values(df)
 
-        self.point_values = point_values
+    def _map_point_names_id(self, name):
+        try:
+            return self.point_identities[name].id
+        except KeyError:
+            return None
+
+    def _format_value(self, row):
+        try:
+            point_value = float(row['pointvalue'])
+            # TODO: Decide how to handle null values. Currently we are setting the null values to be -2.
+            if math.isnan(point_value):
+                return 'None'
+            if point_value > 0:
+                # Round point_value to 5 decimal places.
+                point_value = round(point_value, 5)
+                # Multiply point_value by 100000 to get as long int
+                point_value *= 100000   
+            return int(point_value)
+        except:
+            return "Invalid"
 
 
 def main():
-    file_name = get_data_resource("csv_files/Lucid_Data_10-16-17_to_10-16-17.csv")
+    file_name = get_data_resource("csv_files/DormData2013-18.csv")
     parser = LucidParser()
     parser.read_csv(file_name)
-    parser.create_point_identities()
-    parser.create_point_values()
+    parser.add_points()
+    parser.add_point_values()
     print("Finished!")
 
 

@@ -25,8 +25,9 @@ def main():
                 unparseable += 1
             else :
                 parsed += 1
-                print (k, "\n" +  stringHumanReadable(tagsSet, jsonDict))
-                # print (k, tagsSet)
+#                print (k, "\n" +  stringHumanReadable(tagsSet, jsonDict))
+#                print (k, tagsSet)
+                print (k, tagName(k, jsonDict))
 
     print (parsed, counter - unparseable, counter, float(parsed * 100) / float(counter - unparseable), float(parsed * 100) / float(counter))
 
@@ -49,6 +50,18 @@ def stringHumanReadable(tags, dictionary):
 
 
 #  Building report: top 5 buildings (or so)
+
+def tagName(name, dictionary):
+    tagSet = decodeName(name, dictionary)
+    tagDict = {}
+    for tag in tagSet:
+        if (tag[0] == 'ROOM'):
+            if (len(tag) > 1):
+                tagDict['ROOM'] = tag[1:2]
+        else:
+            tagDict[dictionary[tag[0]]["type"]] = tag
+    return tagDict
+
 
 def decodeName(name, dictionary):
     revDict = createRevDict(dictionary)

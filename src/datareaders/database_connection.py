@@ -219,11 +219,12 @@ class DatabaseConnection:
         :param building_name: Building name, str
         :return: building id
         """
-        building_id = self.get_building_id(building_name)
-        if building_id is None:
-            building_id = self.add_building(building_name)
-
-        return building_id
+        print("Adding building "+building_name)
+        # building_id = self.get_building_id(building_name)
+        # if building_id is None:
+        #     building_id = self.add_building(building_name)
+        #
+        # return building_id
 
     def add_unique_room(self, room_name, building_id):
         """
@@ -232,10 +233,11 @@ class DatabaseConnection:
         :param building_id: Building id, int
         :return: room id
         """
-        room_id = self.get_room_id(room_name, building_id)
-        if room_id is None:
-            room_id = self.add_room(room_name, building_id)
-        return room_id
+        print("Adding room " + room_name)
+        # room_id = self.get_room_id(room_name, building_id)
+        # if room_id is None:
+        #     room_id = self.add_room(room_name, building_id)
+        # return room_id
 
     def add_unique_point_type(self, point_type):
         """
@@ -243,10 +245,11 @@ class DatabaseConnection:
         :param point_type: PointType class
         :return: point type id
         """
-        point_type_id = self.get_point_type_id(point_type)
-        if point_type_id is None:
-            point_type_id = self.add_point_type(point_type)
-        return point_type_id
+        print("Adding type " + point_type.name)
+        # point_type_id = self.get_point_type_id(point_type)
+        # if point_type_id is None:
+        #     point_type_id = self.add_point_type(point_type)
+        # return point_type_id
 
     def add_unique_equipment_box(self, equipment_name, description):
         """
@@ -255,10 +258,11 @@ class DatabaseConnection:
         :param description: human readable description
         :return:
         """
-        equipment_id = self.get_equipment_box_id(equipment_name)
-        if equipment_id is None:
-            equipment_id = self.add_equipment_box(equipment_name, description)
-        return equipment_id
+        print("Adding equipment " + equipment_name)
+        # equipment_id = self.get_equipment_box_id(equipment_name)
+        # if equipment_id is None:
+        #     equipment_id = self.add_equipment_box(equipment_name, description)
+        # return equipment_id
 
     def add_unique_point(self, point):
         """
@@ -266,10 +270,11 @@ class DatabaseConnection:
         :param point: Point class
         :return: point id
         """
-        point_id = self.get_point_id(point)
-        if point_id is None:
-            point_id = self.add_point(point)
-        return point_id
+        print("Adding point " + point.name + " with description " + point.description)
+        # point_id = self.get_point_id(point)
+        # if point_id is None:
+        #     point_id = self.add_point(point)
+        # return point_id
 
     def add_unique_point_value(self, timestamp, point_id, value):
         """

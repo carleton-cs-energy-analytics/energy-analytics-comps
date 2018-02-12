@@ -31,25 +31,23 @@ class SiemensReader:
         cant_finish_lst = []
         points_with_ids = []
         for point_name in self.siemens_data.columns[2:]:
-            try:
-                print(point_name)
-                print(type(self.tag_dict))
-                tags = tagName(point_name, self.tag_dict)
-                building_id, building_name = self._add_building(tags)
-                room_id = self._add_room(tags, building_name, building_id)
-                equipment_id = self._add_equipment_box(tags)
-                point_type_id, point_type = self._add_point_type(tags)
-                description = self._make_point_description(tags)
+            tags = tagName(point_name, self.tag_dict)
+            if tags == None:
+                print("No tags for point " + point_name)
+                continue
+            building_id, building_name = self._add_building(tags)
+            room_id = self._add_room(tags, building_name, building_id)
+            equipment_id = self._add_equipment_box(tags)
+            point_type_id, point_type = self._add_point_type(tags)
+            description = self._make_point_description(tags)
 
-                point = Point(point_name, room_id, building_id, self.source, point_type_id, description, equipment_id)
-                point.point_type = point_type
+            point = Point(point_name, room_id, building_id, self.source, point_type_id, description, equipment_id)
+            point.point_type = point_type
 
-                point_id = self.db_connection.add_unique_point(point)
-                point.id = point_id
-                points_with_ids.append(point)
-                finish_lst.append("Finished for point "+point_name)
-            except KeyError:
-                cant_finish_lst.append("Don't know type of "+point_name)
+            point_id = self.db_connection.add_unique_point(point)
+            point.id = point_id
+            points_with_ids.append(point)
+            finish_lst.append("Finished for point "+point_name)
 
         for item in finish_lst:
             print(item)
@@ -71,7 +69,7 @@ class SiemensReader:
         """
         building = "Carleton Campus"  # dummy building
         if "Building" in tags:
-            building = tags["Building"]
+            building = tags["Building"][0]
 
         building_id = self.db_connection.add_unique_building(building)
         return building_id, building
@@ -85,7 +83,7 @@ class SiemensReader:
         """
         room = "{}_Dummy_Room".format(building_name)
         if "ROOM" in tags:
-            room = tags["ROOM"]
+            room = tags["ROOM"][0]
 
         room_id = self.db_connection.add_unique_room(room, building_id)
         return room_id
@@ -97,8 +95,11 @@ class SiemensReader:
         :return: equipment box id (int)
         """
         if "Equipment" in tags:
-            description = self.tag_dict[tags["Equipment"]]["descriptor"]
-            equipment_id = self.db_connection.add_unique_equipment_box(tags["Equipment"], description)
+            description = self.tag_dict[tags["Equipment"][0]]["descriptor"]
+            equipment_name = tags["Equipment"][0]
+            if len(tags["Equipment"]) > 1:
+                equipment_name += tags["Equipment"][1]
+            equipment_id = self.db_connection.add_unique_equipment_box(equipment_name, description)
             return equipment_id
         return None
 
@@ -110,15 +111,15 @@ class SiemensReader:
         """
         description = ""
         if "Measurement" in tags:
-            description += self.tag_dict[tags["Measurement"]]["descriptor"]
+            description += self.tag_dict[tags["Measurement"][0]]["descriptor"]
         if "Set Point" in tags:
-            description += self.tag_dict[tags["Set Point"]]["descriptor"]
+            description += self.tag_dict[tags["Set Point"][0]]["descriptor"]
         if "Equipment" in tags:
-            description += " in " + self.tag_dict[tags["Equipment"]]["descriptor"]
+            description += " IN " + self.tag_dict[tags["Equipment"][0]]["descriptor"]
         if "Room" in tags:
-            description += " in Room " + tags["ROOM"]
+            description += " IN Room " + tags["ROOM"][0]
         if "Building" in tags:
-            description += " in " + self.tag_dict[tags["Building"]]["descriptor"]
+            description += " IN " + self.tag_dict[tags["Building"][0]]["descriptor"]
         return description
 
     def _get_point_type(self, tags):
@@ -129,9 +130,9 @@ class SiemensReader:
         """
         try:
             if "Measurement" in tags:
-                return tags["Measurement"]
+                return tags["Measurement"][0]
             else:
-                return tags["Set Point"]
+                return tags["Set Point"][0]
         except KeyError:
             print("This point does not have a type")
             return None
@@ -149,7 +150,7 @@ class SiemensReader:
         else:
             point_type = PointType(point_type_name, "float")
             point_type.units = self.tag_dict[point_type_name]["units"]
-            point_type.units = self.tag_dict[point_type_name]["factor"]
+            point_type.factor = 5 # No longer getting this information, everything should be less than this
 
         point_type_id = self.db_connection.add_unique_point_type(point_type)
         return point_type_id, point_type

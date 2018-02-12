@@ -229,19 +229,10 @@ class DatabaseConnection:
         :param point: Point class
         :return: point id
         """
-
-        '''point_id = self.get_point_id(point)
-                if point_id is None:
-                    point_id = self.add_point(point)
-                return point_id'''
-
-        return self.execute_commit_and_return("with s as (select id from Points where Name = %s),"
-                                               "i as (INSERT INTO Points(Name, RoomID, PointTypeID, PointSourceID, "
-                                               "Description) SELECT %s, %s, %s, %s, %s WHERE NOT EXISTS "
-                                               "(SELECT * FROM Points WHERE Name = %s) "
-                                               "RETURNING id) select id from i union all select id from s;",
-                                              (point.name, point.name, point.room_id, point.point_type_id,
-                                                             point.source, point.description, point.name))
+        point_id = self.get_point_id(point)
+        if point_id is None:
+            point_id = self.add_point(point)
+        return point_id
 
     def add_unique_point_value(self, timestamp, point_id, value):
         """

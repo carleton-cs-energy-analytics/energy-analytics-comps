@@ -63,7 +63,7 @@ class LucidReader:
                 # Create Point Object from this column header information.
                 point = Point(name=name, room_id=room_id, building_id=building_id,
                               source_enum_value=Sources.LUCID, point_type_id=point_type_id,
-                              description=description)
+                              description=description, equipment_box=None)
                 point_id = self.db_connection.add_unique_point(point)
                 point.id = point_id
                 index_to_point[i] = point

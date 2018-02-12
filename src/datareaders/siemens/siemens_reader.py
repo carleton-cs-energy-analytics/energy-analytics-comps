@@ -6,7 +6,7 @@ from src.datareaders.table_enumerations import Sources
 from src.datareaders.database_connection import DatabaseConnection
 from src.datareaders.data_object_holders import Point, PointType
 from src.datareaders.siemens.siemens_parser import transform_file
-from src.datareaders.siemens.nameParser import decodeName
+from src.datareaders.siemens.nameParser import tagName
 from json import load as json_load
 from sys import argv
 import pandas as pd
@@ -32,13 +32,16 @@ class SiemensReader:
         points_with_ids = []
         for point_name in self.siemens_data.columns[2:]:
             try:
-                tags = decodeName(point_name, self.tag_dict)
+                print(point_name)
+                print(type(self.tag_dict))
+                tags = tagName(point_name, self.tag_dict)
                 building_id, building_name = self._add_building(tags)
                 room_id = self._add_room(tags, building_name, building_id)
+                equipment_id = self._add_equipment_box(tags)
                 point_type_id, point_type = self._add_point_type(tags)
                 description = self._make_point_description(tags)
 
-                point = Point(point_name, room_id, building_id, self.source, point_type_id, description)
+                point = Point(point_name, room_id, building_id, self.source, point_type_id, description, equipment_id)
                 point.point_type = point_type
 
                 point_id = self.db_connection.add_unique_point(point)
@@ -67,8 +70,8 @@ class SiemensReader:
         :return: The building id (int) added to the database
         """
         building = "Carleton Campus"  # dummy building
-        if "building" in tags:
-            building = tags["building"]  # TODO: might change key
+        if "Building" in tags:
+            building = tags["Building"]
 
         building_id = self.db_connection.add_unique_building(building)
         return building_id, building
@@ -81,11 +84,23 @@ class SiemensReader:
         :return: Room id (int)
         """
         room = "{}_Dummy_Room".format(building_name)
-        if "room" in tags:
-            room = tags["room"]  # TODO: might change key
+        if "ROOM" in tags:
+            room = tags["ROOM"]
 
         room_id = self.db_connection.add_unique_room(room, building_id)
         return room_id
+
+    def _add_equipment_box(self, tags):
+        """
+        Add unique equipment box -- only adds if not in DB
+        :param tags: a dictionary of tags for a point
+        :return: equipment box id (int)
+        """
+        if "Equipment" in tags:
+            description = self.tag_dict[tags["Equipment"]]["descriptor"]
+            equipment_id = self.db_connection.add_unique_equipment_box(tags["Equipment"], description)
+            return equipment_id
+        return None
 
     def _make_point_description(self, tags):
         """
@@ -94,9 +109,16 @@ class SiemensReader:
         :return: a string description
         """
         description = ""
-        for key, value in tags.items():
-            description += self.tag_dict[value]["descriptor"] + ", "
-        description = description[:len(description)-2]
+        if "Measurement" in tags:
+            description += self.tag_dict[tags["Measurement"]]["descriptor"]
+        if "Set Point" in tags:
+            description += self.tag_dict[tags["Set Point"]]["descriptor"]
+        if "Equipment" in tags:
+            description += " in " + self.tag_dict[tags["Equipment"]]["descriptor"]
+        if "Room" in tags:
+            description += " in Room " + tags["ROOM"]
+        if "Building" in tags:
+            description += " in " + self.tag_dict[tags["Building"]]["descriptor"]
         return description
 
     def _get_point_type(self, tags):
@@ -106,10 +128,10 @@ class SiemensReader:
         :return: the measurement or set point tag (should only be one)
         """
         try:
-            if "measurement" in tags:
-                return tags["measurement"]  # TODO: might change key
+            if "Measurement" in tags:
+                return tags["Measurement"]
             else:
-                return tags["set point"]  # TODO: might change key
+                return tags["Set Point"]
         except KeyError:
             print("This point does not have a type")
             return None
@@ -121,12 +143,11 @@ class SiemensReader:
         :return: point type id (int)
         """
         point_type_name = self._get_point_type(tags)
-        # TODO: differentiate between enum and float
-        if self.tag_dict[point_type_name]["return type"] == "enum":
+        if self.tag_dict[point_type_name]["isEnumerated"] == "True":
             point_type = PointType(point_type_name, "enumerated")
-            point_type.enumeration_values = self.tag_dict[point_type_name]["units"].split(",")
+            point_type.enumeration_values = self.tag_dict[point_type_name]["units"][5:].split("/")
         else:
-            point_type = PointType(point_type_name, "float")  # TODO: get return type
+            point_type = PointType(point_type_name, "float")
             point_type.units = self.tag_dict[point_type_name]["units"]
             point_type.units = self.tag_dict[point_type_name]["factor"]
 
@@ -177,30 +198,7 @@ class SiemensReader:
 
         return formatted_value
 
-
-def test_insert():
-    # TODO: delete this, just for note purposes
-    # this works if the self.siemens_data = ... line above is commented out (don't need to csv)
-    tags = {"building":"TEST BUILDING", "room": "TEST ROOM", "measurement": "TEST TYPE"}
-    sr = SiemensReader("")
-    building_id, building_name = sr._add_building(tags)
-    room_id = sr._add_room(tags, building_name, building_id)
-    point_type_id, point_type = sr._add_point_type(tags)
-    description = sr._make_point_description(tags)
-
-    start = time.time()
-
-    for i in range(100):
-        point = Point("TEST POINT" + str(i), room_id, building_id, Sources.SIEMENS, point_type_id, description)
-        point.point_type = point_type
-
-        point_id = sr.db_connection.add_unique_point(point)
-
-    end = time.time()
-    length = end - start
-    print("Inserts took " + str(length))
-
-def main(building, csv_file):
+def main(csv_file):
     """
     Read in individual file and add all subpoints to DB
     :return:
@@ -209,14 +207,12 @@ def main(building, csv_file):
 
     sr = SiemensReader(get_data_resource("better_csv_files/"+csv_file))
     sr.add_to_db()
-    sr.db_connection.close_connection()
+    #sr.db_connection.close_connection()
 
 
 if __name__ == '__main__':
-    test_insert()
-    # if len(argv) > 2:
-    #     given_building = argv[1]  # building should be as spelled in the data description file name
-    #     given_csv_file = argv[2]
-    #     main(given_building, given_csv_file)
-    # else:
-    #     print("Requires a building name and a csv file parameter")
+    if len(argv) > 1:
+        given_csv_file = argv[1]
+        main(given_csv_file)
+    else:
+        print("Requires a building name and a csv file parameter")

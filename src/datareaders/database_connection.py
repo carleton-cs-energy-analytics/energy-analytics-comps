@@ -18,7 +18,7 @@ class DatabaseConnection:
         """
         self.db = None
         self.conn = None
-        self.open_connection()
+        #self.open_connection()
 
     def open_connection(self):
         """
@@ -48,8 +48,9 @@ class DatabaseConnection:
                Args match db.execute(args)
         :return: None
         """
-        self.db.execute(*args)
-        self.conn.commit()
+        print(*args)
+        #self.db.execute(*args)
+        #self.conn.commit()
 
     def execute_commit_and_return(self, *args):
         """
@@ -59,10 +60,11 @@ class DatabaseConnection:
                Args match db.execute(args)
         :return: First value returned by execute statement, usually the id of inserted row
         """
-        self.db.execute(*args)
-        row_id = self.db.fetchone()[0]
-        self.conn.commit()
-        return row_id
+        print(*args)
+        #self.db.execute(*args)
+        #row_id = self.db.fetchone()[0]
+        #self.conn.commit()
+        #return row_id
 
     def add_building(self, building_name):
         """
@@ -81,6 +83,16 @@ class DatabaseConnection:
         """
         return self.execute_commit_and_return("INSERT INTO Rooms(Name, BuildingID) VALUES (%s, %s) RETURNING id;",
                                               (self.format_sql_none(room_name), building_id))
+
+    def add_equipment_box(self, equipment_name, description):
+        """
+        Adds an equipment to the Equipment Box table
+        :param equipment_name: unique name of the equipment box
+        :param description: human readable description
+        :return:
+        """
+        return self.execute_commit_and_return("INSERT INTO EquipmentBoxes(Name, Description) VALUES (%s, "
+                                              "%s) RETURNING id;", (equipment_name, description))
 
     def add_point_type(self, point_type):
         """
@@ -169,6 +181,19 @@ class DatabaseConnection:
         else:
             return type_id[0]
 
+    def get_equipment_box_id(self, equipment_name):
+        """
+        Looks in DB for equipment with given name
+        :param equipment_name: unique name
+        :return:
+        """
+        self.db.execute("SELECT ID from EquipmentBoxes where Name = (%s);", (equipment_name))
+        equipment_id = self.db.fetchone()
+        if equipment_id is None:
+            return None
+        else:
+            return equipment_id[0]
+
     def get_point_id(self, point):  # only need to use name and room/building combo
         """
         Looks in DB for point
@@ -223,6 +248,18 @@ class DatabaseConnection:
             point_type_id = self.add_point_type(point_type)
         return point_type_id
 
+    def add_unique_equipment_box(self, equipment_name, description):
+        """
+        Add unique equipment box if it doesn't already exist in DB
+        :param equipment_name: unique name of equipment
+        :param description: human readable description
+        :return:
+        """
+        equipment_id = self.get_equipment_box_id(equipment_name)
+        if equipment_id is None:
+            equipment_id = self.add_equipment_box(equipment_name, description)
+        return equipment_id
+
     def add_unique_point(self, point):
         """
         Add unique point only adds point to DB if doesn't already exist
@@ -242,8 +279,9 @@ class DatabaseConnection:
         :param value: observed value of the point at the given time
         :return: None
         """
-        if not self.check_exists_point_value(timestamp, point_id):
-            self.add_point_value(timestamp, point_id, value)
+        pass
+        #if not self.check_exists_point_value(timestamp, point_id):
+            #self.add_point_value(timestamp, point_id, value)
 
     # getAll methods select * from database and return as a dictionary with key as name
     def get_all_point_types(self):

@@ -1,5 +1,6 @@
 import json
 import sys
+from src.datareaders.resources import get_data_resource
 
 # Call with: python3 nameParser <dictionary_file> <name of point>
 # Where <dictionary_file> will almost always be ????? (Ask Carolyn)
@@ -7,11 +8,11 @@ import sys
 
 def main():
     nameLookUpDictionary = {}
-    with open(sys.argv[1], 'r') as jsonFile:
+    with open(get_data_resource("csv_descriptions/"+sys.argv[1]), 'r') as jsonFile:
         jsonDict = json.load(jsonFile)
         
-    with open(sys.argv[2], 'r') as pointListFile:
-        pointList = json.load(pointListFile);
+    with open(get_data_resource("csv_descriptions/"+sys.argv[2]), 'r') as pointListFile:
+        pointList = json.load(pointListFile)
     
     counter = 0
     parsed = 0
@@ -23,10 +24,10 @@ def main():
             if (tagsSet == "Not quite"):
                 unparseable += 1
             else :
-	            parsed += 1
-	            print (k, "\n" +  stringHumanReadable(tagsSet, jsonDict))
-#	            print (k, tagsSet)
-    
+                parsed += 1
+                print (k, "\n" +  stringHumanReadable(tagsSet, jsonDict))
+                # print (k, tagsSet)
+
     print (parsed, counter - unparseable, counter, float(parsed * 100) / float(counter - unparseable), float(parsed * 100) / float(counter))
 
 def stringHumanReadable(tags, dictionary):

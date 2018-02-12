@@ -6,6 +6,7 @@ from src.datareaders.table_enumerations import Sources
 from src.datareaders.database_connection import DatabaseConnection
 from src.datareaders.data_object_holders import Point, PointType
 from src.datareaders.siemens.siemens_parser import transform_file
+from src.datareaders.siemens.nameParser import decodeName
 from json import load as json_load
 from sys import argv
 import pandas as pd
@@ -17,7 +18,7 @@ class SiemensReader:
         self.file_path = file_path
         self.source = Sources.SIEMENS
         self.db_connection = DatabaseConnection()
-        #self.siemens_data = pd.read_csv(file_path, dtype=object)
+        self.siemens_data = pd.read_csv(file_path, dtype=object)
         tag_json = open(get_data_resource("csv_descriptions/PointDecoder.json"))
         self.tag_dict = json_load(tag_json)
 
@@ -31,7 +32,7 @@ class SiemensReader:
         points_with_ids = []
         for point_name in self.siemens_data.columns[2:]:
             try:
-                tags = {}  # TODO: get tags
+                tags = decodeName(point_name, self.tag_dict)
                 building_id, building_name = self._add_building(tags)
                 room_id = self._add_room(tags, building_name, building_id)
                 point_type_id, point_type = self._add_point_type(tags)

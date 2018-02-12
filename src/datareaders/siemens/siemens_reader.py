@@ -33,7 +33,7 @@ class SiemensReader:
         for point_name in self.siemens_data.columns[2:]:
             tags = tagName(point_name, self.tag_dict)
             if tags == None:
-                print("No tags for point " + point_name)
+                cant_finish_lst.append("No tags for point " + point_name)
                 continue
             building_id, building_name = self._add_building(tags)
             room_id = self._add_room(tags, building_name, building_id)

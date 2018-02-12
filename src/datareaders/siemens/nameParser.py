@@ -53,6 +53,8 @@ def stringHumanReadable(tags, dictionary):
 
 def tagName(name, dictionary):
     tagSet = decodeName(name, dictionary)
+    if ((tagSet == None) or (tagSet == "Not quite")):
+        return None
     tagDict = {}
     for tag in tagSet:
         if (tag[0] == 'ROOM'):
@@ -86,11 +88,17 @@ def decodeName(name, dictionary):
                              addedTag = True
                  if (dictionary[tag]["type"] == "Building"):
                      if (testIndex + 1 < len(nameSubstrings)):
-                         if (isNumberToken(nameSubstrings[testIndex + 1])):
+                         if ((name[1] == 'V') and ((name[0] == 'O') or (name[0] == 'B'))):
                              testIndex += 1
                              tagList.append([tag])
-                             tagList.append(["ROOM", getTokenString(nameSubstrings[testIndex])])
+                             tagList.append(["VAV", getTokenString(nameSubstrings[testIndex])])
                              addedTag = True
+#                         if (isNumberToken(nameSubstrings[testIndex + 1]) and not name.startswith('BIG')):
+#                             testIndex += 1
+#                             tagList.append([tag])
+#                             tagList.append(["ROOM", getTokenString(nameSubstrings[testIndex])])
+#                             addedTag = True
+#                             print ("----> hello", name)
                  if ("toss" in dictionary[tag]):
                      for toToss in dictionary[tag]["toss"]:
                          toToss = 't' + toToss

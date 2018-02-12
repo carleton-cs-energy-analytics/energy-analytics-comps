@@ -13,6 +13,7 @@
 	"BURTON":{"name":["BURTON", "BURT"], "indexed":"False", "type":"Building", "descriptor": "Burton (dining hall / dorm)"},
 	"OLIN":{"name":["OLIN", "OV", "OL"], "indexed":"False", "type":"Building", "descriptor": "Olin (physics / psych)"},
 	"WILLIS":{"name":["WI", "WILLIS"], "indexed":"False", "type":"Building", "descriptor": "Willis (econ)"},
+	"SCOVILLE":{"name":["SCOVILLE"], "indexed":"False", "type":"Building", "descriptor": "Scoville (admissions)"},
 	"LIBE":{"name":["LI"], "indexed":"False", "type":"Building", "descriptor": "Gould Library"},
 	"BOLIOU":{"name":["BOLIOU"], "indexed":"False", "type":"Building", "descriptor": "Boliou"},
 	"DAVIS":{"name":["DAVIS"], "indexed":"False", "type":"Building", "descriptor": "Davis (dorm) hall"},
@@ -54,6 +55,7 @@
 	"FLH STPA":{"name":["FLH.STPA"], "indexed":"False", "type":"Set Point", "descriptor": "Floor heating actual (as seen by the equipment) setpoint", "units":"DEG F", "isEnumerated":"False"},
 	"FLH FLT":{"name":["FLH.FLT"], "indexed":"False", "type":"Measurement", "descriptor": "Floor heating measured temperature", "units":"DEG F", "isEnumerated":"False"},
 	"FLH FLTD":{"name":["FLH.FLTD"], "indexed":"False", "type":"Measurement", "descriptor": "On / off indicator of whether or not the floor heating is disabled", "units":"Enum ON/OFF", "isEnumerated":"True"},
+	"FLH VLV":{"name":["FLH.VLV"], "indexed":"False", "type":"Measurement", "descriptor": "On / off indicator of whether or not the floor heating value is open", "units":"Enum ON/OFF", "isEnumerated":"True"},
 	"ELEC":{"name":["ELEC", "EL"], "indexed":"False", "type":"Measurement", "descriptor": "Electric meter reading", "units":"KWH", "toss":["METER", "CONS", "CONSU", "CONSUM", "CONSUMP", "READING"], "isEnumerated":"False"},
 	"H2O":{"name":["H2O", "WATER"], "indexed":"False", "type":"Measurement", "descriptor": "Water meter reading", "units":"GAL", "toss":["METER", "CONS", "CONSU", "CONSUM", "CONSUMP", "READING"], "isEnumerated":"False"}
 }

@@ -89,4 +89,9 @@ params = {
     'user': 'energycomps',
     'password': '<password>',
     'host': 'localhost',
-}```
+}
+lucid = {
+    'username': 'buildingos username',
+    'password': 'buildingos password'
+}
+```

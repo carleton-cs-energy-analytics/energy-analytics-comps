@@ -89,9 +89,9 @@ class WindReader:
 
                 # Do the actual search for everything in the past day
                 now = datetime.datetime.now()
-                today = now.strftime("%Y-%m-%d")
-                yesterday = datetime.datetime.strftime(now - datetime.timedelta(1), '%Y-%m-%d')
-                data = self.get_meter_data(meter, yesterday, today)
+                cur_time = now.strftime('%Y-%m-%d %H:%M:%S')
+                from_time = datetime.datetime.strftime(now - datetime.timedelta(hours = 1), '%Y-%m-%d %H:%M:%S')
+                data = self.get_meter_data(meter, from_time, cur_time)
 
                 # format the data into our results for easy printing out
                 for row in data:

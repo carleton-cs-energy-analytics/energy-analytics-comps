@@ -136,7 +136,7 @@ function getValuesByBuildingInRangeByType($buildingID, $start, $end, $equipmentT
     return transformData(Model::getValuesByBuildingInRangeByType($buildingID, $start, $end, $equipmentType));
 }
 function getValuesByBuildingInRangeBySource($buildingID, $start, $end, $source){
-    return transformData(Model::getValuesByBuildingInRangeBySource($buildingID, $start, $end, $equipmentType));
+    return transformData(Model::getValuesByBuildingInRangeBySource($buildingID, $start, $end, $source));
 }
 
 

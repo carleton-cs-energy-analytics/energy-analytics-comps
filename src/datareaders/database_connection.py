@@ -31,7 +31,8 @@ class DatabaseConnection:
             self.conn = psycopg2.connect(**params)
             self.db = self.conn.cursor()
             print("Database Connected")
-        except:
+        except Exception as e:
+            print(e)
             print("Database Connection Failed")
 
     def close_connection(self):

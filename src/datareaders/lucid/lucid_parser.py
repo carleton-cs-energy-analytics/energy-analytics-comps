@@ -32,6 +32,7 @@ class LucidParser:
 
         point_names = list(self.data.columns)  # Get row that includes all point name data.
         for i in range(1, len(point_names)):
+            print(point_names[i])
             try:
                 # Get the name, the building name (sometimes the same thing) and the units information
                 name, building_name, description = point_names[i].split(" - ")
@@ -93,7 +94,7 @@ class LucidParser:
         #finally get our formatted point values by inputting the row into format_value
         if df.empty:
             # Just check to make sure we don't have an empty df- otherwise it errors here if we do
-            print("Invalid insert- double check that the points are successfully getting inserted")
+            print("Invalid insert due to null columns- double check that the points and buildings are successfully getting inserted")
             return
 
         df['pointvalue'] = df.apply(self._format_value, axis=1).astype(str)

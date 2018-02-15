@@ -35,7 +35,7 @@
 	"LAIRD":{"name":["LAIRD"], "indexed":"False", "type":"Building", "descriptor": "Laird (english)"},
 	"LEIGHTON":{"name":["LE"], "indexed":"False", "type":"Building", "descriptor": "Leighton (history / Soan / Philosophy)"},
 	"ROOMTEMP":{"name":["RMT", "ROOM TEMP", "FLH.RMT"], "indexed":"False", "type":"Measurement", "descriptor": "Measurement of the Room Tempurature", "units":"DEG F", "parent":"ROOM", "isEnumerated":"False"},
-	"ROOMTEMP SETPT":{"name":["RSET"], "indexed":"False", "type":"Measurement", "descriptor": "Measurement of the Room Tempurature", "units":"DEG F", "parent":"ROOM", "isEnumerated":"False"},
+	"ROOMTEMP SETPT":{"name":["RSET", "SP"], "indexed":"False", "type":"Measurement", "descriptor": "Measurement of the Room Tempurature", "units":"DEG F", "parent":"ROOM", "isEnumerated":"False"},
 	"VSP":{"name":["VSP"], "indexed":"False", "type":"Set Point", "descriptor": "Virtual Set Point of the Room Tempurature (Student))", "units":"DEG F", "parent":"ROOM", "isEnumerated":"False"},
 	"OCCUPIED":{"name":["OCC", "OCCUP"], "indexed":"False", "type":"Measurement", "descriptor": "on / off indicator for whether or not the room is in occupied mode", "units":"Enum ON/OFF", "isEnumerated":"True"},
 	"MINFLOW":{"name":["CTLFLMN"], "indexed":"False", "type":"Set Point", "descriptor": "Minimum Flow Setpoint of air", "units":"CFM", "isEnumerated":"False", "parent":"VAV"},
@@ -45,6 +45,7 @@
 	"MAD":{"name":["MAD"], "indexed":"False", "type":"Measurement", "descriptor": "Mixed Air Damper", "units":"PSI", "parent":"AH", "isEnumerated":"False"},
 	"OAD":{"name":["OAD"], "indexed":"False", "type":"Measurement", "descriptor": "Outside Air Damper", "units":"PSI", "parent":"AH", "isEnumerated":"False"},
 	"ECN":{"name":["ECN"], "indexed":"False", "type":"Measurement", "descriptor": "On / Off indicator of the economize mode", "units":"Enum ON/OFF", "parent":"AH", "isEnumerated":"True"},
+	"SFC":{"name":["SFC"], "indexed":"False", "type":"Set Point", "descriptor": "Setpoint of the supply air flow", "units":"CFM", "parent":"AH", "isEnumerated":"False"},
 	"SW":{"name":["SW"], "indexed":"False", "type":"Measurement", "descriptor": "On / Off swithc", "units":"Enum ON/OFF", "parent":"EF", "isEnumerated":"True"},
 	"FIRE":{"name":["FIRE"], "indexed":"False", "type":"Measurement", "descriptor": "On / Off condition of a fire alarm", "units":"Enum ON/OFF", "toss":["TROUBLE"], "isEnumerated":"True"},
 	"TUNNEL":{"name":["TUNNEL"], "indexed":"False", "type":"Measurement", "descriptor": "On / Off condition of the tunnel alarm", "units":"Enum ON/OFF", "isEnumerated":"True"},
@@ -54,9 +55,10 @@
 	"FLH STPL":{"name":["FLH.STPL"], "indexed":"False", "type":"Set Point", "descriptor": "Floor heating minimum (low) setpoint", "units":"DEG F", "isEnumerated":"False"},
 	"FLH STPH":{"name":["FLH.STPH"], "indexed":"False", "type":"Set Point", "descriptor": "Floor heating maximum (high) setpoint", "units":"DEG F", "isEnumerated":"False"},
 	"FLH STPA":{"name":["FLH.STPA"], "indexed":"False", "type":"Set Point", "descriptor": "Floor heating actual (as seen by the equipment) setpoint", "units":"DEG F", "isEnumerated":"False"},
+	"FLH STP":{"name":["FLH.STP"], "indexed":"False", "type":"Set Point", "descriptor": "Floor heating setpoint", "units":"DEG F", "isEnumerated":"False"},
 	"FLH FLT":{"name":["FLH.FLT"], "indexed":"False", "type":"Measurement", "descriptor": "Floor heating measured temperature", "units":"DEG F", "isEnumerated":"False"},
 	"FLH FLTD":{"name":["FLH.FLTD"], "indexed":"False", "type":"Measurement", "descriptor": "On / off indicator of whether or not the floor heating is disabled", "units":"Enum ON/OFF", "isEnumerated":"True"},
-	"FLH VLV":{"name":["FLH.VLV"], "indexed":"False", "type":"Measurement", "descriptor": "On / off indicator of whether or not the floor heating value is open", "units":"Enum ON/OFF", "isEnumerated":"True"},
+	"FLH VLV":{"name":["FLH.VLV"], "indexed":"False", "type":"Measurement", "descriptor": "On / off indicator of whether or not the floor heating valve is open", "units":"Enum ON/OFF", "isEnumerated":"True"},
 	"ELEC":{"name":["ELEC", "EL"], "indexed":"False", "type":"Measurement", "descriptor": "Electric meter reading", "units":"KWH", "toss":["METER", "CONS", "CONSU", "CONSUM", "CONSUMP", "READING"], "isEnumerated":"False"},
 	"H2O":{"name":["H2O", "WATER"], "indexed":"False", "type":"Measurement", "descriptor": "Water meter reading", "units":"GAL", "toss":["METER", "CONS", "CONSU", "CONSUM", "CONSUMP", "READING"], "isEnumerated":"False"}
 }

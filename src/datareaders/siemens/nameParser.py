@@ -76,17 +76,17 @@ def decodeName(name, dictionary):
              else:
                  tag = ""
                  for tagPossible in revDict[substring]:
-#                     if ("parent" in dictionary[tagPossible]):
-#                         validTag = False
-#                         for currTag in tagList:
-#                             if (currTag[0] == dictionary[tag]["parent"]):
-#                                 validTag = True
-#                         if (validTag):
-#                             tag = tagPossible
-#                         else:
-#                             return None
-#                     else:
-                     tag = tagPossible
+                     if ("parent" in dictionary[tagPossible]):
+                         validTag = False
+                         for currTag in tagList:
+                             if (currTag[0] == dictionary[tagPossible]["parent"]):
+                                 validTag = True
+                         if (validTag):
+                             tag = tagPossible
+                     else:
+                         tag = tagPossible
+                 if (tag == ""):
+                     return None
                  addedTag = False
                  if (dictionary[tag]["indexed"] == "True"):
                      if (testIndex + 1 < len(nameSubstrings)):
@@ -107,13 +107,6 @@ def decodeName(name, dictionary):
                          toToss = 't' + toToss
                          if (toToss in nameSubstrings):
                              nameSubstrings.remove(toToss)
-                 if ("parent" in dictionary[tag]):
-                     validTag = False
-                     for currTag in tagList:
-                         if (currTag[0] == dictionary[tag]["parent"]):
-                             validTag = True
-                     if (not validTag):
-                         return None
                  if (not addedTag):
                      tagList.append([tag])
              testIndex += 1

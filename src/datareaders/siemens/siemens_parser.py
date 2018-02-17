@@ -4,9 +4,10 @@ Converts an ugly csv into a better one.
 import csv
 import sys
 import os
+import io
 from src.datareaders.resources import get_data_resource
 
-def transform_csv_from_bad_format_to_better_format(data_list, new_csv_name):
+def transform_csv(input_stream):
     """
     Takes in dataList, which represents the original CSV, and writes a new
     CSV file that has mapped all the point with their name.
@@ -14,26 +15,32 @@ def transform_csv_from_bad_format_to_better_format(data_list, new_csv_name):
     # Find the first empty row and create a dictionary to map the points to their names:
     point_index = 1
     point_name_list = []
+    reader = csv.reader(input_stream)
+    data_list = list(reader)
+    output_stream = io.StringIO()
+
+    writer = csv.writer(output_stream)
     while "Point_" in data_list[point_index][0]:
         point_name_list.append(data_list[point_index][1])
         point_index += 1
 
-    # Write the new data to a CSV:
-    with open(new_csv_name, 'w') as f:
-        writer = csv.writer(f)
-        
-        # Construct and write the first line
-        first_line = ["Date","Time"]
-        for name in point_name_list:
-            first_line.append(name)
+    
+    # Construct and write the first line
+    first_line = ["Date","Time"]
+    for name in point_name_list:
+        first_line.append(name)
 
-        writer.writerow(first_line)
-
-        # Write the rest of the lines:
-        for i in range(point_index + 5, len(data_list), 1):
+    writer.writerow(first_line)
+    # Write the rest of the lines:
+    for i in range(point_index + 5, len(data_list), 1):
+        try:
             if '*******' in data_list[i][0]: # End of report
                 break
             writer.writerow(data_list[i])
+        except IndexError:
+            #end of file, can just continue
+            break
+    return output_stream
 
 def transform_all_files(directory_path = None):
     """
@@ -42,28 +49,31 @@ def transform_all_files(directory_path = None):
     """
     if not directory_path:
         directory_path = get_data_resource("csv_files")
+    results = []
 
     for file in os.listdir(directory_path):
         if file.endswith(".csv"):
-            transform_file(get_data_resource("csv_files/"+file))
+            results.append(transform_file(get_data_resource("csv_files/"+file)))
+    return results
 
-def transform_file(file_path, better_dir_path = None):
+def transform_file(file_path):
     """
     Transforms an individual file
     :param file: file name
-    :return: None (Output is better file format in data/better_csv_files)
+    :return: output stream
     """
-    if not better_dir_path:
-        better_dir_path = get_data_resource("better_csv_files")
-    # Create directory for transforming csvs into better format
-    if not os.path.isdir(better_dir_path):
-        os.makedirs(better_dir_path)
 
-    better_file_name = better_dir_path + "/" + file_path.split("/")[-1]
-    with open(file_path, 'r') as f:
-        reader = csv.reader(f)
-        data_list = list(reader)
-    transform_csv_from_bad_format_to_better_format(data_list, better_file_name)
+    with open(file_path, 'r') as input_stream:
+        output_stream = transform_csv(input_stream)
+        output_stream.seek(0)
+        return output_stream
+
+def transform_string(input_string):
+    input_stream = io.StringIO(input_string)
+    input_stream.seek(0)
+    output_stream = transform_csv(input_stream)
+    output_stream.seek(0)
+    return output_stream
 
 def main():
     """

@@ -4,6 +4,8 @@ This is the only file that has a connection to the database
 import psycopg2
 from src.datareaders.data_object_holders import PointType
 from src.datareaders.data_connection_params import params
+from io import StringIO
+import pandas as pd
 
 # For making sure all values can be stored in our current database configuration
 MAXINT = 9223372036854775807
@@ -29,7 +31,8 @@ class DatabaseConnection:
             self.conn = psycopg2.connect(**params)
             self.db = self.conn.cursor()
             print("Database Connected")
-        except:
+        except Exception as e:
+            print(e)
             print("Database Connection Failed")
 
     def close_connection(self):
@@ -81,6 +84,16 @@ class DatabaseConnection:
         """
         return self.execute_commit_and_return("INSERT INTO Rooms(Name, BuildingID) VALUES (%s, %s) RETURNING id;",
                                               (self.format_sql_none(room_name), building_id))
+
+    def add_equipment_box(self, equipment_name, description):
+        """
+        Adds an equipment to the Equipment Box table
+        :param equipment_name: unique name of the equipment box
+        :param description: human readable description
+        :return:
+        """
+        return self.execute_commit_and_return("INSERT INTO EquipmentBoxes(Name, Description) VALUES (%s, "
+                                              "%s) RETURNING id;", (equipment_name, description))
 
     def add_point_type(self, point_type):
         """
@@ -169,6 +182,19 @@ class DatabaseConnection:
         else:
             return type_id[0]
 
+    def get_equipment_box_id(self, equipment_name):
+        """
+        Looks in DB for equipment with given name
+        :param equipment_name: unique name
+        :return:
+        """
+        self.db.execute("SELECT ID from EquipmentBoxes where Name = (%s);", (equipment_name,))
+        equipment_id = self.db.fetchone()
+        if equipment_id is None:
+            return None
+        else:
+            return equipment_id[0]
+
     def get_point_id(self, point):  # only need to use name and room/building combo
         """
         Looks in DB for point
@@ -197,7 +223,6 @@ class DatabaseConnection:
         building_id = self.get_building_id(building_name)
         if building_id is None:
             building_id = self.add_building(building_name)
-
         return building_id
 
     def add_unique_room(self, room_name, building_id):
@@ -222,6 +247,18 @@ class DatabaseConnection:
         if point_type_id is None:
             point_type_id = self.add_point_type(point_type)
         return point_type_id
+
+    def add_unique_equipment_box(self, equipment_name, description):
+        """
+        Add unique equipment box if it doesn't already exist in DB
+        :param equipment_name: unique name of equipment
+        :param description: human readable description
+        :return:
+        """
+        equipment_id = self.get_equipment_box_id(equipment_name)
+        if equipment_id is None:
+            equipment_id = self.add_equipment_box(equipment_name, description)
+        return equipment_id
 
     def add_unique_point(self, point):
         """
@@ -275,3 +312,20 @@ class DatabaseConnection:
             return "NULL"
         else:
             return value
+
+    def bulk_add_point_values(self, df):
+        data = StringIO()
+        df.to_csv(data,header=False, index=False)
+        data.seek(0)
+        curs = self.db
+        table = pd.io.sql.get_schema(df, 'PointValues', con = self.conn)
+        self.db.copy_from(data, 'PointValues', columns=('pointvalue', 'pointtimestamp', 'pointid'), sep = ',', null='None')
+        self.conn.commit()
+        dedupe_cmd = """DELETE  from PointValues T1
+                          USING       PointValues T2
+                        WHERE  T1.ctid    < T2.ctid   
+                          AND  T1.pointid    = T2.pointid      
+                          AND  T1.pointtimestamp = T2.pointtimestamp;"""
+        print("Deduping")
+        self.db.execute(dedupe_cmd)
+        self.conn.commit()

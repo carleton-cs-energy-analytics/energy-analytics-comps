@@ -74,6 +74,7 @@ def decodeName(name, dictionary):
              if (substring not in revDict):
                  return None
              else:
+                 tagPassInital = []
                  tag = ""
                  for tagPossible in revDict[substring]:
                      if ("parent" in dictionary[tagPossible]):
@@ -82,10 +83,21 @@ def decodeName(name, dictionary):
                              if (currTag[0] == dictionary[tagPossible]["parent"]):
                                  validTag = True
                          if (validTag):
-                             tag = tagPossible
+                             tagPassInital.append(tagPossible)
                      else:
-                         tag = tagPossible
-                 if (tag == ""):
+                         tagPassInital.append(tagPossible)
+                 if (len(tagPassInital) == 1):
+                     tag = tagPassInital[0]
+                 elif (len(tagPassInital) == 2):
+                     t0HasParent = ("parent" in dictionary[tagPassInital[0]])
+                     t1HasParent = ("parent" in dictionary[tagPassInital[1]])
+                     if (t0HasParent and (not t1HasParent)):
+                         tag = tagPassInital[0]
+                     elif (t1HasParent and (not t0HasParent)):
+                         tag = tagPassInital[1]
+                     else:
+                         return None
+                 else:
                      return None
                  addedTag = False
                  if (dictionary[tag]["indexed"] == "True"):

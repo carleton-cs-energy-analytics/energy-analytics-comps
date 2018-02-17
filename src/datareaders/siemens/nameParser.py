@@ -26,7 +26,9 @@ def main():
                 parsed += 1
 #                print (k, "\n" +  stringHumanReadable(tagsSet, jsonDict))
 #                print (k, tagsSet)
-                print (k, tagName(k, jsonDict))
+#                print (k, tagName(k, jsonDict))
+        else:
+            print (k)
 
     print (parsed, counter - unparseable, counter, float(parsed * 100) / float(counter - unparseable), float(parsed * 100) / float(counter))
 
@@ -108,7 +110,7 @@ def decodeName(name, dictionary):
                              addedTag = True
                  if (dictionary[tag]["type"] == "Building"):
                      if (testIndex + 1 < len(nameSubstrings)):
-                         if ((name[1] == 'V') and ((name[0] == 'O') or (name[0] == 'B'))):
+                         if ((substring == 'OV') or (substring == 'BV') or (substring == 'LIV')):
                              testIndex += 1
                              tagList.append([tag])
                              tagList.append(["VAV", getTokenString(nameSubstrings[testIndex])])

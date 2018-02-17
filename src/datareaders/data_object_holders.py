@@ -32,6 +32,7 @@ class Point:
         self.equipment_id = equipment_box
         self.id = None
 
+
 class PointValue:
     def __init__(self, timestamp, point, value):
         self.timestamp = timestamp

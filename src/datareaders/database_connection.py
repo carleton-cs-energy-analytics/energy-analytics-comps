@@ -4,6 +4,8 @@ This is the only file that has a connection to the database
 import psycopg2
 from src.datareaders.data_object_holders import PointType
 from src.datareaders.data_connection_params import params
+from io import StringIO
+import pandas as pd
 
 # For making sure all values can be stored in our current database configuration
 MAXINT = 9223372036854775807
@@ -18,7 +20,7 @@ class DatabaseConnection:
         """
         self.db = None
         self.conn = None
-        #self.open_connection()
+        self.open_connection()
 
     def open_connection(self):
         """
@@ -29,7 +31,8 @@ class DatabaseConnection:
             self.conn = psycopg2.connect(**params)
             self.db = self.conn.cursor()
             print("Database Connected")
-        except:
+        except Exception as e:
+            print(e)
             print("Database Connection Failed")
 
     def close_connection(self):
@@ -48,9 +51,8 @@ class DatabaseConnection:
                Args match db.execute(args)
         :return: None
         """
-        print(*args)
-        #self.db.execute(*args)
-        #self.conn.commit()
+        self.db.execute(*args)
+        self.conn.commit()
 
     def execute_commit_and_return(self, *args):
         """
@@ -60,11 +62,10 @@ class DatabaseConnection:
                Args match db.execute(args)
         :return: First value returned by execute statement, usually the id of inserted row
         """
-        print(*args)
-        #self.db.execute(*args)
-        #row_id = self.db.fetchone()[0]
-        #self.conn.commit()
-        #return row_id
+        self.db.execute(*args)
+        row_id = self.db.fetchone()[0]
+        self.conn.commit()
+        return row_id
 
     def add_building(self, building_name):
         """
@@ -187,7 +188,7 @@ class DatabaseConnection:
         :param equipment_name: unique name
         :return:
         """
-        self.db.execute("SELECT ID from EquipmentBoxes where Name = (%s);", (equipment_name))
+        self.db.execute("SELECT ID from EquipmentBoxes where Name = (%s);", (equipment_name,))
         equipment_id = self.db.fetchone()
         if equipment_id is None:
             return None
@@ -219,12 +220,10 @@ class DatabaseConnection:
         :param building_name: Building name, str
         :return: building id
         """
-        print("Adding building "+building_name)
-        # building_id = self.get_building_id(building_name)
-        # if building_id is None:
-        #     building_id = self.add_building(building_name)
-        #
-        # return building_id
+        building_id = self.get_building_id(building_name)
+        if building_id is None:
+            building_id = self.add_building(building_name)
+        return building_id
 
     def add_unique_room(self, room_name, building_id):
         """
@@ -233,11 +232,10 @@ class DatabaseConnection:
         :param building_id: Building id, int
         :return: room id
         """
-        print("Adding room " + room_name)
-        # room_id = self.get_room_id(room_name, building_id)
-        # if room_id is None:
-        #     room_id = self.add_room(room_name, building_id)
-        # return room_id
+        room_id = self.get_room_id(room_name, building_id)
+        if room_id is None:
+            room_id = self.add_room(room_name, building_id)
+        return room_id
 
     def add_unique_point_type(self, point_type):
         """
@@ -245,11 +243,10 @@ class DatabaseConnection:
         :param point_type: PointType class
         :return: point type id
         """
-        print("Adding type " + point_type.name)
-        # point_type_id = self.get_point_type_id(point_type)
-        # if point_type_id is None:
-        #     point_type_id = self.add_point_type(point_type)
-        # return point_type_id
+        point_type_id = self.get_point_type_id(point_type)
+        if point_type_id is None:
+            point_type_id = self.add_point_type(point_type)
+        return point_type_id
 
     def add_unique_equipment_box(self, equipment_name, description):
         """
@@ -258,11 +255,10 @@ class DatabaseConnection:
         :param description: human readable description
         :return:
         """
-        print("Adding equipment " + equipment_name)
-        # equipment_id = self.get_equipment_box_id(equipment_name)
-        # if equipment_id is None:
-        #     equipment_id = self.add_equipment_box(equipment_name, description)
-        # return equipment_id
+        equipment_id = self.get_equipment_box_id(equipment_name)
+        if equipment_id is None:
+            equipment_id = self.add_equipment_box(equipment_name, description)
+        return equipment_id
 
     def add_unique_point(self, point):
         """
@@ -270,11 +266,10 @@ class DatabaseConnection:
         :param point: Point class
         :return: point id
         """
-        print("Adding point " + point.name + " with description " + point.description)
-        # point_id = self.get_point_id(point)
-        # if point_id is None:
-        #     point_id = self.add_point(point)
-        # return point_id
+        point_id = self.get_point_id(point)
+        if point_id is None:
+            point_id = self.add_point(point)
+        return point_id
 
     def add_unique_point_value(self, timestamp, point_id, value):
         """
@@ -284,9 +279,8 @@ class DatabaseConnection:
         :param value: observed value of the point at the given time
         :return: None
         """
-        pass
-        #if not self.check_exists_point_value(timestamp, point_id):
-            #self.add_point_value(timestamp, point_id, value)
+        if not self.check_exists_point_value(timestamp, point_id):
+            self.add_point_value(timestamp, point_id, value)
 
     # getAll methods select * from database and return as a dictionary with key as name
     def get_all_point_types(self):
@@ -318,3 +312,20 @@ class DatabaseConnection:
             return "NULL"
         else:
             return value
+
+    def bulk_add_point_values(self, df):
+        data = StringIO()
+        df.to_csv(data,header=False, index=False)
+        data.seek(0)
+        curs = self.db
+        table = pd.io.sql.get_schema(df, 'PointValues', con = self.conn)
+        self.db.copy_from(data, 'PointValues', columns=('pointvalue', 'pointtimestamp', 'pointid'), sep = ',', null='None')
+        self.conn.commit()
+        dedupe_cmd = """DELETE  from PointValues T1
+                          USING       PointValues T2
+                        WHERE  T1.ctid    < T2.ctid   
+                          AND  T1.pointid    = T2.pointid      
+                          AND  T1.pointtimestamp = T2.pointtimestamp;"""
+        print("Deduping")
+        self.db.execute(dedupe_cmd)
+        self.conn.commit()

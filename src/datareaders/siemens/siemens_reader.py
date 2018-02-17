@@ -5,22 +5,22 @@ from src.datareaders.resources import get_data_resource
 from src.datareaders.table_enumerations import Sources
 from src.datareaders.database_connection import DatabaseConnection
 from src.datareaders.data_object_holders import Point, PointType
-from src.datareaders.siemens.siemens_parser import transform_file
 from src.datareaders.siemens.nameParser import tagName
+from src.datareaders.siemens.siemens_parser import transform_file, transform_string
 from json import load as json_load
-from sys import argv
+import sys
 import pandas as pd
 import time
 
 
 class SiemensReader:
-    def __init__(self, file_path):
-        self.file_path = file_path
+    def __init__(self, input_stream):
         self.source = Sources.SIEMENS
         self.db_connection = DatabaseConnection()
-        self.siemens_data = pd.read_csv(file_path, dtype=object)
+        self.siemens_data = pd.read_csv(input_stream)
         tag_json = open(get_data_resource("csv_descriptions/PointDecoder.json"))
         self.tag_dict = json_load(tag_json)
+        self.points_with_ids = {}
 
     def add_to_db(self):
         """
@@ -29,10 +29,9 @@ class SiemensReader:
         """
         finish_lst = []
         cant_finish_lst = []
-        points_with_ids = []
         for point_name in self.siemens_data.columns[2:]:
             tags = tagName(point_name, self.tag_dict)
-            if tags == None:
+            if tags is None:
                 cant_finish_lst.append("No tags for point " + point_name)
                 continue
             building_id, building_name = self._add_building(tags)
@@ -40,13 +39,12 @@ class SiemensReader:
             equipment_id = self._add_equipment_box(tags)
             point_type_id, point_type = self._add_point_type(tags)
             description = self._make_point_description(tags)
-
             point = Point(point_name, room_id, building_id, self.source, point_type_id, description, equipment_id)
             point.point_type = point_type
 
             point_id = self.db_connection.add_unique_point(point)
             point.id = point_id
-            points_with_ids.append(point)
+            self.points_with_ids[point.name] = point
             finish_lst.append("Finished for point "+point_name)
 
         for item in finish_lst:
@@ -58,7 +56,7 @@ class SiemensReader:
         print("Was able to successfully add {} points".format(len(finish_lst)))
         print("Was NOT able to add {} points".format(len(cant_finish_lst)))
 
-        self._add_point_values(points_with_ids)
+        self._add_point_values()
 
     def _add_building(self, tags):
         """
@@ -150,44 +148,74 @@ class SiemensReader:
         else:
             point_type = PointType(point_type_name, "float")
             point_type.units = self.tag_dict[point_type_name]["units"]
-            point_type.factor = 5 # No longer getting this information, everything should be less than this
+            point_type.factor = 5  # No longer getting this information, everything should be less than this
 
         point_type_id = self.db_connection.add_unique_point_type(point_type)
         return point_type_id, point_type
 
-    def _add_point_values(self, points_with_ids):
+    def _add_point_values(self):
         """
         Loops over all points and all values for points, adds to db
         :return: None
         """
-        point_index = 0
-        for point in points_with_ids:
-            print("starting point {}, number {}".format(point.name, point_index))
-            try:
-                for i in range(len(self.siemens_data[point.name])):
-                    date = self.siemens_data.Date[i]
-                    time = self.siemens_data.Time[i]
-                    raw_data = self.siemens_data[point.name][i]
-                    formatted_value = self._format_value(point, raw_data)
-                    self.db_connection.add_unique_point_value(timestamp=date+" "+time, point_id = point.id,
-                                                              value=formatted_value)
-                point_index += 1
-                print("finished point {}".format(point.name))
-            except ValueError:
-                print("point {} failed to go in with value {}".format(point.name, raw_data))
-                continue
+        df = self.siemens_data
+        keep_cols = ['Date', 'Time']
+        point_names = [x for x in list(df.columns.values) if x not in keep_cols]
+        # first melt the point name headers into the table
+        # so that point name is now a row variable, not a header
+        df = pd.melt(df, id_vars=['Date', 'Time'], value_vars=point_names, var_name='pointname', value_name='pointvalue')
+        print("Melted")
+        # Next combine the date and time columns into one 
+        df['pointtimestamp'] = df['Date'] + ' ' + df['Time']
 
-    def _format_value(self, point, raw_value):
+        print("Timestamps Combined")
+
+        # transform pointnames to pointids based on the mapping that we constructed earlier
+        # get rid of cases where we get a null point id- means we couldn't map a type to the point
+        df['pointid'] = df['pointname'].apply(self._map_point_names_id)
+
+        df.dropna(axis=0, how='any', inplace=True)
+        print('Null Points Dropped')
+
+        df['pointid'] = df['pointid'].astype(int)
+        print("Points Mapped")
+
+        # finally get our formatted point values by inputting the row into format_value
+        if df.empty:
+            # Just check to make sure we don't have an empty df- otherwise it errors here if we do
+            print("Invalid insert- double check that the points are successfully getting inserted")
+            return
+        df['pointvalue'] = df.apply(self._format_value, axis=1)
+        # replace all NaNs with None for sql
+        print("Values Formatted")
+
+        # drop all of the old cols
+        df.drop(['Date', 'Time', 'pointname'], axis=1, inplace=True)
+        # Now format it to go into the sql
+        df = df[['pointvalue', 'pointtimestamp', 'pointid']]
+        
+        print("COPY FROM FORMATTING FINISHED")
+        self.db_connection.bulk_add_point_values(df)
+
+    def _map_point_names_id(self, name):
+        try:
+            return self.points_with_ids[name].id
+        except KeyError:
+            return None
+
+    def _format_value(self, row):
         """
         Makes every given value into an integer for storage in db
-        :param point: Point name
-        :param raw_value: Value as given in csv
+        :param row: pandas dataframe containing a raw_value and a point_name
         :return: Formatted value as an int corresponding to the original data
         """
         # TODO error catching if value not type expected, what if there is a problem value not in that list
+        point_name = row['pointname']
+        raw_value = row['pointvalue']
+        point = self.points_with_ids[point_name]
         problem_values = ["data loss", "no data", "nan", "null"]
         if (isinstance(raw_value, str) and raw_value.lower() in problem_values) or pd.isnull(raw_value):
-            formatted_value = None
+            formatted_value = 'None'
         elif point.point_type.return_type == "enumerated":
             formatted_value = point.point_type.enumeration_values.index(raw_value)
             # TODO if it doesn't have that value???, what if value is 'closed' and we expected 'on'/'off'
@@ -196,24 +224,33 @@ class SiemensReader:
             formatted_value = round(formatted_value)
         else:  # it's an int!
             formatted_value = int(raw_value)
-
         return formatted_value
+
 
 def main(csv_file):
     """
     Read in individual file and add all subpoints to DB
     :return:
     """
-    transform_file(get_data_resource("csv_files/"+csv_file))
+    transformed_file = transform_file(get_data_resource("csv_files/"+csv_file))
 
-    sr = SiemensReader(get_data_resource("better_csv_files/"+csv_file))
+    sr = SiemensReader(transformed_file)
     sr.add_to_db()
-    #sr.db_connection.close_connection()
+    sr.db_connection.close_connection()
+
+
+def stream_main(input_string):
+    transformed_file = transform_string(input_string)
+    sr = SiemensReader(transformed_file)
+    sr.add_to_db()
+    sr.db_connection.close_connection()
 
 
 if __name__ == '__main__':
-    if len(argv) > 1:
-        given_csv_file = argv[1]
+    if len(sys.argv) > 1:
+        given_csv_file = sys.argv[1]
         main(given_csv_file)
+    elif not sys.stdin.isatty():
+        stream_main(sys.stdin.read())
     else:
-        print("Requires a building name and a csv file parameter")
+        print("Requires a csv file parameter")

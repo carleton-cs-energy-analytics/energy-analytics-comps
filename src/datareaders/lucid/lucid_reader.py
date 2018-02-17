@@ -135,7 +135,6 @@ class LucidReader:
     def _format_value(self, row):
         try:
             point_value = float(row['pointvalue'])
-            # TODO: Decide how to handle null values. Currently we are setting the null values to be -2.
             if math.isnan(point_value):
                 return 'None'
             if point_value > 0:

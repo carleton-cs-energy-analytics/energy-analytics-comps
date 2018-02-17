@@ -53,6 +53,7 @@ class DatabaseConnection:
         """
         self.db.execute(*args)
         self.conn.commit()
+
     def execute_commit_and_return(self, *args):
         """
         Takes in any number of execute arguments
@@ -75,14 +76,16 @@ class DatabaseConnection:
         """
         return self.execute_commit_and_return("INSERT INTO Buildings(Name) VALUES (%s) RETURNING id;", (building_name,))
 
-    def add_room(self, room_name, building_name):
+    def add_room(self, room_name, building_id):
         """
         Adds a room to Rooms table with building name as foreign key
         :param room_name: str room name
         :param building_id: str building id
         :return: room id
         """
-        building_id = self.get_building_id(building_name)
+        if not isinstance(building_id, int):
+            #its actually a building name
+            building_id = self.get_building_id(building_id)
         return self.execute_commit_and_return("INSERT INTO Rooms(Name, BuildingID) VALUES (%s, %s) RETURNING id;",
                                               (self.format_sql_none(room_name), building_id))
 
@@ -149,14 +152,16 @@ class DatabaseConnection:
         else:
             return building_id[0]
 
-    def get_room_id(self, room_name, building_name):
+    def get_room_id(self, room_name, building_id):
         """
         Looks in DB for room with room name
         :param room_name: Room name, str
         :param building_name: Building name, str
         :return: Room id if exists, None otherwise
         """
-        building_id = self.get_building_id(building_name)
+        if not isinstance(building_id, int):
+            #its actually a building name
+            building_id = self.get_building_id(building_id)
         self.db.execute("SELECT ID, Name from Rooms where Name = (%s) AND BuildingID = (%s);", (self.format_sql_none(
             room_name), building_id))
         room_id = self.db.fetchone()
@@ -253,6 +258,24 @@ class DatabaseConnection:
         """
         if not self.check_exists_point_value(timestamp, point):
             self.add_point_value(timestamp, point, value)
+
+    def get_point_names_in_building(self, building_id):
+        self.db.execute("SELECT Points.name, Points.id, Points.roomid FROM Points "\
+            "LEFT JOIN ROOMS on Points.roomid = Rooms.id "\
+            "WHERE Rooms.buildingid = (%s);", (building_id,))
+        return self.db.fetchall()
+
+    def update_point_room(self, point_id, room_id):
+        self.execute_and_commit("UPDATE Points SET roomid = (%s) WHERE id = (%s);", (room_id, point_id))
+
+    def update_room_building_ids(self, old_bid, new_bid):
+        self.execute_and_commit("UPDATE Rooms SET buildingid = (%s) WHERE buildingid = (%s);", (new_bid, old_bid))
+        self.execute_and_commit("DELETE FROM Buildings WHERE id = (%s);", (old_bid,))
+
+
+    def get_buildings(self):
+        self.db.execute("SELECT * FROM Buildings;")
+        return self.db.fetchall()
 
     # getAll methods select * from database and return as a dictionary with key as name
     def get_all_point_types(self):

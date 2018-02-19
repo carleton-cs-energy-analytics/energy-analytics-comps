@@ -33,13 +33,16 @@ class LucidReader:
 
         successfully_inserted = []
         unsuccessfully_inserted = []
-
-        point_names = list(self.data.iloc[3].copy())  # Get row that includes all point name data.
+        point_names = list(self.data.columns)  # Get row that includes all point name data.
         for i in range(1, len(point_names)):
+            print(point_names)
 
             # Get the name, the building name (sometimes the same thing) and the units information
-            name, building_name, description = point_names[i].split(" - ")
-            name = building_name + " - " + description.split("(")[0]
+            try:
+                name, building_name, description = point_names[i].split(" - ")
+            except ValueError:
+                name = building_name + " - " + description.split("(")[0]
+
             if "Old Meter" in description:  # We need to differentiate between old meters and new ones.
                 name = name + "(Old Meter)"
 

@@ -67,7 +67,6 @@ class DatabaseConnection:
         self.conn.commit()
         return row_id
 
-
     def add_building(self, building_name):
         """
         Adds a given building to the buildings table of the database
@@ -89,6 +88,16 @@ class DatabaseConnection:
         return self.execute_commit_and_return("INSERT INTO Rooms(Name, BuildingID) VALUES (%s, %s) RETURNING id;",
                                               (self.format_sql_none(room_name), building_id))
 
+    def add_equipment_box(self, equipment_name, description):
+        """
+        Adds an equipment to the Equipment Box table
+        :param equipment_name: unique name of the equipment box
+        :param description: human readable description
+        :return:
+        """
+        return self.execute_commit_and_return("INSERT INTO EquipmentBoxes(Name, Description) VALUES (%s, "
+                                              "%s) RETURNING id;", (equipment_name, description))
+
     def add_point_type(self, point_type):
         """
         Adds a point type to the point type table
@@ -107,34 +116,30 @@ class DatabaseConnection:
         :param point: Point class has name, room_id, type_id, source, and description
         :return: point id
         """
-        room_id = self.get_room_id(point.room, point.building)
-        type_id = self.get_point_type_id(point.point_type)
         return self.execute_commit_and_return("INSERT INTO Points(Name, RoomID, PointTypeID, PointSourceID, "
                                               "Description) VALUES (%s,%s, %s, %s, %s) RETURNING id;",
-                                              (point.name, room_id, type_id, point.source,
+                                              (point.name, point.room_id, point.point_type_id, point.source,
                                                point.description))
 
-    def add_point_value(self, timestamp, point, value):
+    def add_point_value(self, timestamp, point_id, value):
         """
         Adds a value for given point at specified timestamp
         :param timestamp: Timestamp of point, str
-        :param point: Point class
+        :param point_id: point id (int)
         :param value: Data value to be recorded for given timestamp, point
                Encoded as an integer
         :return: None
         """
         if value is None:
-            point_id = self.get_point_id(point)
             self.execute_and_commit("INSERT INTO PointValues (PointTimestamp, PointID, PointValue) "
                                     "VALUES (%s, %s, NULL);", (timestamp, point_id))
             return
 
         if value > MAXINT or value < MININT:
             raise ValueError("{} is greater than MAXINT or smaller than MININT that can be stored in DB\n"
-                             "Point {} value not added".format(value, point.name))
+                             "Point {} value not added".format(value, point_id))
 
         # TODO make sure we convert to value before calling this
-        point_id = self.get_point_id(point)
         self.execute_and_commit("INSERT INTO PointValues (PointTimestamp, PointID, PointValue) "
                                 "VALUES (%s, %s, %s);", (timestamp, point_id, self.format_sql_none(value)))
 
@@ -156,7 +161,7 @@ class DatabaseConnection:
         """
         Looks in DB for room with room name
         :param room_name: Room name, str
-        :param building_name: Building name, str
+        :param building_id: Building id, int
         :return: Room id if exists, None otherwise
         """
         if not isinstance(building_id, int):
@@ -183,6 +188,19 @@ class DatabaseConnection:
         else:
             return type_id[0]
 
+    def get_equipment_box_id(self, equipment_name):
+        """
+        Looks in DB for equipment with given name
+        :param equipment_name: unique name
+        :return:
+        """
+        self.db.execute("SELECT ID from EquipmentBoxes where Name = (%s);", (equipment_name,))
+        equipment_id = self.db.fetchone()
+        if equipment_id is None:
+            return None
+        else:
+            return equipment_id[0]
+
     def get_point_id(self, point):  # only need to use name and room/building combo
         """
         Looks in DB for point
@@ -196,8 +214,7 @@ class DatabaseConnection:
         else:
             return point_id[0]
 
-    def check_exists_point_value(self, timestamp, point):
-        point_id = self.get_point_id(point)
+    def check_exists_point_value(self, timestamp, point_id):
         self.db.execute("SELECT * from PointValues where PointTimestamp = (%s) AND PointID = (%s);",
                         (timestamp, point_id))
         return not self.db.fetchone() is None
@@ -230,34 +247,46 @@ class DatabaseConnection:
         """
         Add unique point type only adds point type to DB if doesn't already exist
         :param point_type: PointType class
-        :return: None
+        :return: point type id
         """
         point_type_id = self.get_point_type_id(point_type)
         if point_type_id is None:
             point_type_id = self.add_point_type(point_type)
         return point_type_id
 
+    def add_unique_equipment_box(self, equipment_name, description):
+        """
+        Add unique equipment box if it doesn't already exist in DB
+        :param equipment_name: unique name of equipment
+        :param description: human readable description
+        :return:
+        """
+        equipment_id = self.get_equipment_box_id(equipment_name)
+        if equipment_id is None:
+            equipment_id = self.add_equipment_box(equipment_name, description)
+        return equipment_id
+
     def add_unique_point(self, point):
         """
         Add unique point only adds point to DB if doesn't already exist
         :param point: Point class
-        :return: None
+        :return: point id
         """
         point_id = self.get_point_id(point)
         if point_id is None:
             point_id = self.add_point(point)
         return point_id
 
-    def add_unique_point_value(self, timestamp, point, value):
+    def add_unique_point_value(self, timestamp, point_id, value):
         """
         Add unique point value only adds point to DB if doesn't already exist
         :param timestamp: string in format of timestamp
-        :param point: Point class
+        :param point_id: point id (int)
         :param value: observed value of the point at the given time
         :return: None
         """
-        if not self.check_exists_point_value(timestamp, point):
-            self.add_point_value(timestamp, point, value)
+        if not self.check_exists_point_value(timestamp, point_id):
+            self.add_point_value(timestamp, point_id, value)
 
     def get_point_names_in_building(self, building_id):
         self.db.execute("SELECT Points.name, Points.id, Points.roomid FROM Points "\
@@ -290,7 +319,7 @@ class DatabaseConnection:
             return_type = next_entry[2]
             this_type = PointType(next_entry[0], return_type)
             if return_type == "enumerated":
-                this_type.enumeration_settings = next_entry[1].split(",")
+                this_type.enumeration_values = next_entry[1].split(",")
             else:
                 this_type.units = next_entry[1]
             known_types[next_entry[0]] = this_type

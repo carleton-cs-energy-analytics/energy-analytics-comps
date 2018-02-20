@@ -151,6 +151,7 @@ def preProcessName(name):
     
     if (len(subString) == 1):
         return None
+        
     
     while (i < len(subString)):
         coveredCase = False
@@ -175,15 +176,16 @@ def preProcessName(name):
         
         # Splice Numbers off the back
         if (subString[i].startswith('R') or subString[i].startswith('RM')):
-           spliceIndex = 2
-           if (subString[i].startswith('R')):
-               spliceIndex = 1
-           if (subString[i][spliceIndex] in '0123456789G'):
+           spliceIndex = 1
+           if (subString[i].startswith('RM')):
+               spliceIndex = 2
+           if ((spliceIndex < len(subString[i])) and (subString[i][spliceIndex] in '0123456789G')):
                subString.insert(i + 1, '#' + subString[i][spliceIndex:])
                subString[i] = 't' + subString[i][:spliceIndex]
                i += 1
                coveredCase = True
                numberSplit = True
+           
         
         # 'Regular' case.  Check to split off the index
         if (not coveredCase):

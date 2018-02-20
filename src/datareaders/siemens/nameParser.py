@@ -125,18 +125,19 @@ def decodeName(name, dictionary):
                      tagList.append([tag])
              testIndex += 1
 #         print (name, tagList)
-         hasMeasurement = False
+         hasMeasurement = 0
          for tagI in tagList:
-             hasMeasurement = (hasMeasurement or 
-                              (dictionary[tagI[0]]["type"] == "Measurement") or 
-                              (dictionary[tagI[0]]["type"] == "Set Point"))
-         if (not hasMeasurement):
-             print ("----->", name)
+             if ((dictionary[tagI[0]]["type"] == "Measurement") or (dictionary[tagI[0]]["type"] == "Set Point")):
+                 hasMeasurement += 1
+         if (hasMeasurement == 0):
              if ("EF" in [x[0] for x in tagList]):
                  tagList.append(["EF ON/OFF"])
                  return tagList
              return None
-         return tagList
+         elif (hasMeasurement == 1):
+             return tagList
+         else:
+             return None
     return "Not quite"
 
 def createRevDict(dictionary):

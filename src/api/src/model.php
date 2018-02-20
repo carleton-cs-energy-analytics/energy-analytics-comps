@@ -31,7 +31,7 @@ class Model{
     }
     public static function getPointsOfTypeInBuilding($equipmentType, $buildingID){
         $db = Database::getInstance();
-        $sth = $db->prepare("SELECT * FROM Points 
+        $sth = $db->prepare("SELECT Points.* FROM Points 
             LEFT JOIN PointTypes ON PointTypes.ID = Points.PointTypeID 
             LEFT JOIN Rooms ON Rooms.ID = Points.RoomID 
             WHERE Rooms.buildingID=? AND PointTypes.ID = ?");

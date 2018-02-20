@@ -5,6 +5,7 @@
 	"CHW":{"name":["CHW"], "indexed":"False", "type":"Equipment", "descriptor":"Chilled Water"},
 	"AH":{"name":["AH", "AHU"], "indexed":"True", "type":"Equipment", "descriptor":"Air Handling Unit"},
 	"EF":{"name":["EF"], "indexed":"True", "type":"Equipment", "descriptor": "Exhaust Fan"},
+	"EF ON/OFF":{"name":["--EF--"], "indexed":"False", "type":"Measurement", "descriptor": "On / Off position of the Exhaust Fan", "units":"Enum ON/OFF", "parent":"EF", "isEnumerated":"True"},
 	"PUMP":{"name":["P"], "indexed":"True", "type":"Equipment", "descriptor": "Pump"},
 	"ROOM":{"name":["R", "RM"], "indexed":"True", "type":"Room", "descriptor": "Room of the Equipment"},
 	"HULINGS":{"name":["HU", "HULINGS", "BU", "BIG", "BV"], "indexed":"False", "type":"Building", "descriptor": "Hulings (bio)"},

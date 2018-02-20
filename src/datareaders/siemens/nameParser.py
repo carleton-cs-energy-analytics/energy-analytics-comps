@@ -26,9 +26,9 @@ def main():
                 parsed += 1
 #                print (k, "\n" +  stringHumanReadable(tagsSet, jsonDict))
 #                print (k, tagsSet)
-#                print (k, tagName(k, jsonDict))
-        else:
-            print (k)
+                print (k, tagName(k, jsonDict))
+#        else:
+#            print (k)
 
     print (parsed, counter - unparseable, counter, float(parsed * 100) / float(counter - unparseable), float(parsed * 100) / float(counter))
 
@@ -125,6 +125,17 @@ def decodeName(name, dictionary):
                      tagList.append([tag])
              testIndex += 1
 #         print (name, tagList)
+         hasMeasurement = False
+         for tagI in tagList:
+             hasMeasurement = (hasMeasurement or 
+                              (dictionary[tagI[0]]["type"] == "Measurement") or 
+                              (dictionary[tagI[0]]["type"] == "Set Point"))
+         if (not hasMeasurement):
+             print ("----->", name)
+             if ("EF" in [x[0] for x in tagList]):
+                 tagList.append(["EF ON/OFF"])
+                 return tagList
+             return None
          return tagList
     return "Not quite"
 

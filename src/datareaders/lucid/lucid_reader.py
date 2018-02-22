@@ -40,9 +40,10 @@ class LucidReader:
                 name, building_name, description = point_names[i].split(" - ")
             except ValueError:
                 building_name, description = point_names[i].split(" - ")
-                name = building_name + " - " + "(".join(description.split("(")[:-1]) # remove units information
-            name = name.strip()
-            building_name = building_name.strip()
+                name = building_name + " - " + description.split("(")[0]
+                #name = building_name + " - " + "(".join(description.split("(")[:-1]) # remove units information
+            #name = name.strip()
+            #building_name = building_name.strip()
 
             if "Old Meter" in description:  # We need to differentiate between old meters and new ones.
                 name = name + "(Old Meter)"

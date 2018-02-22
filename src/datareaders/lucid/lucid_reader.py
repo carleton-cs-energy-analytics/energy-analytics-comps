@@ -20,8 +20,8 @@ class LucidReader:
         self.data = pd.read_csv(input_stream, skiprows=4, dtype=object)
         print("Creating Points")
         self.add_points()  # Create values to insert into Points Table
-        print("Creating Values")
-        self.add_point_values()  # Create values to insert into PointValue Table
+        #print("Creating Values")
+        #self.add_point_values()  # Create values to insert into PointValue Table
 
     def add_points(self):
         """
@@ -39,7 +39,10 @@ class LucidReader:
             try:
                 name, building_name, description = point_names[i].split(" - ")
             except ValueError:
-                name = building_name + " - " + description.split("(")[0]
+                building_name, description = point_names[i].split(" - ")
+                name = building_name + " - " + "(".join(description.split("(")[:-1]) # remove units information
+            name = name.strip()
+            building_name = building_name.strip()
 
             if "Old Meter" in description:  # We need to differentiate between old meters and new ones.
                 name = name + "(Old Meter)"
@@ -50,19 +53,25 @@ class LucidReader:
             units = units.replace(")", "")
 
             try:
-                building_id = self.db_connection.add_unique_building(building_name)
+                #building_id = self.db_connection.add_unique_building(building_name)
+                building_id = 0
                 room = "{}_Dummy_Room".format(building_name)
-                room_id = self.db_connection.add_unique_room(room, building_id)
+                #room_id = self.db_connection.add_unique_room(room, building_id)
+                room_id = 0
 
                 # Create PointType class for Lucid Data Column
                 point_type = PointType(name=name, return_type="float", units=units, factor=5)
-                point_type_id = self.db_connection.add_unique_point_type(point_type)
+                #point_type_id = self.db_connection.add_unique_point_type(point_type)
+                point_type_id = self.db_connection.get_point_type_id(point_type)
+                print(point_type.name + ": " + str(point_type_id))
 
                 # Create Point Object from this column header information.
                 point = Point(name=name, room_id=room_id, building_id=building_id,
                               source_enum_value=Sources.LUCID, point_type_id=point_type_id,
                               description=description, equipment_box=None)
-                point_id = self.db_connection.add_unique_point(point)
+                #point_id = self.db_connection.add_unique_point(point)
+                point_id = self.db_connection.get_point_id(point)
+                print(point.name + ": " + str(point_id))
                 point.id = point_id
                 self.point_identities[point_names[i]] = point
                 successfully_inserted.append("Inserted point " + point.name)

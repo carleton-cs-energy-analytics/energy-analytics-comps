@@ -175,7 +175,8 @@ class DatabaseConnection:
         :param point_type: PointType class
         :return: PointType id if exists, None otherwise
         """
-        self.db.execute("SELECT ID from PointTypes where Name = (%s);", (point_type.name,))
+        self.db.execute("SELECT ID from PointTypes where Name = (%s) AND Units = (%s) AND ReturnType = (%s);",
+                        (point_type.name,point_type.get_units_placeholder(),point_type.return_type))
         type_id = self.db.fetchone()
         if type_id is None:
             return None

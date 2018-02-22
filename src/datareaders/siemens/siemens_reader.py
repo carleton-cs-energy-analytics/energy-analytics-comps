@@ -113,11 +113,11 @@ class SiemensReader:
         if "Set Point" in tags:
             description += self.tag_dict[tags["Set Point"][0]]["descriptor"]
         if "Equipment" in tags:
-            description += " IN " + self.tag_dict[tags["Equipment"][0]]["descriptor"]
+            description += " in " + self.tag_dict[tags["Equipment"][0]]["descriptor"]
         if "Room" in tags:
-            description += " IN Room " + tags["ROOM"][0]
+            description += " in Room " + tags["ROOM"][0]
         if "Building" in tags:
-            description += " IN " + self.tag_dict[tags["Building"][0]]["descriptor"]
+            description += " in " + self.tag_dict[tags["Building"][0]]["descriptor"]
         return description
 
     def _get_point_type(self, tags):

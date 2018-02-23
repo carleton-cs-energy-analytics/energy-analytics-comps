@@ -97,7 +97,6 @@ class SiemensReader:
             if len(tags["Equipment"]) > 1:
                 equipment_name += tags["Equipment"][1]
             equipment_id = self.db_connection.add_unique_equipment_box(equipment_name, description)
-            print("equipment: " + str(equipment_id))
             return equipment_id
         return None
 

@@ -40,6 +40,7 @@ CREATE TABLE Points (
     RoomID int NOT NULL,
     PointTypeID int NOT NULL,
     PointSourceID int NOT NULL,
+    EquipmentBoxID int,
     Description text,
     FOREIGN KEY (RoomID) REFERENCES Rooms(ID),
     FOREIGN KEY (PointTypeID) REFERENCES PointTypes(ID),

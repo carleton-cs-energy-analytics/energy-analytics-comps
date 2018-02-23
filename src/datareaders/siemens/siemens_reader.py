@@ -41,7 +41,6 @@ class SiemensReader:
             description = self._make_point_description(tags)
             point = Point(point_name, room_id, building_id, self.source, point_type_id, description, equipment_id)
             point.point_type = point_type
-
             point_id = self.db_connection.add_unique_point(point)
             point.id = point_id
             self.points_with_ids[point.name] = point
@@ -113,11 +112,11 @@ class SiemensReader:
         if "Set Point" in tags:
             description += self.tag_dict[tags["Set Point"][0]]["descriptor"]
         if "Equipment" in tags:
-            description += " IN " + self.tag_dict[tags["Equipment"][0]]["descriptor"]
+            description += " in " + self.tag_dict[tags["Equipment"][0]]["descriptor"]
         if "Room" in tags:
-            description += " IN Room " + tags["ROOM"][0]
+            description += " in Room " + tags["ROOM"][0]
         if "Building" in tags:
-            description += " IN " + self.tag_dict[tags["Building"][0]]["descriptor"]
+            description += " in " + self.tag_dict[tags["Building"][0]]["descriptor"]
         return description
 
     def _get_point_type(self, tags):
@@ -142,11 +141,12 @@ class SiemensReader:
         :return: point type id (int)
         """
         point_type_name = self._get_point_type(tags)
+        description = self.tag_dict[point_type_name]["descriptor"]
         if self.tag_dict[point_type_name]["isEnumerated"] == "True":
-            point_type = PointType(point_type_name, "enumerated")
+            point_type = PointType(point_type_name, "enumerated", description=description)
             point_type.enumeration_values = self.tag_dict[point_type_name]["units"][5:].split("/")
         else:
-            point_type = PointType(point_type_name, "float")
+            point_type = PointType(point_type_name, "float", description=description)
             point_type.units = self.tag_dict[point_type_name]["units"]
             point_type.factor = 5  # No longer getting this information, everything should be less than this
 

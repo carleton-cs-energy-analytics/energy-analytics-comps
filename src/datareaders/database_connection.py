@@ -104,11 +104,13 @@ class DatabaseConnection:
         :param point_type: PointType class, has values name, units, return type, and factor
         :return: point type id
         """
-        return self.execute_commit_and_return("INSERT INTO PointTypes(Name, Units, ReturnType, Factor) VALUES (%s, %s, "
-                                              "%s, %s) RETURNING id;", (point_type.name,
-                                                                        point_type.get_units_placeholder(),
-                                                                        point_type.return_type,
-                                                                        point_type.factor))
+        return self.execute_commit_and_return("INSERT INTO PointTypes(Name, Units, ReturnType, Factor, "
+                                              "Description) VALUES (%s, %s, %s, %s, %s) RETURNING id;",
+                                              (point_type.name,
+                                               point_type.get_units_placeholder(),
+                                               point_type.return_type,
+                                               point_type.factor,
+                                               point_type.description))
 
     def add_point(self, point):
         """
@@ -117,9 +119,9 @@ class DatabaseConnection:
         :return: point id
         """
         return self.execute_commit_and_return("INSERT INTO Points(Name, RoomID, PointTypeID, PointSourceID, "
-                                              "Description) VALUES (%s,%s, %s, %s, %s) RETURNING id;",
+                                              "EquipmentBoxID, Description) VALUES (%s,%s, %s, %s, %s, %s) RETURNING id;",
                                               (point.name, point.room_id, point.point_type_id, point.source,
-                                               point.description))
+                                               point.equipment_id, point.description))
 
     def add_point_value(self, timestamp, point_id, value):
         """
@@ -181,7 +183,8 @@ class DatabaseConnection:
         :param point_type: PointType class
         :return: PointType id if exists, None otherwise
         """
-        self.db.execute("SELECT ID from PointTypes where Name = (%s);", (point_type.name,))
+        self.db.execute("SELECT ID from PointTypes where Name = (%s) AND Units = (%s) AND ReturnType = (%s);",
+                        (point_type.name,point_type.get_units_placeholder(),point_type.return_type))
         type_id = self.db.fetchone()
         if type_id is None:
             return None

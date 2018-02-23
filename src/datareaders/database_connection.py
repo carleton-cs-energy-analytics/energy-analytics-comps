@@ -101,11 +101,13 @@ class DatabaseConnection:
         :param point_type: PointType class, has values name, units, return type, and factor
         :return: point type id
         """
-        return self.execute_commit_and_return("INSERT INTO PointTypes(Name, Units, ReturnType, Factor) VALUES (%s, %s, "
-                                              "%s, %s) RETURNING id;", (point_type.name,
-                                                                        point_type.get_units_placeholder(),
-                                                                        point_type.return_type,
-                                                                        point_type.factor))
+        return self.execute_commit_and_return("INSERT INTO PointTypes(Name, Units, ReturnType, Factor, "
+                                              "Description) VALUES (%s, %s, %s, %s, %s) RETURNING id;",
+                                              (point_type.name,
+                                               point_type.get_units_placeholder(),
+                                               point_type.return_type,
+                                               point_type.factor,
+                                               point_type.description))
 
     def add_point(self, point):
         """

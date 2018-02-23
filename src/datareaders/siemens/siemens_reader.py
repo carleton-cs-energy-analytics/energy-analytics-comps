@@ -98,6 +98,7 @@ class SiemensReader:
             if len(tags["Equipment"]) > 1:
                 equipment_name += tags["Equipment"][1]
             equipment_id = self.db_connection.add_unique_equipment_box(equipment_name, description)
+            print("equipment: " + str(equipment_id))
             return equipment_id
         return None
 
@@ -142,11 +143,12 @@ class SiemensReader:
         :return: point type id (int)
         """
         point_type_name = self._get_point_type(tags)
+        description = self.tag_dict[point_type_name]["descriptor"]
         if self.tag_dict[point_type_name]["isEnumerated"] == "True":
-            point_type = PointType(point_type_name, "enumerated")
+            point_type = PointType(point_type_name, "enumerated", description=description)
             point_type.enumeration_values = self.tag_dict[point_type_name]["units"][5:].split("/")
         else:
-            point_type = PointType(point_type_name, "float")
+            point_type = PointType(point_type_name, "float", description=description)
             point_type.units = self.tag_dict[point_type_name]["units"]
             point_type.factor = 5  # No longer getting this information, everything should be less than this
 

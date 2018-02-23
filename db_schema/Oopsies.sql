@@ -5,6 +5,7 @@ Delete all tables & contents and re-make
 
 DROP TABLE IF EXISTS PointValues;
 DROP TABLE IF EXISTS Points;
+DROP TABLE IF EXISTS EquipmentBoxes;
 DROP TABLE IF EXISTS PointTypes;
 DROP TABLE IF EXISTS PointSources;
 DROP TABLE IF EXISTS Rooms;

@@ -41,7 +41,6 @@ class SiemensReader:
             description = self._make_point_description(tags)
             point = Point(point_name, room_id, building_id, self.source, point_type_id, description, equipment_id)
             point.point_type = point_type
-
             point_id = self.db_connection.add_unique_point(point)
             point.id = point_id
             self.points_with_ids[point.name] = point

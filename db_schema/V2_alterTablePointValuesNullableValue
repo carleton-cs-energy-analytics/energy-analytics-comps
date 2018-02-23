@@ -1,1 +1,0 @@
-ALTER TABLE PointValues ALTER COLUMN PointValue bigint NULL;

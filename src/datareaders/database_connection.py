@@ -210,7 +210,7 @@ class DatabaseConnection:
         :param point: Point class
         :return: Point id if exists, None otherwise
         """
-        self.db.execute("SELECT ID from Points where Name = (%s);", (point.name, ))
+        self.db.execute("SELECT ID from Points where Name = (%s) AND PointTypeID = (%s);", (point.name, point.point_type_id))
         point_id = self.db.fetchone()
         if point_id is None:
             return None
